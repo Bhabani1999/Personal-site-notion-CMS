@@ -1,8 +1,7 @@
 // pages/api/properties.js
-
 import { retrievePageProperties } from '../../notionModule';
 
-export default async (req, res) => {
+const propertiesHandler = async (req, res) => {
   try {
     const pageProperties = await retrievePageProperties(process.env.NOTION_DATABASE_ID);
     res.status(200).json(pageProperties);
@@ -12,4 +11,4 @@ export default async (req, res) => {
   }
 };
 
-
+export default propertiesHandler;

@@ -1,6 +1,7 @@
+// pages/api/databaseproperties.js
 import { getDatabaseInfo } from '../../databasemodule';
 
-export default async (req, res) => {
+const databasePropertiesHandler = async (req, res) => {
   try {
     const databaseInfo = await getDatabaseInfo(process.env.NOTION_DATABASE_ID);
 
@@ -14,3 +15,5 @@ export default async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+export default databasePropertiesHandler;

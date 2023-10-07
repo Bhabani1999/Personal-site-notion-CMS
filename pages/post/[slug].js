@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '../../app/Layout';
+import Layout from '../../app/layout';
 import '../../styles/styles.css';
 import { useRouter } from 'next/router';  
 import Link from 'next/link';
+import Image from 'next/image';
+
 
 function BlogPage() {
 
@@ -174,7 +176,7 @@ function BlogPage() {
               </h2>
             )}
             {block.type === 'image' && (
-              <img className="image top-padding-26 bottom-padding-26" src={block.url} alt="Image" />
+              <Image className="image top-padding-26 bottom-padding-26" src={block.url} alt="Image" />
             )}
             {/* Handle other block types as needed */}
           </div>

@@ -1,7 +1,7 @@
 // pages/api/content.js
 import notionContentModule from '../../notioncontentModule';
 
-export default async (req, res) => {
+const contentHandler = async (req, res) => {
   try {
     const postId = req.query.id; // Retrieve the numeric identifier from the query string
     const contentData = await notionContentModule(postId); // Pass postId to your content module
@@ -13,3 +13,5 @@ export default async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
+
+export default contentHandler;
