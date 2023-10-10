@@ -62,10 +62,10 @@ function BlogPage() {
 
   // Render H2 headings from the content in topContent
   const renderH2Headings = () => {
-    if (!pageContent) {
+    if (!pageContent || !pageContent.content) {
       return null;
     }
-
+  
     const scrollToHeading = (event, headingText) => {
       event.preventDefault(); // Prevent the default anchor link behavior
       const headingElement = document.getElementById(headingText);
@@ -73,9 +73,13 @@ function BlogPage() {
         headingElement.scrollIntoView({ behavior: 'smooth' });
       }
     };
-
+  
     const h2Headings = pageContent.content.filter((block) => block.type === 'h2');
-
+  
+    if (h2Headings.length === 0) {
+      return null; // No 'h2' headings found, return null
+    }
+  
     return (
       <div>
         {h2Headings.map((heading, index) => (
@@ -91,7 +95,6 @@ function BlogPage() {
       </div>
     );
   };
-
   // Define content for top-container and bottom-container
   function renderTopContent() {
     return (
@@ -155,10 +158,14 @@ function BlogPage() {
           <div id="top"></div>
 
           <div className="sidebyside">
-            <p className="para type-opacity-50">On {formatDate(pageContent.properties.creationDate)}</p>
-            &nbsp;
-            <p className="para type-opacity-50">in {pageContent.properties.Tags}</p>
-          </div>
+  {pageContent && pageContent.properties && (
+    <>
+      <p className="para type-opacity-50">on <span className='number'>{formatDate(pageContent.properties.creationDate)}</span></p>
+      &nbsp;
+      <p className="para type-opacity-50">in {pageContent.properties.Tags}</p>
+    </>
+  )}
+</div>
         </div>
         <div style={{ height: '39px' }}></div>
         <p className="icon">{pageContent.properties.icon}</p>
@@ -176,7 +183,7 @@ function BlogPage() {
               </h2>
             )}
             {block.type === 'image' && (
-              <Image className="image top-padding-26 bottom-padding-26" src={block.url} alt="Image" />
+              <Image className="image top-padding-26 bottom-padding-26" width="688" height="200" src={block.url} alt="Image" />
             )}
             {/* Handle other block types as needed */}
           </div>
@@ -186,7 +193,7 @@ function BlogPage() {
   };
 
   return (
-    <Layout topContent={isLoading ? renderLoader() : renderTopContent()} bottomContent={isLoading ? null : renderBottomContent()} >
+    <Layout topContent={isLoading ? renderLoader() : renderTopContent()} bottomContent={isLoading ? null : renderBottomContent()} isPostPage={true} >
       {isLoading ? null : renderPageContent()}
     </Layout>
   );
