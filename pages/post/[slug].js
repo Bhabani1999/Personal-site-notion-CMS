@@ -4,19 +4,16 @@ import '../../styles/styles.css';
 import { useRouter } from 'next/router';  
 import Link from 'next/link';
 import Image from 'next/image';
+import retrievePageData from '../../notioncontentModule';
+import { retrievePageProperties } from '../../notionModule';
 
+function BlogPage({ pageContent, isLoading }) {
 
-function BlogPage() {
 
  
 
-  const router = useRouter();
-  const { slug } = router.query; // Get the slug from the router query
+  
 
-  // State to hold the retrieved page content
-  const [pageContent, setPageContent] = useState(null);
-  // State to track whether the page is loading
-  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     // Your JavaScript code to manipulate the text with class 'text'
     const textElements = document.querySelectorAll('.tex2t');
@@ -43,22 +40,6 @@ function BlogPage() {
     toggleTextRandom(element);
     });
     }, []);
-    
-  useEffect(() => {
-    // Fetch content data from your API endpoint based on the slug
-    if (slug) {
-      fetch(`/api/content?id=${slug}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setPageContent(data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          console.error('Error fetching content data:', error);
-          setIsLoading(false);
-        });
-    }
-  }, [slug]);
 
   // Render H2 headings from the content in topContent
   const renderH2Headings = () => {
@@ -246,5 +227,43 @@ const scrollToTop = (event) => {
   event.preventDefault(); // Prevent the default anchor link behavior
   window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top of the page
 };
+
+export async function getStaticProps({ params }) {
+  const { slug } = params;
+
+  let isLoading = true; // Set initial loading state
+  let pageContent = null; // Initialize page content
+
+  try {
+    if (slug) {
+      pageContent = await retrievePageData(slug); // Fetch content based on the slug (id)
+      isLoading = false; // Data has been fetched, set isLoading to false
+    }
+  } catch (error) {
+    console.error('Error fetching page content:', error);
+  }
+
+  return {
+    props: {
+      pageContent,
+      isLoading,
+    },
+  };
+}
+
+export async function getStaticPaths() {
+  // Fetch all page properties to build dynamic paths
+  const pageProperties = await retrievePageProperties(process.env.NOTION_DATABASE_ID);
+
+  const paths = pageProperties.map((property) => ({
+    params: { slug: property.id }, // Use "id" as the slug
+  }));
+
+  return {
+    paths,
+    fallback: false, // Render a 404 page if the path doesn't match any page
+  };
+}
+
 
 export default BlogPage;

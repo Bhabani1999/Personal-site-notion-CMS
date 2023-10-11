@@ -1,4 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
+import { retrievePageProperties } from '../notionModule';
+import { getDatabaseInfo } from '../databasemodule';
 
 import React, { useEffect, useState } from 'react';
 import Layout from '../app/layout';
@@ -6,7 +8,8 @@ import '../styles/styles.css';
 import { useMediaQuery } from 'react-responsive';
 
 
-function HomePage() {
+function Home({ pageProperties, isLoading, databaseInfo }) {
+
   useEffect(() => {
     // Your JavaScript code to manipulate the text with class 'text'
     const textElements = document.querySelectorAll('.tex1t');
@@ -37,42 +40,12 @@ function HomePage() {
 
 
   // State to hold the retrieved page properties
-  const [pageProperties, setPageProperties] = useState([]);
-  // State to track whether the API data is loading
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    // Fetch data from your API endpoint
-    fetch('/api/properties')
-      .then((response) => response.json())
-      .then((data) => {
-        setPageProperties(data);
-        setIsLoading(false); // Set loading state to false once data is fetched
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-        setIsLoading(false); // Set loading state to false in case of an error
-      });
-  }, []);
 
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
   // State to hold the retrieved database properties
-  const [databaseInfo, setDatabaseInfo] = useState(null);
 
-  useEffect(() => {
-    // Fetch data from your API endpoint
-    fetch('/api/databaseproperties')
-      .then((response) => response.json())
-      .then((data) => {
-        setDatabaseInfo(data);
-        ; // Set loading state to false once data is fetched
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-        // Set loading state to false in case of an error
-      });
-  }, []);
 
 
   // Filter pageProperties for work and notes separately
@@ -223,33 +196,33 @@ function HomePage() {
               <h3 id="_work" className="accent-heading"><span className="accent">_ work</span></h3>
               <div style={{ height: "26px" }}></div>
               {workPageProperties.map((property) => (
-               <div className="inner-container" key={property.id}>
-               <div className="row">
-                 <div className="left-content">
-                   <div>
-                   <a className="para lowercase  type pageTitleLink" href={`/post/${property.id}`}>
-                     {property.pageTitle}
-                   </a>
-                   </div>
-                   <p className="para lowercase type-opacity-50 pageDescription">{property.pageDescription}</p>
-                 </div>
-                 <div className="right-content">
+                <div className="inner-container" key={property.id}>
+                  <div className="row">
+                    <div className="left-content">
+                      <div>
+                        <a className="para lowercase  type pageTitleLink" href={`/post/${property.id}`}>
+                          {property.pageTitle}
+                        </a>
+                      </div>
+                      <p className="para lowercase type-opacity-50 pageDescription">{property.pageDescription}</p>
+                    </div>
+                    <div className="right-content">
 
-                   {isMobile ? (
-                     <span className="number type-opacity-50 creationDate">
-                       {formatDateShort(property.creationDate)}
-                     </span>
-                   ) : (
-                     <span className="number type-opacity-50 creationDate">
-                       {formatDateShort(property.creationDate)}
-                     </span>
-                   )}
+                      {isMobile ? (
+                        <span className="number type-opacity-50 creationDate">
+                          {formatDateShort(property.creationDate)}
+                        </span>
+                      ) : (
+                        <span className="number type-opacity-50 creationDate">
+                          {formatDateShort(property.creationDate)}
+                        </span>
+                      )}
 
-                 </div>
-               </div>
-               
-               <div style={{ height: "26px" }}></div>
-             </div>
+                    </div>
+                  </div>
+
+                  <div style={{ height: "26px" }}></div>
+                </div>
               ))}
             </div>
             <div style={{ height: "13px" }}></div>
@@ -258,32 +231,32 @@ function HomePage() {
               <div style={{ height: "26px" }}></div>
               {notesPageProperties.map((property) => (
                 <div className="inner-container" key={property.id}>
-                <div className="row">
-                  <div className="left-content">
-                    <div>
-                    <a className="para lowercase type pageTitleLink" href={`/post/${property.id}`}>
-                      {property.pageTitle}
-                    </a>
+                  <div className="row">
+                    <div className="left-content">
+                      <div>
+                        <a className="para lowercase type pageTitleLink" href={`/post/${property.id}`}>
+                          {property.pageTitle}
+                        </a>
+                      </div>
+                      <p className="para lowercase type-opacity-50 pageDescription">{property.pageDescription}</p>
                     </div>
-                    <p className="para lowercase type-opacity-50 pageDescription">{property.pageDescription}</p>
-                  </div>
-                  <div className="right-content">
+                    <div className="right-content">
 
-                    {isMobile ? (
-                      <span className="number type-opacity-50 creationDate">
-                        {formatDateShort(property.creationDate)}
-                      </span>
-                    ) : (
-                      <span className="number type-opacity-50 creationDate">
-                        {formatDateShort(property.creationDate)}
-                      </span>
-                    )}
+                      {isMobile ? (
+                        <span className="number type-opacity-50 creationDate">
+                          {formatDateShort(property.creationDate)}
+                        </span>
+                      ) : (
+                        <span className="number type-opacity-50 creationDate">
+                          {formatDateShort(property.creationDate)}
+                        </span>
+                      )}
 
+                    </div>
                   </div>
+
+                  <div style={{ height: "26px" }}></div>
                 </div>
-                
-                <div style={{ height: "26px" }}></div>
-              </div>
               ))}
             </div>
             <div style={{ height: "13px" }}></div>
@@ -327,7 +300,7 @@ function HomePage() {
                 <p className="para type-opacity-50">last updated on <span className="number type-opacity-50">
                   {formatDateShort(databaseInfo.lastEditedTime)}
                 </span></p>
-              
+
               )}
 
             </div>
@@ -338,5 +311,37 @@ function HomePage() {
     </Layout>
   );
 }
-/* eslint-enable react/no-unescaped-entities */
-export default HomePage;
+
+
+export async function getStaticProps() {
+  let isLoading = true; // Set initial loading state
+  let databaseInfo = null; // Initialize databaseInfo
+
+  try {
+    const pageProperties = await retrievePageProperties(process.env.NOTION_DATABASE_ID);
+    isLoading = false; // Data has been fetched, set isLoading to false
+
+    // Fetch database info using your module
+    databaseInfo = await getDatabaseInfo(process.env.NOTION_DATABASE_ID);
+
+    return {
+      props: {
+        pageProperties,
+        isLoading,
+        databaseInfo,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+
+    return {
+      props: {
+        pageProperties: [],
+        isLoading,
+        databaseInfo,
+      },
+    };
+  }
+}
+
+export default Home;

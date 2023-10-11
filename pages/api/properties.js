@@ -1,7 +1,7 @@
 // pages/api/properties.js
 import { retrievePageProperties } from '../../notionModule';
 
-const propertiesHandler = async (req, res) => {
+export default async function handler(req, res) {
   try {
     const pageProperties = await retrievePageProperties(process.env.NOTION_DATABASE_ID);
     res.status(200).json(pageProperties);
@@ -9,6 +9,4 @@ const propertiesHandler = async (req, res) => {
     console.error('Error:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
-};
-
-export default propertiesHandler;
+}
