@@ -58,13 +58,22 @@ body {
 
     .column.middle {
         flex: 0 0 calc(100% - 26px);
-        max-width: 648px;
         position: relative;
         overflow-y: auto;
         flex-basis: 100%;
         max-width: 100%;
         padding: 0px;
     
+    }
+
+    .column.middlepost {
+        flex: 0 0 calc(100% - 52px);
+        max-width: 740px;
+        position: relative;
+        overflow-y: auto;
+        padding: 0px;
+        max-width: 100%;
+
     }
     
 }

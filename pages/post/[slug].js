@@ -154,7 +154,18 @@ function BlogPage() {
     // You can customize this part based on your specific content structure
     return (
       <div>
+        <div className='mobile-show'>
+        <div className="nav-container-mobile nav-container">
+          <Link href="../">home</Link>
+          
+        </div>
+        <div className='line mobile-show' style={{ height: "1px" }}></div>
+        <div style={{ height: '13px' }}></div>
+
+        </div>
+        <div className='main-content'>
         <div>
+       
           <div id="top"></div>
 
           <div className="sidebyside">
@@ -188,6 +199,21 @@ function BlogPage() {
             {/* Handle other block types as needed */}
           </div>
         ))}
+        </div>
+        <div className='mobile-show'>
+        <div style={{ height: '13px' }}></div>
+        <div className='line mobile-show' style={{ height: "1px" }}></div>
+        <div className='nav-container-mobile'>
+        <Link
+          href="#top" // Use the same ID as the top of the page
+          className="para block type-opacity-50"
+          onClick={scrollToTop}
+        >
+          back to top
+        </Link>
+        </div>
+      </div>
+
       </div>
     );
   };
