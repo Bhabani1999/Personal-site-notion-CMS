@@ -1,66 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import Layout from '../../app/layout';
-import '../../styles/styles.css';
-import { useRouter } from 'next/router';  
-import Link from 'next/link';
-import Image from 'next/image';
-import retrievePageData from '../../notioncontentModule';
-import { retrievePageProperties } from '../../notionModule';
+import Layout from "../../app/layout";
+import "../../styles/styles.css";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import Image from "next/image";
+import retrievePageData from "../../notioncontentModule";
+import { retrievePageProperties } from "../../notionModule";
 
-function BlogPage({ pageContent, isLoading }) {
-
-
- 
-
-  
-
-  useEffect(() => {
-    // Your JavaScript code to manipulate the text with class 'text'
-    const textElements = document.querySelectorAll('.tex2t');
-    
-    
-    function toggleText(element) {
-    const currentText = element.textContent;
-    const newText = currentText === '1' ? '0' : '1';
-    element.textContent = newText;
-    }
-    
-    
-    function toggleTextRandom(element) {
-    function toggleWithRandomInterval() {
-    const randomInterval = Math.floor(Math.random() * (400 - 200 + 1) + 200); // Random interval between 200ms to 400ms
-    toggleText(element);
-    setTimeout(toggleWithRandomInterval, randomInterval);
-    }
-    toggleWithRandomInterval();
-    }
-    
-    
-    textElements.forEach((element) => {
-    toggleTextRandom(element);
-    });
-    }, []);
-
+function BlogPage({ pageContent }) {
   // Render H2 headings from the content in topContent
   const renderH2Headings = () => {
     if (!pageContent || !pageContent.content) {
       return null;
     }
-  
+
     const scrollToHeading = (event, headingText) => {
       event.preventDefault(); // Prevent the default anchor link behavior
       const headingElement = document.getElementById(headingText);
       if (headingElement) {
-        headingElement.scrollIntoView({ behavior: 'smooth' });
+        headingElement.scrollIntoView({ behavior: "smooth" });
       }
     };
-  
-    const h2Headings = pageContent.content.filter((block) => block.type === 'h2');
-  
+
+    const h2Headings = pageContent.content.filter(
+      (block) => block.type === "h2"
+    );
+
     if (h2Headings.length === 0) {
       return null; // No 'h2' headings found, return null
     }
-  
+
     return (
       <div>
         {h2Headings.map((heading, index) => (
@@ -82,17 +50,15 @@ function BlogPage({ pageContent, isLoading }) {
       <div>
         <div className="nav-container">
           <Link href="../">home</Link>
-          
         </div>
         <div>
-        <div className="spacer" ></div>
-        {renderH2Headings()} {/* Render H2 headings in top content */}</div>
-        
+          <div className="spacer"></div>
+          {renderH2Headings()} {/* Render H2 headings in top content */}
+        </div>
       </div>
     );
   }
 
- 
   function renderBottomContent() {
     return (
       <div>
@@ -107,24 +73,6 @@ function BlogPage({ pageContent, isLoading }) {
     );
   }
 
-  function renderLoader() {
-    return (
-      <div className="loader">
-        <div className="grid-container">
-          <div className="grid-item lpara type tex2t">1</div>
-          <div className="grid-item lpara type tex2t">0</div>
-          <div className="grid-item lpara type tex2t">1</div>
-          <div className="grid-item lpara type tex2t">0</div>
-          <div className="grid-item lpara type tex2t">1</div>
-          <div className="grid-item lpara type tex2t">0</div>
-          <div className="grid-item lpara type tex2t">1</div>
-          <div className="grid-item lpara type tex2t">0</div>
-          <div className="grid-item lpara type tex2t">1</div>
-        </div>
-      </div>
-    );
-  }
-
   // Render the page content when it's available
   const renderPageContent = () => {
     if (!pageContent) {
@@ -135,73 +83,91 @@ function BlogPage({ pageContent, isLoading }) {
     // You can customize this part based on your specific content structure
     return (
       <div>
-        <div className='mobile-show'>
-        <div className="nav-container-mobile nav-container">
-          <Link href="../">home</Link>
-          
-        </div>
-        <div className='line mobile-show' style={{ height: "1px" }}></div>
-        <div style={{ height: '13px' }}></div>
-
-        </div>
-        <div className='main-content'>
-        <div>
-       
-          <div id="top"></div>
-
-          <div className="sidebyside">
-  {pageContent && pageContent.properties && (
-    <>
-      <p className="para type-opacity-50">on <span className='number'>{formatDate(pageContent.properties.creationDate)}</span></p>
-      &nbsp;
-      <p className="para type-opacity-50">in {pageContent.properties.Tags}</p>
-    </>
-  )}
-</div>
-        </div>
-        <div style={{ height: '39px' }}></div>
-        <p className="icon">{pageContent.properties.icon}</p>
-        <div style={{ height: '39px' }}></div>
-        <h1 className="type title">{pageContent.properties.pageTitle}</h1>
-        <div style={{ height: '26px' }}></div>
-        {pageContent.content.map((block, index) => (
-          <div key={index}>
-            {block.type === 'text' && (
-              <p className="para blogtype top-padding-13 bottom-padding-13">{block.text}</p>
-            )}
-            {block.type === 'h2' && (
-              <h2 id={block.text} className="type heading-md top-padding-26 bottom-padding-13">
-                {block.text}
-              </h2>
-            )}
-            {block.type === 'image' && (
-              <Image className="image top-padding-26 bottom-padding-26" width="688" height="200" src={block.url} alt="Image" />
-            )}
-            {/* Handle other block types as needed */}
+        <div className="mobile-show">
+          <div className="nav-container-mobile nav-container">
+            <Link href="../">home</Link>
           </div>
-        ))}
+          <div className="line mobile-show" style={{ height: "1px" }}></div>
+          <div style={{ height: "13px" }}></div>
         </div>
-        <div className='mobile-show'>
-        <div style={{ height: '13px' }}></div>
-        <div className='line mobile-show' style={{ height: "1px" }}></div>
-        <div className='nav-container-mobile'>
-        <Link
-          href="#top" // Use the same ID as the top of the page
-          className="para block type-opacity-50"
-          onClick={scrollToTop}
-        >
-          back to top
-        </Link>
-        </div>
-      </div>
+        <div className="main-content">
+          <div>
+            <div id="top"></div>
 
+            <div className="sidebyside">
+              {pageContent && pageContent.properties && (
+                <>
+                  <p className="para type-opacity-50">
+                    on{" "}
+                    <span className="number">
+                      {formatDate(pageContent.properties.creationDate)}
+                    </span>
+                  </p>
+                  &nbsp;
+                  <p className="para type-opacity-50">
+                    in {pageContent.properties.Tags}
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+          <div style={{ height: "39px" }}></div>
+          <p className="icon">{pageContent.properties.icon}</p>
+          <div style={{ height: "39px" }}></div>
+          <h1 className="type title">{pageContent.properties.pageTitle}</h1>
+          <div style={{ height: "26px" }}></div>
+          {pageContent.content.map((block, index) => (
+            <div key={index}>
+              {block.type === "text" && (
+                <p className="para blogtype top-padding-13 bottom-padding-13">
+                  {block.text}
+                </p>
+              )}
+              {block.type === "h2" && (
+                <h2
+                  id={block.text}
+                  className="type heading-md top-padding-26 bottom-padding-13"
+                >
+                  {block.text}
+                </h2>
+              )}
+              {block.type === "image" && (
+                <Image
+                  className="image top-padding-26 bottom-padding-26"
+                  width="688"
+                  height="200"
+                  src={block.url}
+                  alt="Image"
+                />
+              )}
+              {/* Handle other block types as needed */}
+            </div>
+          ))}
+        </div>
+        <div className="mobile-show">
+          <div style={{ height: "13px" }}></div>
+          <div className="line mobile-show" style={{ height: "1px" }}></div>
+          <div className="nav-container-mobile">
+            <Link
+              href="#top" // Use the same ID as the top of the page
+              className="para block type-opacity-50"
+              onClick={scrollToTop}
+            >
+              back to top
+            </Link>
+          </div>
+        </div>
       </div>
     );
   };
 
   return (
-    <Layout topContent={isLoading ? renderLoader() : renderTopContent()} bottomContent={isLoading ? null : renderBottomContent()} isPostPage={true} >
-      {isLoading ? null : renderPageContent()}
+    <Layout
+      topContent={renderTopContent()}
+      bottomContent={renderBottomContent()}
+      isPostPage={true}
+    >
+      {renderPageContent()}
     </Layout>
   );
 }
@@ -211,52 +177,60 @@ function formatDate(dateString) {
 
   // Define the month names as an array
   const monthNames = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
-  const day = String(date.getDate()).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, "0");
   const month = monthNames[date.getMonth()];
   const year = String(date.getFullYear()).slice(-2);
 
   return `${day} ${month} '${year}`;
 }
 
-
 const scrollToTop = (event) => {
   event.preventDefault(); // Prevent the default anchor link behavior
-  window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top of the page
+  window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top of the page
 };
 
 export async function getStaticProps({ params }) {
   const { slug } = params;
 
-  let isLoading = true; // Set initial loading state
   let pageContent = null; // Initialize page content
 
   try {
     if (slug) {
-      pageContent = await retrievePageData(slug); // Fetch content based on the slug (id)
-      isLoading = false; // Data has been fetched, set isLoading to false
+      pageContent = await retrievePageData(slug); // Fetch content based on the slug
     }
   } catch (error) {
-    console.error('Error fetching page content:', error);
+    console.error("Error fetching page content:", error);
   }
 
   return {
     props: {
       pageContent,
-      isLoading,
     },
   };
 }
 
 export async function getStaticPaths() {
   // Fetch all page properties to build dynamic paths
-  const pageProperties = await retrievePageProperties(process.env.NOTION_DATABASE_ID);
+  const pageProperties = await retrievePageProperties(
+    process.env.NOTION_DATABASE_ID
+  );
 
   const paths = pageProperties.map((property) => ({
-    params: { slug: property.id }, // Use "id" as the slug
+    params: { slug: property.slug }, // Use "slug" from your properties
   }));
 
   return {
@@ -264,6 +238,5 @@ export async function getStaticPaths() {
     fallback: false, // Render a 404 page if the path doesn't match any page
   };
 }
-
 
 export default BlogPage;

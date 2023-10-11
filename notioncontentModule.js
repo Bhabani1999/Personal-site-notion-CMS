@@ -3,8 +3,26 @@ const { Client } = require("@notionhq/client");
 
 const notion = new Client({ auth: process.env.NOTION_KEY });
 
-const retrievePageData = async (pageId) => {
+const DATABASE_ID = process.env.NOTION_DATABASE_ID;
+
+const retrievePageData = async (slug) => {
   try {
+    const response = await notion.databases.query({
+      database_id: DATABASE_ID, // Use your database ID
+      filter: {
+        property: 'Slug',
+        rich_text: {
+          equals: slug,
+        },
+      },
+    });
+
+    if (response.results.length === 0) {
+      console.error("No page found with the provided slug.");
+      return null;
+    }
+    else {
+    const pageId = response.results[0].id;
     const page = await notion.pages.retrieve({ page_id: pageId });
     const pageProperties = {
       id: page.id,
@@ -76,7 +94,7 @@ const retrievePageData = async (pageId) => {
     return {
       properties: pageProperties,
       content: content,
-    };
+    };}
   } catch (error) {
     console.error("Error retrieving page data:", error);
     throw error;

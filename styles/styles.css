@@ -1,8 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,200;0,300;0,400;0,500;1,200;1,400;1,500&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Handjet:wght@300;400;500;600&family=Spline+Sans+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Spline+Sans+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
 body {
     margin: 0;
     padding: 0;
@@ -63,7 +60,7 @@ body {
         flex-basis: 100%;
         max-width: 100%;
         padding: 0px;
-    
+
     }
 
     .column.middlepost {
@@ -75,11 +72,15 @@ body {
         max-width: 100%;
 
     }
-    
+
 }
 
 /* Apply typography styles */
-h1.title, h2.heading-md, p.para, span.number, .accent-heading {
+h1.title,
+h2.heading-md,
+p.para,
+span.number,
+.accent-heading {
     font-size: 15px;
     text-decoration: none;
     font-family: "Helvetica Neue", Arial, sans-serif;
@@ -108,28 +109,30 @@ span.number {
     font-size: 13.2px;
     white-space: nowrap;
 
-    
-    
+
+
 }
+
 .para.lowercase {
     text-transform: lowercase;
 }
 
-.accent-heading
-{    font-family: 'Spline Sans Mono', monospace;
+.accent-heading {
+    font-family: 'Spline Sans Mono', monospace;
     text-transform: uppercase;
     font-size: 12px;
     line-height: 13px;
-    font-weight: 5  00;
+    font-weight: 5 00;
     letter-spacing: 0.6px;
 
-  
+
 }
 
 /* Define color classes */
 .type {
     color: #f3f3f3;
 }
+
 .blogtype {
     color: #BFBFBF;
 }
@@ -146,10 +149,11 @@ span.number {
     display: flex;
     justify-content: space-between;
 }
-.sidebyside{
+
+.sidebyside {
     display: flex;
     flex-direction: row;
-    
+
 }
 
 /* Add styling for left and right content within the row */
@@ -190,51 +194,58 @@ a:hover {
     top: 0;
 
     @media (max-width: 768px) {
-        display: none; /* Change display to flex under 768px */
-    
-      }
+        display: none;
+        /* Change display to flex under 768px */
+
+    }
 }
 
 .column.right {
-    
+
     padding: 26px;
 
     @media (max-width: 768px) {
-        display: none; /* Change display to flex under 768px */
-    
-      }
+        display: none;
+        /* Change display to flex under 768px */
+
+    }
 }
 
 
 .mobile-show {
-    
+
     display: none;
 
     @media (max-width: 768px) {
-        ; /* Change display to flex under 768px */
+        ;
+        /* Change display to flex under 768px */
         display: block;
-      }
+    }
 }
 
 
 /* Disable overscroll behavior */
-html, body {
+html,
+body {
     overscroll-behavior-y: none;
 }
 
 /* Style the "work" and "notes" links */
 .work-link:hover,
 .notes-link:hover {
-    cursor: pointer; /* Change cursor to pointer on hover */
-    text-decoration: underline; /* Underline the text on hover */
+    cursor: pointer;
+    /* Change cursor to pointer on hover */
+    text-decoration: underline;
+    /* Underline the text on hover */
 }
+
 /* Add this CSS to your stylesheet */
 .hidden {
     display: none;
-  }
-  
+}
 
-  .icon {
+
+.icon {
     font-size: 43.35px;
     line-height: 52px;
     font-family: "Helvetica Neue", Arial, sans-serif;
@@ -249,19 +260,25 @@ html, body {
 /* CSS */
 #backToTopContainer {
     display: none;
-    opacity: 0; /* Start with opacity 0 */
-    transition: opacity 0.3s ease, display 0.3s ease; /* Add transitions for opacity and display */
+    opacity: 0;
+    /* Start with opacity 0 */
+    transition: opacity 0.3s ease, display 0.3s ease;
+    /* Add transitions for opacity and display */
 }
 
 /* CSS for post.js modifications */
 .image-container {
-    max-width: 100%; /* Ensure the container doesn't exceed its parent's width */
-    margin: 0 auto; /* Center the image horizontally within the container */
+    max-width: 100%;
+    /* Ensure the container doesn't exceed its parent's width */
+    margin: 0 auto;
+    /* Center the image horizontally within the container */
 }
 
 .image {
-    max-width: 100%; /* Make the image fit the width of its container */
-    height: auto; /* Preserve the aspect ratio of the image */
+    max-width: 100%;
+    /* Make the image fit the width of its container */
+    height: auto;
+    /* Preserve the aspect ratio of the image */
 }
 
 .top-padding-13 {
@@ -280,9 +297,10 @@ html, body {
     padding-bottom: 26px;
 }
 
-.block{
+.block {
     display: block;
 }
+
 .sidebyside {
     flex-direction: row;
 }
@@ -302,18 +320,23 @@ html, body {
     background-color: #f3f3f3;
     position: absolute;
     animation: moveLoader 2s linear infinite;
-    
+
 }
 
 @keyframes moveLoader {
     0% {
-        left: -10px; /* Start position */
+        left: -10px;
+        /* Start position */
     }
+
     50% {
-        left: 100%; /* Halfway to the right */
+        left: 100%;
+        /* Halfway to the right */
     }
+
     100% {
-        left: -10px; /* Back to the left */
+        left: -10px;
+        /* Back to the left */
     }
 }
 
@@ -321,24 +344,29 @@ html, body {
 /* Define a grid container */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Three columns */
-    grid-template-rows: repeat(3, 1fr);    /* Three rows */
-    gap: 1px; /* Gap between grid items */
-    width: 65px; /* Adjust the width as needed */
-  }
-  
-  /* Style for grid items */
-  .grid-item {
+    grid-template-columns: repeat(3, 1fr);
+    /* Three columns */
+    grid-template-rows: repeat(3, 1fr);
+    /* Three rows */
+    gap: 1px;
+    /* Gap between grid items */
+    width: 65px;
+    /* Adjust the width as needed */
+}
+
+/* Style for grid items */
+.grid-item {
     display: flex;
     align-items: center;
     justify-content: left;
-    height: 23px; /* Adjust the height as needed */
+    height: 23px;
+    /* Adjust the height as needed */
 
-    
-  }
-  
 
-  .lpara {
+}
+
+
+.lpara {
 
     font-size: 13px;
     text-decoration: none;
@@ -351,54 +379,56 @@ html, body {
     margin: 0;
 
 
-  }
+}
 
-  .spacer {
+.spacer {
     height: 156px;
-  }
-  
+}
 
-  .nav-container-mobile {
-    display: none; /* Default: hide the element */
-  
+
+.nav-container-mobile {
+    display: none;
+    /* Default: hide the element */
+
     /* Media query for viewport width under 768px */
     @media (max-width: 768px) {
-      display: flex; /* Change display to flex under 768px */
-      flex-wrap: wrap;
-      max-width: 100%;
-      padding: 26px;
+        display: flex;
+        /* Change display to flex under 768px */
+        flex-wrap: wrap;
+        max-width: 100%;
+        padding: 26px;
     }
-  }
-  
-  
-  .nav-container-child {
-    margin: 0; /* Remove any default margins */
-    margin-right: 13px; /* Add padding or spacing between child containers */
-    white-space: nowrap; /* Prevent child containers from breaking within themselves */
-  }
-  
-  /* Optional: Set a max-width for the child containers to limit their width */
-  .line {
+}
+
+
+.nav-container-child {
+    margin: 0;
+    /* Remove any default margins */
+    margin-right: 13px;
+    /* Add padding or spacing between child containers */
+    white-space: nowrap;
+    /* Prevent child containers from breaking within themselves */
+}
+
+/* Optional: Set a max-width for the child containers to limit their width */
+.line {
     background-color: rgba(128, 128, 128, 0.2)
+}
 
-  }
+.link-container-mobile {
+    display: none;
+    /* Default: hide the element */
 
-  .link-container-mobile {
-    display: none; /* Default: hide the element */
-  
     /* Media query for viewport width under 768px */
     @media (max-width: 768px) {
-      display: flex; /* Change display to flex under 768px */
-      flex-wrap: wrap;
-      max-width: 100%;
-      
+        display: flex;
+        /* Change display to flex under 768px */
+        flex-wrap: wrap;
+        max-width: 100%;
+
     }
-  }
+}
 
-  .padding-26{
+.padding-26 {
     padding: 26px;
-  }
-  
-
- 
-  
+}
