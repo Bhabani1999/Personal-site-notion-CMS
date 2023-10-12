@@ -1,10 +1,10 @@
 import Layout from "../../app/layout";
 import "../../styles/styles.css";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import retrievePageData from "../../notioncontentModule";
 import { retrievePageProperties } from "../../notionModule";
+import Head from "next/head";
 
 function BlogPage({ pageContent }) {
   // Render H2 headings from the content in topContent
@@ -134,7 +134,7 @@ function BlogPage({ pageContent }) {
               {block.type === "image" && (
                 <Image
                   className="image top-padding-26 bottom-padding-26"
-                  width="688"
+                  width="2000"
                   height="200"
                   src={block.url}
                   alt="Image"
@@ -167,7 +167,34 @@ function BlogPage({ pageContent }) {
       bottomContent={renderBottomContent()}
       isPostPage={true}
     >
-      {renderPageContent()}
+      <>
+        <Head>
+          <title>{pageContent.properties.pageTitle}</title>
+          <meta
+            name="description"
+            content={pageContent.properties.pageDescription}
+          />
+
+          <meta
+            property="og:title"
+            content={pageContent.properties.pageTitle}
+          />
+          <meta
+            property="og:description"
+            content={pageContent.properties.pageDescription}
+          />
+          <meta
+            property="og:image"
+            content={pageContent.properties.coverImage}
+          />
+
+          <meta name="Bhabani Shankar Mohapatra" content="Author Name" />
+          <meta name="keywords" content="blog, topic, keyword, tags" />
+
+          <Link rel="icon" href="../../app/favicon.ico" type="image/x-icon" />
+        </Head>
+        {renderPageContent()}
+      </>
     </Layout>
   );
 }

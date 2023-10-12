@@ -1,10 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 import { retrievePageProperties } from "../notionModule";
 import { getDatabaseInfo } from "../databasemodule";
-
 import Layout from "../app/layout";
 import "../styles/styles.css";
 import { useMediaQuery } from "react-responsive";
+import Head from "next/head";
+import Link from "next/link";
 
 function Home({ pageProperties, databaseInfo }) {
   // State to hold the retrieved page properties
@@ -116,7 +117,25 @@ function Home({ pageProperties, databaseInfo }) {
       topContent={renderTopContent()}
       bottomContent={renderBottomContent()}
     >
-      <div>
+      <>
+        <Head>
+          <title>Bhabani SM</title>
+          <meta
+            name="description"
+            content="Repository of notes and work by Bhabani SM"
+          />
+
+          <meta property="og:title" content="Bhabani SM" />
+          <meta
+            property="og:description"
+            content="Repository of notes and work by Bhabani SM"
+          />
+         
+          <meta name="Bhabani Shankar Mohapatra" content="Author Name" />
+          <meta name="keywords" content="blog, topic, keyword, tags" />
+
+          <Link rel="icon" href="../app/favicon.png" type="image/x-icon" />
+        </Head>
         <div className="mobile-show">
           <div className="nav-container-mobile">
             <div className="nav-container-child">
@@ -297,7 +316,7 @@ function Home({ pageProperties, databaseInfo }) {
             )}
           </div>
         </div>
-      </div>
+      </>
     </Layout>
   );
 }

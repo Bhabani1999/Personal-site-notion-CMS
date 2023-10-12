@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+
 function Layout({ children, topContent, bottomContent, middleContent,rightContent, isPostPage }) {
   const middleColumnClass = isPostPage ? 'column middlepost' : 'column middle';
   return (
@@ -24,3 +26,5 @@ function Layout({ children, topContent, bottomContent, middleContent,rightConten
 }
 
 export default Layout;
+
+
