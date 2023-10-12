@@ -188,7 +188,6 @@ function BlogPage({ pageContent }) {
           <meta name="Bhabani Shankar Mohapatra" content="Author Name" />
           <meta name="keywords" content="blog, topic, keyword, tags" />
 
-          <Link rel="icon" href="../../app/favicon.ico" type="image/x-icon" />
         </Head>
         {renderPageContent()}
       </>
