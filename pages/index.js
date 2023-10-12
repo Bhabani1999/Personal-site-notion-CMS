@@ -133,6 +133,7 @@ function Home({ pageProperties, databaseInfo }) {
          
           <meta name="Bhabani Shankar Mohapatra" content="Author Name" />
           <meta name="keywords" content="blog, topic, keyword, tags" />
+          <link rel="icon" href="../app/favicon.ico" />
 
         </Head>
         <div className="mobile-show">
