@@ -164,7 +164,7 @@ function Home({ pageProperties, databaseInfo }) {
           </div>
         </div>
         <div className="line mobile-show" style={{ height: "1px" }}></div>
-        <div className="mobile-show" style={{ height: "13px" }}></div>
+        <div  style={{ height: "13px" }}></div>
 
         <div className="main-content">
           <div className="inner-container">
