@@ -183,10 +183,7 @@ function BlogPage({ pageContent }) {
             property="og:description"
             content={pageContent.properties.pageDescription}
           />
-          <meta
-            property="og:image"
-            content={pageContent.properties.coverImage}
-          />
+         
 
           <meta name="Bhabani Shankar Mohapatra" content="Author Name" />
           <meta name="keywords" content="blog, topic, keyword, tags" />

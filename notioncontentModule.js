@@ -31,7 +31,6 @@ const retrievePageData = async (slug) => {
       icon: page.icon?.emoji || "",
       creationDate: page.created_time,
       Tags: page.properties["Tags"]?.select.name || "", // Assuming "Tags" is a select property
-      coverImage: page.cover?.type === 'external' ? page.cover.external.url : null,
     };
 
     const blockResponse = await notion.blocks.children.list({ block_id: pageId });
