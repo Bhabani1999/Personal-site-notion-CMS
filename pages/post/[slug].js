@@ -134,11 +134,25 @@ function BlogPage({ pageContent }) {
               {block.type === "image" && (
                 <Image
                   className="image top-padding-26 bottom-padding-26"
-                  width="2000"
+                  width="20000000"
                   height="200"
                   src={block.url}
                   alt="Image"
                 />
+                
+              )}
+              {block.type === "bookmark" && (
+                <div className="image-flex">
+                <Image
+                  className="full-width-content top-padding-26 bottom-padding-26"
+                  width="200"
+                  height="200"
+                  src={block.url}
+                  alt="Image"
+                />
+
+                </div>
+                
               )}
               {/* Handle other block types as needed */}
             </div>

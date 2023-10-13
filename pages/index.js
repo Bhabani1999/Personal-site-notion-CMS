@@ -5,7 +5,7 @@ import Layout from "../app/layout";
 import "../styles/styles.css";
 import { useMediaQuery } from "react-responsive";
 import Head from "next/head";
-import Link from "next/link";
+import { motion } from 'framer-motion';
 
 function Home({ pageProperties, databaseInfo }) {
   // State to hold the retrieved page properties
@@ -27,24 +27,30 @@ function Home({ pageProperties, databaseInfo }) {
     return (
       <div>
         <div className="nav-container">
-          <p
+          <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.6,ease: "easeInOut" } }}
             className="para type work-link"
             onClick={() => scrollToSection("_work")}
           >
             work
-          </p>
-          <p
+          </motion.p>
+          <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.8, delay: 0.04, ease: "easeInOut"} }}
             className="para type notes-link"
             onClick={() => scrollToSection("_notes")}
           >
             notes
-          </p>
-          <p
+          </motion.p>
+          <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 1.0, delay: 0.08 ,ease: "easeInOut"} }}
             className="para type notes-link"
             onClick={() => scrollToSection("_about")}
           >
             about
-          </p>
+          </motion.p>
         </div>
       </div>
     );
@@ -54,12 +60,14 @@ function Home({ pageProperties, databaseInfo }) {
     return (
       <div>
         <div className="social-links-container">
-          <p className=" para type">
+          <motion.p initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.6, delay: 0.4, ease: "easeInOut"} }}className=" para type">
             <a className="type" href="mailto:bhabani10121999@gmail.com">
               email{" "}
             </a>
-          </p>
-          <p className="para type">
+          </motion.p>
+          <motion.p initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.7, delay: 0.44, ease: "easeInOut"} }}className="para type">
             <a
               className=" type"
               href="https://www.linkedin.com/in/bhabanismoh/"
@@ -68,8 +76,9 @@ function Home({ pageProperties, databaseInfo }) {
             >
               linkedin
             </a>
-          </p>
-          <p className="para type">
+          </motion.p>
+          <motion.p initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.8, delay: 0.48, ease: "easeInOut"} }}className="para type">
             <a
               className=" type"
               href="https://twitter.com/smbhabani"
@@ -78,15 +87,16 @@ function Home({ pageProperties, databaseInfo }) {
             >
               twitter
             </a>
-          </p>
+          </motion.p>
         </div>
         {databaseInfo && (
-          <p className="para type-opacity-50">
+          <motion.p initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.9, delay: 0.52, ease: "easeInOut"} }}className="para type-opacity-50">
             last updated on{" "}
             <span className="number type-opacity-50">
               {formatDateShort(databaseInfo.lastEditedTime)}
             </span>
-          </p>
+          </motion.p>
         )}
       </div>
     );
@@ -164,16 +174,18 @@ function Home({ pageProperties, databaseInfo }) {
           </div>
         </div>
         <div className="line mobile-show" style={{ height: "1px" }}></div>
-        <div  style={{ height: "13px" }}></div>
+        <div  className = 'mobile-show' style={{ height: "13px" }}></div>
 
         <div className="main-content">
           <div className="inner-container">
-            <h3 id="_work" className="accent-heading">
-              <span className="accent">_ work</span>
-            </h3>
+            <motion.h3 initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.3, delay: 0, ease: "easeInOut"} }} id="_work" className="accent-heading">
+              <span className="accent">work</span>
+            </motion.h3>
             <div style={{ height: "26px" }}></div>
             {workPageProperties.map((property) => (
-              <div className="inner-container" key={property.id}>
+              <motion.div initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.45, delay: 0.1, ease: "easeInOut"} }}className="inner-container" key={property.id}>
                 <div className="row">
                   <div className="left-content">
                     <div>
@@ -189,37 +201,35 @@ function Home({ pageProperties, databaseInfo }) {
                     </p>
                   </div>
                   <div className="right-content">
-                    {isMobile ? (
+                    
                       <span className="number type-opacity-50 creationDate">
                         {formatDateShort(property.creationDate)}
                       </span>
-                    ) : (
-                      <span className="number type-opacity-50 creationDate">
-                        {formatDateShort(property.creationDate)}
-                      </span>
-                    )}
+                    
                   </div>
                 </div>
 
                 <div style={{ height: "26px" }}></div>
-              </div>
+              </motion.div>
             ))}
           </div>
           <div style={{ height: "13px" }}></div>
           <div className="inner-container">
-            <h3 id="_notes" className="accent-heading">
-              <span className="accent">_ notes</span>
-            </h3>
+            <motion.h3 initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.3, delay: 0, ease: "easeInOut"} }} id="_notes" className="accent-heading">
+              <span className="accent">notes</span>
+            </motion.h3>
             <div style={{ height: "26px" }}></div>
             {notesPageProperties.map((property) => (
-              <div className="inner-container" key={property.id}>
+              <motion.div initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.8, delay: 0.1, ease: "easeInOut"} }}className="inner-container" key={property.id}>
                 <div className="row">
                   <div className="left-content">
                     <div>
                       <a
                         className="para lowercase type pageTitleLink"
-                        href={`/post/${property.slug}`}
-                      >
+                        href={`/post/${property.slug}`} >
+                      
                         {property.pageTitle}
                       </a>
                     </div>
@@ -228,29 +238,25 @@ function Home({ pageProperties, databaseInfo }) {
                     </p>
                   </div>
                   <div className="right-content">
-                    {isMobile ? (
                       <span className="number type-opacity-50 creationDate">
                         {formatDateShort(property.creationDate)}
                       </span>
-                    ) : (
-                      <span className="number type-opacity-50 creationDate">
-                        {formatDateShort(property.creationDate)}
-                      </span>
-                    )}
                   </div>
                 </div>
 
                 <div style={{ height: "26px" }}></div>
-              </div>
+              </motion.div>
             ))}
           </div>
           <div style={{ height: "13px" }}></div>
           <div className="inner-container">
-            <h3 id="_about" className="accent-heading">
-              <span className="accent">_ about</span>
-            </h3>
+            <motion.h3 initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 0.3, delay: 0, ease: "easeInOut"} }}id="_about" className="accent-heading">
+              <span className="accent">about</span>
+            </motion.h3>
             <div style={{ height: "26px" }}></div>
-            <div>
+            <motion.div initial={{ opacity: 0 }}
+              animate={{ opacity: 1, transition: { duration: 0.45, delay: 0.1, ease: "easeInOut"} }}>
               <p className="para lowercase blogtype">
                 Bhabani (23, Odisha/India). Previously co-founder of Evy Energy,
                 acquired by Zemetric USA, and product-designed on workforce
@@ -264,7 +270,7 @@ function Home({ pageProperties, databaseInfo }) {
                 largest e-summit. Now, I'm looking to spend more time on
                 filmmaking, football, and art.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
 
