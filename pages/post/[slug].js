@@ -5,9 +5,19 @@ import Image from "next/image";
 import retrievePageData from "../../notioncontentModule";
 import { retrievePageProperties } from "../../notionModule";
 import Head from "next/head";
+import { motion, useAnimation } from "framer-motion";
 
 function BlogPage({ pageContent }) {
-  // Render H2 headings from the content in topContent
+  const controls = useAnimation();
+
+  const handleClick = async () => {
+    // Trigger a fade-out animation for other elements
+    await controls.start({
+      opacity: 0,
+      transition: { duration: 0.2, ease: "easeOut" },
+    });
+  };
+  
   const renderH2Headings = () => {
     if (!pageContent || !pageContent.content) {
       return null;
@@ -30,7 +40,11 @@ function BlogPage({ pageContent }) {
     }
 
     return (
-      <div>
+      <motion.div initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        transition: { duration: 0.8, delay: 0.04, ease: "easeInOut" },
+      }}>
         {h2Headings.map((heading, index) => (
           <Link
             href={`#${heading.text}`}
@@ -41,27 +55,31 @@ function BlogPage({ pageContent }) {
             {heading.text}
           </Link>
         ))}
-      </div>
+      </motion.div>
     );
   };
   // Define content for top-container and bottom-container
   function renderTopContent() {
     return (
-      <div>
-        <div className="nav-container">
-          <Link href="../">home</Link>
-        </div>
+      <motion.div initial={{ opacity: 1 }} animate={controls}>
+        <motion.div  initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.6, ease: "easeInOut" },
+            }} className="nav-container">
+          <Link onClick={handleClick} href="../">home</Link>
+        </motion.div>
         <div>
           <div className="spacer"></div>
           {renderH2Headings()} {/* Render H2 headings in top content */}
         </div>
-      </div>
+      </motion.div>
     );
   }
 
   function renderBottomContent() {
     return (
-      <div>
+      <motion.div initial={{ opacity: 1 }} animate={controls}>
         <Link
           href="#top" // Use the same ID as the top of the page
           className="para block type-opacity-50"
@@ -69,7 +87,7 @@ function BlogPage({ pageContent }) {
         >
           back to top
         </Link>
-      </div>
+      </motion.div>
     );
   }
 
@@ -82,7 +100,7 @@ function BlogPage({ pageContent }) {
     // Render the content based on the structure returned by the notionContentModule
     // You can customize this part based on your specific content structure
     return (
-      <div>
+      <motion.div initial={{ opacity: 1 }} animate={controls}>
         <div className="mobile-show">
           <div className="nav-container-mobile nav-container">
             <Link href="../">home</Link>
@@ -94,7 +112,11 @@ function BlogPage({ pageContent }) {
           <div>
             <div id="top"></div>
 
-            <div className="sidebyside">
+            <motion.div  initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
+              }} className="sidebyside">
               {pageContent && pageContent.properties && (
                 <>
                   <p className="para type-opacity-50">
@@ -109,15 +131,31 @@ function BlogPage({ pageContent }) {
                   </p>
                 </>
               )}
-            </div>
+            </motion.div>
           </div>
+          <motion.div  initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
+              }} style={{ height: "39px" }}></motion.div>
+          <motion.p  initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
+              }}className="icon">{pageContent.properties.icon}</motion.p>
           <div style={{ height: "39px" }}></div>
-          <p className="icon">{pageContent.properties.icon}</p>
-          <div style={{ height: "39px" }}></div>
-          <h1 className="type title">{pageContent.properties.pageTitle}</h1>
+          <motion.h1  initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
+              }} className="type title">{pageContent.properties.pageTitle}</motion.h1>
           <div style={{ height: "26px" }}></div>
           {pageContent.content.map((block, index) => (
-            <div key={index}>
+            <motion.div  initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.45, delay: 0.1, ease: "easeInOut" },
+            }} key={index}>
               {block.type === "text" && (
                 <p className="para blogtype top-padding-13 bottom-padding-13">
                   {block.text}
@@ -155,7 +193,7 @@ function BlogPage({ pageContent }) {
                 
               )}
               {/* Handle other block types as needed */}
-            </div>
+            </motion.div>
           ))}
         </div>
         <div className="mobile-show">
@@ -171,7 +209,7 @@ function BlogPage({ pageContent }) {
             </Link>
           </div>
         </div>
-      </div>
+      </motion.div>
     );
   };
 

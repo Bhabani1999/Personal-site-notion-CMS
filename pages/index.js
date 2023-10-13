@@ -3,17 +3,18 @@ import { retrievePageProperties } from "../notionModule";
 import { getDatabaseInfo } from "../databasemodule";
 import Layout from "../app/layout";
 import "../styles/styles.css";
-import { useMediaQuery } from "react-responsive";
 import Head from "next/head";
-import { motion, useAnimation } from 'framer-motion';
-
+import { motion, useAnimation } from "framer-motion";
 
 function Home({ pageProperties, databaseInfo }) {
   const controls = useAnimation();
 
   const handleClick = async () => {
     // Trigger a fade-out animation for other elements
-    await controls.start({ opacity: 0, transition: { duration: 0.2, ease: "easeOut" } });
+    await controls.start({
+      opacity: 0,
+      transition: { duration: 0.2, ease: "easeOut" },
+    });
   };
 
   // Filter pageProperties for work and notes separately
@@ -27,8 +28,7 @@ function Home({ pageProperties, databaseInfo }) {
 
   function renderTopContent() {
     return (
-      <motion.div initial={{ opacity: 1 }}
-      animate={controls}>
+      <motion.div initial={{ opacity: 1 }} animate={controls}>
         <div className="nav-container">
           <motion.p
             initial={{ opacity: 0 }}
@@ -70,8 +70,7 @@ function Home({ pageProperties, databaseInfo }) {
 
   function renderBottomContent() {
     return (
-      <motion.div initial={{ opacity: 1 }}
-      animate={controls}>
+      <motion.div initial={{ opacity: 1 }} animate={controls}>
         <div className="social-links-container">
           <motion.p
             initial={{ opacity: 0 }}
@@ -212,8 +211,11 @@ function Home({ pageProperties, databaseInfo }) {
         <div className="line mobile-show" style={{ height: "1px" }}></div>
         <div className="mobile-show" style={{ height: "13px" }}></div>
 
-        <motion.div initial={{ opacity: 1 }}
-      animate={controls} className="main-content">
+        <motion.div
+          initial={{ opacity: 1 }}
+          animate={controls}
+          className="main-content"
+        >
           <div className="inner-container">
             <motion.h3
               initial={{ opacity: 0 }}
@@ -240,7 +242,8 @@ function Home({ pageProperties, databaseInfo }) {
                 <div className="row">
                   <div className="left-content">
                     <div>
-                      <a onClick={handleClick}
+                      <a
+                        onClick={handleClick}
                         className="para lowercase  type pageTitleLink"
                         href={`/post/${property.slug}`}
                       >
@@ -289,7 +292,8 @@ function Home({ pageProperties, databaseInfo }) {
                 <div className="row">
                   <div className="left-content">
                     <div>
-                      <a onClick={handleClick}
+                      <a
+                        onClick={handleClick}
                         className="para lowercase type pageTitleLink"
                         href={`/post/${property.slug}`}
                       >
