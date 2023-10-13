@@ -295,6 +295,7 @@ export async function getStaticProps({ params }) {
     props: {
       pageContent,
     },
+    revalidate: 1800,
   };
 }
 
