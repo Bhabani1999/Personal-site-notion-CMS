@@ -1,11 +1,8 @@
 import React from 'react';
-import { Spline_Sans_Mono } from 'next/font/google'
+
+
  
-const Spline = Spline_Sans_Mono({
-  subsets: ['latin'],
-  variable: '--font-Spline',
-  display: 'swap',
-})
+
  
 
 function Layout({ children, topContent, bottomContent, middleContent,rightContent, isPostPage }) {
