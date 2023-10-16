@@ -63,12 +63,12 @@ const retrievePageData = async (slug) => {
               block.bulleted_list_item.rich_text[0]?.text?.content || "";
             content.push({ type: "bullet", text: bulletContent });
             break;
+
           case "numbered_list_item":
             // Handle numbered lists
             const numberedContent =
               block.numbered_list_item.rich_text[0]?.text?.content || "";
             content.push({ type: "numbered", text: numberedContent });
-          
 
             // Check for nested blocks (if iterable)
             if (
@@ -80,24 +80,46 @@ const retrievePageData = async (slug) => {
               }
             }
             break;
-          case "paragraph":
-            // Handle paragraphs
-            if (block.paragraph && block.paragraph.rich_text) {
-              const paragraphContent = block.paragraph.rich_text
-                .map((richText) => {
-                  return richText.text.content;
-                })
-                .join(" "); // Combine text content within the paragraph
+            case "paragraph":
+              // Handle paragraph blocks
+              const paragraphContent = block.paragraph.rich_text.map((richText) => {
+                if (richText.type === "text") {
+                  const text = richText.text.content;
+                  const href = richText.href;
+                  let contentType = "main"; // Default content type is "main"
+        
+                  if (richText.annotations.color === "gray") {
+                    contentType = "sidenote"; // Set content type to "sidenote" when the color is "gray"
+                  }
+        
+                  return { contentType, text, href };
+                }
+                return null;
+              }).filter(Boolean); // Filter out null values (non-text elements)
+        
+              content.push({ type: "paragraph", content: paragraphContent });
+              break;
+          case "callout":
+            // Handle callout blocks
+            const calloutContent = block.callout.rich_text
+              .map((richText) => {
+                if (richText.type === "text") {
+                  const text = richText.text.content;
+                  const href = richText.href; // Check if a link is associated with the text
+                  return { text, href }; // Return both the text and the link
+                }
+                return null;
+              })
+              .filter(Boolean); // Filter out null values (non-text elements)
 
-              content.push({ type: "text", text: paragraphContent });
-            }
+            content.push({ type: "callout", content: calloutContent });
             break;
           case "bookmark":
-              // Handle numbered lists
-              const bookmarkUrl =block.bookmark.url || "";
-              content.push({ type: "bookmark", url: bookmarkUrl });
-          
-            default:
+            // Handle numbered lists
+            const bookmarkUrl = block.bookmark.url || "";
+            content.push({ type: "bookmark", url: bookmarkUrl });
+
+          default:
             content.push({ type: "text", text: "" });
             break;
         }

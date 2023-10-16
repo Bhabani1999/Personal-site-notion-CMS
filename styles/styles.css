@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-    max-width: 1920px;
+    max-width: 1660px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -27,7 +27,7 @@ body {
 }
 
 .column.middle {
-    flex: 0 0 calc(100% - 52px);
+    flex: 2;
     max-width: 648px;
     position: relative;
     overflow-y: auto;
@@ -469,5 +469,36 @@ body {
     display: grid;
     justify-content: center;
        
+
+}
+
+.underline {
+
+    text-decoration: underline;
+}
+
+.sidenote {
+    position: absolute;
+    left: 766px;
+    width: 247px;
+    color: #808080;
+font-size: 13px;
+line-height: 22px; 
+        @media (max-width: 1024px) {
+         display: none;
+    /* Change display to flex under 768px */
+   
+
+    }
+
+}
+
+.sidenote-link {
+    
+    color: #808080;
+font-size: 13px;
+line-height: 22px;
+text-decoration: underline;
+
 
 }

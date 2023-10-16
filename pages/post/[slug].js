@@ -17,7 +17,7 @@ function BlogPage({ pageContent }) {
       transition: { duration: 0.2, ease: "easeOut" },
     });
   };
-  
+
   const renderH2Headings = () => {
     if (!pageContent || !pageContent.content) {
       return null;
@@ -40,11 +40,13 @@ function BlogPage({ pageContent }) {
     }
 
     return (
-      <motion.div initial={{ opacity: 0 }}
-      animate={{
-        opacity: 1,
-        transition: { duration: 0.8, delay: 0.04, ease: "easeInOut" },
-      }}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: { duration: 0.8, delay: 0.04, ease: "easeInOut" },
+        }}
+      >
         {h2Headings.map((heading, index) => (
           <Link
             href={`#${heading.text}`}
@@ -62,12 +64,17 @@ function BlogPage({ pageContent }) {
   function renderTopContent() {
     return (
       <motion.div initial={{ opacity: 1 }} animate={controls}>
-        <motion.div  initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-              transition: { duration: 0.6, ease: "easeInOut" },
-            }} className="nav-container">
-          <Link onClick={handleClick} href="../">home</Link>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            transition: { duration: 0.6, ease: "easeInOut" },
+          }}
+          className="nav-container"
+        >
+          <Link onClick={handleClick} href="../">
+            home
+          </Link>
         </motion.div>
         <div>
           <div className="spacer"></div>
@@ -112,11 +119,14 @@ function BlogPage({ pageContent }) {
           <div>
             <div id="top"></div>
 
-            <motion.div  initial={{ opacity: 0 }}
+            <motion.div
+              initial={{ opacity: 0 }}
               animate={{
                 opacity: 1,
                 transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
-              }} className="sidebyside">
+              }}
+              className="sidebyside"
+            >
               {pageContent && pageContent.properties && (
                 <>
                   <p className="para type-opacity-50">
@@ -133,34 +143,127 @@ function BlogPage({ pageContent }) {
               )}
             </motion.div>
           </div>
-          <motion.div  initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
-              }} style={{ height: "39px" }}></motion.div>
-          <motion.p  initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
-              }}className="icon">{pageContent.properties.icon}</motion.p>
-          <div style={{ height: "39px" }}></div>
-          <motion.h1  initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
-              }} className="type title">{pageContent.properties.pageTitle}</motion.h1>
-          <div style={{ height: "26px" }}></div>
-          {pageContent.content.map((block, index) => (
-            <motion.div  initial={{ opacity: 0 }}
+          <motion.div
+            initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
-              transition: { duration: 0.45, delay: 0.1, ease: "easeInOut" },
-            }} key={index}>
-              {block.type === "text" && (
-                <p className="para blogtype top-padding-13 bottom-padding-13">
-                  {block.text}
-                </p>
-              )}
+              transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
+            }}
+            style={{ height: "39px" }}
+          ></motion.div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
+            }}
+            className="icon"
+          >
+            {pageContent.properties.icon}
+          </motion.p>
+          <div style={{ height: "39px" }}></div>
+          <motion.h1
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
+            }}
+            className="type title"
+          >
+            {pageContent.properties.pageTitle}
+          </motion.h1>
+          <div style={{ height: "26px" }}></div>
+          {pageContent.content.map((block, index) => (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.45, delay: 0.1, ease: "easeInOut" },
+              }}
+              key={index}
+            >
+              {block.type === "paragraph" && (
+  <p className="para blogtype top-padding-13">
+    {block.content.reduce((acc, text, textIndex, content) => {
+      if (text.contentType === "sidenote") {
+        if (!acc.currentSidenote) {
+          acc.currentSidenote = [text];
+        } else {
+          acc.currentSidenote.push(text);
+        }
+      } else {
+        if (acc.currentSidenote) {
+          const sidenoteText = acc.currentSidenote.map((sidenote, sidenoteIndex) => {
+            if (sidenote.href) {
+              return (
+                <a
+                  key={sidenoteIndex}
+                  className="sidenote-link underline"
+                  href={sidenote.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {sidenote.text}
+                </a>
+              );
+            } else {
+              return <span key={sidenoteIndex}>{sidenote.text}</span>;
+            }
+          })
+          acc.result.push(
+            <span key={acc.result.length} className="sidenote">
+              {sidenoteText}
+            </span>
+          );
+          delete acc.currentSidenote;
+        }
+        if (text.href) {
+          acc.result.push(
+            <a
+              key={textIndex}
+              className="blogtype underline"
+              href={text.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {text.text}
+            </a>
+          );
+        } else {
+          acc.result.push(<span key={textIndex}>{text.text}</span>);
+        }
+      }
+      if (textIndex === content.length - 1 && acc.currentSidenote) {
+        const sidenoteText = acc.currentSidenote.map((sidenote, sidenoteIndex) => {
+          if (sidenote.href) {
+            return (
+              <a
+                key={sidenoteIndex}
+                className="sidenote-link  underline"
+                href={sidenote.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {sidenote.text}
+              </a>
+            );
+          } else {
+            return <span key={sidenoteIndex}>{sidenote.text}</span>;
+          }
+        })
+        acc.result.push(
+          <span key={acc.result.length} className="sidenote">
+            {sidenoteText}
+          </span>
+        );
+        delete acc.currentSidenote;
+      }
+      return acc;
+    }, { currentSidenote: null, result: [] }).result}
+  </p>
+)}
+
+            
               {block.type === "h2" && (
                 <h2
                   id={block.text}
@@ -177,20 +280,17 @@ function BlogPage({ pageContent }) {
                   src={block.url}
                   alt="Image"
                 />
-                
               )}
               {block.type === "bookmark" && (
                 <div className="image-flex">
-                <Image
-                  className="full-width-content top-padding-26 bottom-padding-26"
-                  width="200"
-                  height="200"
-                  src={block.url}
-                  alt="Image"
-                />
-
+                  <Image
+                    className="full-width-content top-padding-26 bottom-padding-26"
+                    width="200"
+                    height="200"
+                    src={block.url}
+                    alt="Image"
+                  />
                 </div>
-                
               )}
               {/* Handle other block types as needed */}
             </motion.div>
@@ -235,11 +335,9 @@ function BlogPage({ pageContent }) {
             property="og:description"
             content={pageContent.properties.pageDescription}
           />
-         
 
           <meta name="Bhabani Shankar Mohapatra" content="Author Name" />
           <meta name="keywords" content="blog, topic, keyword, tags" />
-
         </Head>
         {renderPageContent()}
       </>
