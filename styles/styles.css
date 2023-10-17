@@ -1,5 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap');
 
+@font-face {
+    font-family: 'PP Hatton';
+    src: url('../fonts/PPHatton-Medium.otf') format('otf');
+    src: url('../fonts/PPHatton-Ultralight.otf') format('otf');
+}
+
+
+@font-face {
+    font-family: 'SupplyMono';
+    src: url('../fonts/PPSupplyMono-Regular.otf') format('otf');
+}
+
+@font-face {
+    font-family: 'SupplySans';
+    src: url('../fonts/PPSupplySans-Regular.otf') format('otf');
+}
+
+
+
 body {
     margin: 0;
     padding: 0;
@@ -98,19 +117,25 @@ span.number,
 
 
 h1.title {
+    font-family: 'PP Hatton';
+    font-weight: 300;
+
     font-size: 43.35px;
     line-height: 52px;
 }
 
 h2.heading-md {
+    font-family: 'PP Hatton';
+    font-weight: 300;
     font-size: 25.5px;
     line-height: 39px;
 }
 
 span.number {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 14px;
+    font-family: 'PP Supply Mono', monospace;
+    font-size: 13px;
     white-space: nowrap;
+    text-transform: uppercase;
 
 
 
@@ -130,6 +155,7 @@ span.number {
     letter-spacing: 0;
     line-height: 26px;
     margin: 0;
+    
 }
 
 /* Define color classes */
@@ -502,3 +528,18 @@ text-decoration: underline;
 
 
 }
+
+
+.hover-effect {
+    opacity: 0;
+    transition: opacity 0.3s; /* Add a transition for a smoother effect */
+  }
+  
+  /* When the .notes-text is hovered, show the .hover-effect element */
+  .notes-text:hover + .hover-effect {
+    opacity: 1;
+  }
+
+  p{
+    margin: 0;
+  }

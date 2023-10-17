@@ -80,25 +80,27 @@ const retrievePageData = async (slug) => {
               }
             }
             break;
-            case "paragraph":
-              // Handle paragraph blocks
-              const paragraphContent = block.paragraph.rich_text.map((richText) => {
+          case "paragraph":
+            // Handle paragraph blocks
+            const paragraphContent = block.paragraph.rich_text
+              .map((richText) => {
                 if (richText.type === "text") {
                   const text = richText.text.content;
                   const href = richText.href;
                   let contentType = "main"; // Default content type is "main"
-        
+
                   if (richText.annotations.color === "gray") {
                     contentType = "sidenote"; // Set content type to "sidenote" when the color is "gray"
                   }
-        
+
                   return { contentType, text, href };
                 }
                 return null;
-              }).filter(Boolean); // Filter out null values (non-text elements)
-        
-              content.push({ type: "paragraph", content: paragraphContent });
-              break;
+              })
+              .filter(Boolean); // Filter out null values (non-text elements)
+
+            content.push({ type: "paragraph", content: paragraphContent });
+            break;
           case "callout":
             // Handle callout blocks
             const calloutContent = block.callout.rich_text

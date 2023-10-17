@@ -72,7 +72,7 @@ function BlogPage({ pageContent }) {
           }}
           className="nav-container"
         >
-          <Link onClick={handleClick} href="../">
+          <Link className= 'para' onClick={handleClick} href="../">
             home
           </Link>
         </motion.div>
@@ -125,20 +125,19 @@ function BlogPage({ pageContent }) {
                 opacity: 1,
                 transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
               }}
-              className="sidebyside"
+              
             >
               {pageContent && pageContent.properties && (
                 <>
-                  <p className="para type-opacity-50">
-                    on{" "}
+                 
+                  <p className=" type-opacity-50">
+                 
                     <span className="number">
-                      {formatDate(pageContent.properties.creationDate)}
+                     {formatDate(pageContent.properties.creationDate)}
                     </span>
                   </p>
-                  &nbsp;
-                  <p className="para type-opacity-50">
-                    in {pageContent.properties.Tags}
-                  </p>
+                  
+                 
                 </>
               )}
             </motion.div>
@@ -149,7 +148,7 @@ function BlogPage({ pageContent }) {
               opacity: 1,
               transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
             }}
-            style={{ height: "39px" }}
+            style={{ height: "26px" }}
           ></motion.div>
           <motion.p
             initial={{ opacity: 0 }}
@@ -161,7 +160,7 @@ function BlogPage({ pageContent }) {
           >
             {pageContent.properties.icon}
           </motion.p>
-          <div style={{ height: "39px" }}></div>
+          <div style={{ height: "26px" }}></div>
           <motion.h1
             initial={{ opacity: 0 }}
             animate={{
@@ -183,7 +182,7 @@ function BlogPage({ pageContent }) {
               key={index}
             >
               {block.type === "paragraph" && (
-  <p className="para blogtype top-padding-13">
+  <p className="para blogtype top-padding-13 bottom-padding-13">
     {block.content.reduce((acc, text, textIndex, content) => {
       if (text.contentType === "sidenote") {
         if (!acc.currentSidenote) {
@@ -302,7 +301,7 @@ function BlogPage({ pageContent }) {
           <div className="nav-container-mobile">
             <Link
               href="#top" // Use the same ID as the top of the page
-              className="para block type-opacity-50"
+              className="accent-heading block type-opacity-50"
               onClick={scrollToTop}
             >
               back to top
@@ -350,18 +349,18 @@ function formatDate(dateString) {
 
   // Define the month names as an array
   const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
+    "January",
+    "February",
+    "March",
+    "April",
     "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "Novemeber",
+    "Decemeber",
   ];
 
   const day = String(date.getDate()).padStart(2, "0");

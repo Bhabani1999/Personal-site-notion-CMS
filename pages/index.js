@@ -5,6 +5,7 @@ import Layout from "../app/layout";
 import "../styles/styles.css";
 import Head from "next/head";
 import { motion, useAnimation } from "framer-motion";
+import Image from "next/image";
 
 function Home({ pageProperties, databaseInfo }) {
   const controls = useAnimation();
@@ -30,6 +31,7 @@ function Home({ pageProperties, databaseInfo }) {
     return (
       <motion.div initial={{ opacity: 1 }} animate={controls}>
         <div className="nav-container">
+       
           <motion.p
             initial={{ opacity: 0 }}
             animate={{
@@ -39,7 +41,7 @@ function Home({ pageProperties, databaseInfo }) {
             className="para type work-link"
             onClick={() => scrollToSection("_work")}
           >
-            work
+            work 
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
@@ -50,7 +52,9 @@ function Home({ pageProperties, databaseInfo }) {
             className="para type notes-link"
             onClick={() => scrollToSection("_notes")}
           >
-            notes
+           notes
+  
+            
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
@@ -80,7 +84,7 @@ function Home({ pageProperties, databaseInfo }) {
             }}
             className=" para type"
           >
-            <a className="type" href="mailto:bhabani10121999@gmail.com">
+            <a className="para type" href="mailto:bhabani10121999@gmail.com">
               email{" "}
             </a>
           </motion.p>
@@ -93,7 +97,7 @@ function Home({ pageProperties, databaseInfo }) {
             className="para type"
           >
             <a
-              className=" type"
+              className="para type"
               href="https://www.linkedin.com/in/bhabanismoh/"
               target="_blank"
               rel="noopener noreferrer"
@@ -110,7 +114,7 @@ function Home({ pageProperties, databaseInfo }) {
             className="para type"
           >
             <a
-              className=" type"
+              className=" para  type"
               href="https://twitter.com/smbhabani"
               target="_blank"
               rel="noopener noreferrer"
