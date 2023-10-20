@@ -100,7 +100,7 @@ body {
 /* Apply typography styles */
 h1.title,
 h2.heading-md,
-p.para,
+.para,
 span.number,
 .accent-heading {
     font-size: 15px;
@@ -146,17 +146,21 @@ span.number {
 }
 
 .accent-heading {
-    font-size: 15px;
+    font-size: 13px;
     text-decoration: none;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: 'PP Supply Mono', monospace;
     font-weight: 400;
     font-style: normal;
     font-stretch: normal;
     letter-spacing: 0;
-    line-height: 26px;
+    line-height: 22px;
     margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    
     
 }
+
 
 /* Define color classes */
 .type {
@@ -172,7 +176,7 @@ span.number {
 }
 
 .accent {
-    color: #EB6E47;
+    color: #808080;
 }
 
 .row {
@@ -218,20 +222,23 @@ flex-direction: column        /* Change display to flex under 768px */
 
 /* Remove default link styling */
 a {
-    font-size: 15px;
+    
     text-decoration: none;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-stretch: normal;
-    letter-spacing: 0;
-    line-height: 26px;
-    color: #F3F3F3;
-    transition: text-decoration 0.3s;
+  
+  
+    transition: color 0s, 
 }
 
 a:hover {
-    text-decoration: underline;
+    color: #E3623A;
+}
+
+
+
+.inheight {
+ display: flex;
+ height: 22px;
+ width: fit-content;
 }
 
 /* Sticky left column */
@@ -254,7 +261,7 @@ a:hover {
 
 .column.right {
 
-    padding: 26px;
+   
 
     @media (max-width: 768px) {
         display: none;
@@ -281,14 +288,18 @@ html,
 body {
     overscroll-behavior-y: none;
 }
+.work-link,.notes-link {
 
+    transition: color 0s, ;
+
+
+}
 /* Style the "work" and "notes" links */
 .work-link:hover,
 .notes-link:hover {
     cursor: pointer;
     /* Change cursor to pointer on hover */
-    text-decoration: underline;
-    /* Underline the text on hover */
+    color: #E3623A;    /* Underline the text on hover */
 }
 
 /* Add this CSS to your stylesheet */
@@ -452,6 +463,14 @@ body {
     }
 }
 
+.nomobileshow {
+    display: inline;
+    @media (max-width: 768px) {
+        display: none;
+       
+    }
+}
+
 
 .nav-container-child {
     margin: 0;
@@ -503,6 +522,10 @@ body {
     text-decoration: underline;
 }
 
+a.noorange:hover{
+    color: #BFBFBF;
+
+}
 .sidenote {
     position: absolute;
     left: 766px;
@@ -529,6 +552,12 @@ text-decoration: underline;
 
 }
 
+.sidenote-link:hover{
+    color: #808080;
+
+
+}
+
 
 .hover-effect {
     opacity: 0;
@@ -543,3 +572,25 @@ text-decoration: underline;
   p{
     margin: 0;
   }
+
+  .slash{
+
+    margin-left: -24px;
+
+    @media (max-width: 768px) {
+        margin-left: 0px;
+       
+    }
+  }
+
+  p{
+  display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px; 
+}
+
+
+
+  

@@ -6,9 +6,13 @@ import retrievePageData from "../../notioncontentModule";
 import { retrievePageProperties } from "../../notionModule";
 import Head from "next/head";
 import { motion, useAnimation } from "framer-motion";
+import { useState, useEffect } from 'react';
+
+
 
 function BlogPage({ pageContent }) {
   const controls = useAnimation();
+  const SCROLL_THRESHOLD = 400; // Adjust this value to set the scroll threshold
 
   const handleClick = async () => {
     // Trigger a fade-out animation for other elements
@@ -72,8 +76,8 @@ function BlogPage({ pageContent }) {
           }}
           className="nav-container"
         >
-          <Link className= 'para' onClick={handleClick} href="../">
-            home
+          <Link className= 'accent-heading type-opacity-50' onClick={handleClick} href="../">
+          /go home
           </Link>
         </motion.div>
         <div>
@@ -85,11 +89,40 @@ function BlogPage({ pageContent }) {
   }
 
   function renderBottomContent() {
+    const controls = useAnimation();
+    const [showDiv, setShowDiv] = useState(false);
+  
+    const scrollToTop = () => {
+      // Your scrollToTop logic here
+    };
+  
+    useEffect(() => {
+      const handleScroll = () => {
+        if (window.scrollY > SCROLL_THRESHOLD) {
+          if (!showDiv) {
+            setShowDiv(true);
+            controls.start({ opacity: 1 });
+          }
+        } else {
+          if (showDiv) {
+            setShowDiv(false);
+            controls.start({ opacity: 0 });
+          }
+        }
+      };
+  
+      window.addEventListener('scroll', handleScroll);
+  
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, [controls, showDiv]);
+  
     return (
-      <motion.div initial={{ opacity: 1 }} animate={controls}>
+      <motion.div initial={{ opacity: 0 }} animate={controls}>
         <Link
-          href="#top" // Use the same ID as the top of the page
-          className="para block type-opacity-50"
+          href="#top"
+          className="accent-heading block type-opacity-50"
           onClick={scrollToTop}
         >
           back to top
@@ -97,7 +130,6 @@ function BlogPage({ pageContent }) {
       </motion.div>
     );
   }
-
   // Render the page content when it's available
   const renderPageContent = () => {
     if (!pageContent) {
@@ -110,7 +142,7 @@ function BlogPage({ pageContent }) {
       <motion.div initial={{ opacity: 1 }} animate={controls}>
         <div className="mobile-show">
           <div className="nav-container-mobile nav-container">
-            <Link href="../">home</Link>
+            <Link onClick={handleClick} className="accent-heading type-opacity-50 " href="../">home</Link>
           </div>
           <div className="line mobile-show" style={{ height: "1px" }}></div>
           <div style={{ height: "13px" }}></div>
@@ -220,7 +252,7 @@ function BlogPage({ pageContent }) {
           acc.result.push(
             <a
               key={textIndex}
-              className="blogtype underline"
+              className="blogtype noorange underline"
               href={text.href}
               target="_blank"
               rel="noopener noreferrer"
@@ -290,6 +322,11 @@ function BlogPage({ pageContent }) {
                     alt="Image"
                   />
                 </div>
+              )}
+              {block.type === "bullet" && (
+               <ul className='para'>
+               <li className="para blogtype">{block.text}</li>
+              </ul>
               )}
               {/* Handle other block types as needed */}
             </motion.div>

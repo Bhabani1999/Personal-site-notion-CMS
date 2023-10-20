@@ -5,11 +5,24 @@ import Layout from "../app/layout";
 import "../styles/styles.css";
 import Head from "next/head";
 import { motion, useAnimation } from "framer-motion";
+import { useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import Image from "next/image";
+
 
 function Home({ pageProperties, databaseInfo }) {
   const controls = useAnimation();
+  const [copied, setCopied] = useState(false);
+  const email = "bhabani10121999@gmail.com"; // Your email address
 
+  const handleCopy = () => {
+    setCopied(true);
+
+    // Optionally, you can use a timeout to reset the copied status after a while
+    setTimeout(() => {
+      setCopied(false);
+    }, 3000);
+  };
   const handleClick = async () => {
     // Trigger a fade-out animation for other elements
     await controls.start({
@@ -38,10 +51,10 @@ function Home({ pageProperties, databaseInfo }) {
               opacity: 1,
               transition: { duration: 0.6, ease: "easeInOut" },
             }}
-            className="para type work-link"
+            className="accent-heading accent work-link"
             onClick={() => scrollToSection("_work")}
           >
-            work 
+            /work 
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
@@ -49,10 +62,10 @@ function Home({ pageProperties, databaseInfo }) {
               opacity: 1,
               transition: { duration: 0.8, delay: 0.04, ease: "easeInOut" },
             }}
-            className="para type notes-link"
+            className="accent-heading accent notes-link"
             onClick={() => scrollToSection("_notes")}
           >
-           notes
+           /notes
   
             
           </motion.p>
@@ -62,10 +75,10 @@ function Home({ pageProperties, databaseInfo }) {
               opacity: 1,
               transition: { duration: 1.0, delay: 0.08, ease: "easeInOut" },
             }}
-            className="para type notes-link"
+            className="accent-heading accent notes-link"
             onClick={() => scrollToSection("_about")}
           >
-            about
+            /about
           </motion.p>
         </div>
       </motion.div>
@@ -76,33 +89,41 @@ function Home({ pageProperties, databaseInfo }) {
     return (
       <motion.div initial={{ opacity: 1 }} animate={controls}>
         <div className="social-links-container">
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-              transition: { duration: 0.6, delay: 0.4, ease: "easeInOut" },
-            }}
-            className=" para type"
-          >
-            <a className="para type" href="mailto:bhabani10121999@gmail.com">
-              email{" "}
-            </a>
-          </motion.p>
+        <motion.p
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        transition: { duration: 0.6, delay: 0.4, ease: "easeInOut" },
+      }}
+      className="accent-heading type-opacity-50"
+    >
+      <CopyToClipboard text={email} onCopy={handleCopy}>
+        <a
+          className={`accent-heading bottomcontent type-opacity-50 email-link${copied ? " email-link-hover" : ""}`}
+
+          role="button"
+          tabIndex={0}
+          style={{ cursor: "pointer" }} // Change cursor to pointer
+        >
+          {copied ? "Copied to clipboard!" : "Copy emailID"}
+        </a>
+      </CopyToClipboard>
+    </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
               transition: { duration: 0.7, delay: 0.44, ease: "easeInOut" },
             }}
-            className="para type"
+            className="accent-heading bottomcontent  type-opacity-50"
           >
             <a
-              className="para type"
+              className="accent-heading type-opacity-50 inheight"
               href="https://www.linkedin.com/in/bhabanismoh/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              linkedin
+              linkedin<sup>↗</sup>
             </a>
           </motion.p>
           <motion.p
@@ -111,15 +132,15 @@ function Home({ pageProperties, databaseInfo }) {
               opacity: 1,
               transition: { duration: 0.8, delay: 0.48, ease: "easeInOut" },
             }}
-            className="para type"
+            className=" accent-heading  type-opacity-50"
           >
             <a
-              className=" para  type"
+              className=" accent-heading inheight type-opacity-50"
               href="https://twitter.com/smbhabani"
               target="_blank"
               rel="noopener noreferrer"
             >
-              twitter
+              twitter<sup>↗</sup>
             </a>
           </motion.p>
         </div>
@@ -130,10 +151,10 @@ function Home({ pageProperties, databaseInfo }) {
               opacity: 1,
               transition: { duration: 0.9, delay: 0.52, ease: "easeInOut" },
             }}
-            className="para type-opacity-50"
+            className="accent-heading type-opacity-50"
           >
             last updated on{" "}
-            <span className="number type-opacity-50">
+            <span className="accent-heading type-opacity-50">
               {formatDateShort(databaseInfo.lastEditedTime)}
             </span>
           </motion.p>
@@ -162,10 +183,15 @@ function Home({ pageProperties, databaseInfo }) {
     }
   }
 
+  function renderRightContent (){
+    return <></>;
+  }
+
   return (
     <Layout
       topContent={renderTopContent()}
       bottomContent={renderBottomContent()}
+      rightContent={renderRightContent()}
     >
       <>
         <Head>
@@ -184,35 +210,35 @@ function Home({ pageProperties, databaseInfo }) {
           <meta name="Bhabani Shankar Mohapatra" content="Author Name" />
           <meta name="keywords" content="blog, topic, keyword, tags" />
         </Head>
-        <div className="mobile-show">
+        <motion.div initial={{ opacity: 1 }} animate={controls} className="mobile-show">
           <div className="nav-container-mobile">
             <div className="nav-container-child">
               <p
-                className="para type work-link"
+                className="accent-heading type-opacity-50 work-link"
                 onClick={() => scrollToSection("_work")}
               >
-                work
+                /work
               </p>
             </div>
             <div className="nav-container-child">
               <p
-                className="para type notes-link"
+                className="accent-heading type-opacity-50 notes-link"
                 onClick={() => scrollToSection("_notes")}
               >
-                notes
+                /notes
               </p>
             </div>
             <div className="nav-container-child">
               <p
-                className="para type notes-link"
+                className="accent-heading type-opacity-50 notes-link"
                 onClick={() => scrollToSection("_about")}
               >
-                about
+                /about
               </p>
             </div>
           </div>
-        </div>
-        <div className="line mobile-show" style={{ height: "1px" }}></div>
+        </motion.div>
+        <motion.div initial={{ opacity: 1 }} animate={controls}  className="line mobile-show" style={{ height: "1px" }}></motion.div>
         <div className="mobile-show" style={{ height: "13px" }}></div>
 
         <motion.div
@@ -228,9 +254,9 @@ function Home({ pageProperties, databaseInfo }) {
                 transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
               }}
               id="_work"
-              className="accent-heading"
+              className="accent-heading slash"
             >
-              <span className="accent">work</span>
+              <span className="accent"><span className="nomobileshow">-- </span>work</span>
             </motion.h3>
             <div style={{ height: "26px" }}></div>
             {workPageProperties.map((property) => (
@@ -278,9 +304,9 @@ function Home({ pageProperties, databaseInfo }) {
                 transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
               }}
               id="_notes"
-              className="accent-heading"
+              className="accent-heading slash"
             >
-              <span className="accent">notes</span>
+              <span className="accent"><span className="nomobileshow">-- </span> notes</span>
             </motion.h3>
             <div style={{ height: "26px" }}></div>
             {notesPageProperties.map((property) => (
@@ -328,9 +354,9 @@ function Home({ pageProperties, databaseInfo }) {
                 transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
               }}
               id="_about"
-              className="accent-heading"
+              className="accent-heading slash"
             >
-              <span className="accent">about</span>
+              <span className="accent"><span className="nomobileshow">-- </span>about</span>
             </motion.h3>
             <div style={{ height: "26px" }}></div>
             <motion.div
@@ -357,45 +383,74 @@ function Home({ pageProperties, databaseInfo }) {
           </div>
         </motion.div>
 
-        <div className="mobile-show">
+        <motion.div initial={{ opacity: 1 }} animate={controls} className="mobile-show">
           <div style={{ height: "13px" }}></div>
           <div className="line" style={{ height: "1px" }}></div>
           <div className="padding-26">
             <div className="link-container-mobile social-links-container">
               <div className="nav-container-child">
-                <p className=" para type">
-                  <a className="type" href="mailto:bhabani10121999@gmail.com">
-                    email{" "}
-                  </a>
-                </p>
+              <motion.p
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        transition: { duration: 0.6, delay: 0.4, ease: "easeInOut" },
+      }}
+      className="accent-heading type-opacity-50"
+    >
+      <CopyToClipboard text={email} onCopy={handleCopy}>
+        <a
+          className={`accent-heading bottomcontent type-opacity-50 email-link${copied ? " email-link-hover" : ""}`}
+
+          role="button"
+          tabIndex={0}
+          style={{ cursor: "pointer" }} // Change cursor to pointer
+        >
+          {copied ? "Copied to clipboard!" : "Copy emailID"}
+        </a>
+      </CopyToClipboard>
+    </motion.p>
               </div>
               <div className="nav-container-child">
-                <p className=" para type">
-                  <a
-                    className=" type"
-                    href="https://www.linkedin.com/in/bhabanismoh/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    linkedin
-                  </a>
-                </p>
+              <motion.p
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.7, delay: 0.44, ease: "easeInOut" },
+            }}
+            className="accent-heading bottomcontent  type-opacity-50"
+          >
+            <a
+              className="accent-heading type-opacity-50 inheight"
+              href="https://www.linkedin.com/in/bhabanismoh/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              linkedin<sup>↗</sup>
+            </a>
+          </motion.p>
               </div>
               <div className="nav-container-child">
-                <p className="para type">
-                  <a
-                    className=" type"
-                    href="https://twitter.com/smbhabani"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    twitter
-                  </a>
-                </p>
+              <motion.p
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.8, delay: 0.48, ease: "easeInOut" },
+            }}
+            className=" accent-heading  type-opacity-50"
+          >
+            <a
+              className=" accent-heading inheight type-opacity-50"
+              href="https://twitter.com/smbhabani"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              twitter<sup>↗</sup>
+            </a>
+          </motion.p>
               </div>
             </div>
             {databaseInfo && (
-              <p className="para type-opacity-50">
+              <p className="accent-heading type-opacity-50">
                 last updated on{" "}
                 <span className="number type-opacity-50">
                   {formatDateShort(databaseInfo.lastEditedTime)}
@@ -403,7 +458,7 @@ function Home({ pageProperties, databaseInfo }) {
               </p>
             )}
           </div>
-        </div>
+        </motion.div>
       </>
     </Layout>
   );
