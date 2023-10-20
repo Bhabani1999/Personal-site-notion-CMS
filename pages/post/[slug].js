@@ -88,7 +88,7 @@ function BlogPage({ pageContent }) {
     );
   }
 
-  function renderBottomContent() {
+  function RenderBottomContent() {
     const controls = useAnimation();
     const [showDiv, setShowDiv] = useState(false);
   
@@ -108,7 +108,7 @@ function BlogPage({ pageContent }) {
             setShowDiv(false);
             controls.start({ opacity: 0 });
           }
-        }
+        };
       };
   
       window.addEventListener('scroll', handleScroll);
@@ -352,7 +352,7 @@ function BlogPage({ pageContent }) {
   return (
     <Layout
       topContent={renderTopContent()}
-      bottomContent={renderBottomContent()}
+      bottomContent={RenderBottomContent()}
       isPostPage={true}
     >
       <>
