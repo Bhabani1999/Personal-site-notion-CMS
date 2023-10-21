@@ -4,17 +4,23 @@
     font-family: 'PP Hatton';
     src: url('/fonts/PPHatton-Medium.otf') format('opentype');
     src: url('/fonts/PPHatton-Ultralight.otf') format('opentype');
+    font-display: swap;
+
 }
 
 
 @font-face {
     font-family: 'PP Supply Mono';
     src: url('/fonts/PPSupplyMono-Regular.otf') format('opentype');
+    font-display: swap;
+
 }
 
 @font-face {
     font-family: 'PP Supply Sans';
     src: url('/fonts/PPSupplySans-Regular.otf') format('opentype');
+    font-display: swap;
+
 }
 
 
