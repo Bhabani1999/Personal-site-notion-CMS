@@ -271,6 +271,14 @@ a:hover {
 }
 
 .column.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100vh;
+    align-items: flex-end;
+    position: sticky;
+    top: 0;
+  
 
    
 
@@ -375,9 +383,6 @@ body {
     display: block;
 }
 
-.sidebyside {
-    flex-direction: row;
-}
 
 .loader-container {
     width: 100%;
@@ -603,5 +608,7 @@ text-decoration: underline;
 }
 
 
-
+.blackbg {
+    background-color: #141414;
+}
   

@@ -11,17 +11,11 @@ import { useRouter } from 'next/router';
 
 
 
+
 function BlogPage({ pageContent, nextPageSlug }) {
   const pageControls = useAnimation();
   const SCROLL_THRESHOLD = 400; // Adjust this value to set the scroll threshold
   const router = useRouter();
-  const handleNextPostClick = () => {
-    // Construct the URL for the next post
-    const nextPostUrl = `/post/${nextPageSlug}`;
-
-    // Navigate to the next post
-    router.push(nextPostUrl);
-  }
 
   const handleClick = async () => {
     // Trigger a fade-out animation for other elements
@@ -97,28 +91,9 @@ function BlogPage({ pageContent, nextPageSlug }) {
     );
   }
 
-function RenderRightContent()  {
-    return (
-      <motion.div initial={{ opacity: 1 }} animate={pageControls}>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-          transition: { duration: 0.6, ease: "easeInOut" },
-        }}
-        
-      >
-              <button onClick={handleNextPostClick} >Next Post</button>
 
-      </motion.div>
-    </motion.div>
-
-      
-    );
-  }
   function RenderBottomContent() {
     const controls = useAnimation();
-    const [showDiv, setShowDiv] = useState(false);
     const isMounted = useRef(true); // Use a ref to track the mounted state
   
     const scrollToTop = () => {
@@ -126,32 +101,24 @@ function RenderRightContent()  {
     };
   
     useEffect(() => {
-      const handleScroll = () => {
-        if (window.scrollY > SCROLL_THRESHOLD) {
-          if (!showDiv) {
-            setShowDiv(true);
-            if (isMounted.current) {
-              controls.start({ opacity: 1 });
-            }
-          }
-        } else {
-          if (showDiv) {
-            setShowDiv(false);
-            if (isMounted.current) {
-              controls.start({ opacity: 0 });
-            }
-          }
-        }
-      };
+      if (isMounted.current) {
+        const handleScroll = () => {
+          if (window.scrollY > SCROLL_THRESHOLD) {
+            controls.start({ opacity: 1 });
+          } else {
+            controls.start({ opacity: 0 });
+          };
+        };
   
-      window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll);
   
-      // Clean up the event listener and update the mounted state when the component unmounts
-      return () => {
-        isMounted.current = false;
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }, [controls, showDiv]);
+        // Clean up the event listener and update the mounted state when the component unmounts
+        return () => {
+          isMounted.current = false;
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }
+    }, [controls]);
   
     return (
       <motion.div initial={{ opacity: 0 }} animate={controls}>
@@ -167,6 +134,7 @@ function RenderRightContent()  {
       </motion.div>
     );
   }
+  
   // Render the page content when it's available
   const renderPageContent = () => {
     if (!pageContent) {
@@ -196,33 +164,37 @@ function RenderRightContent()  {
               
             >
               {pageContent && pageContent.properties && (
-                <>
+                <div className="sidebyside">
                  
-                  <p className=" type-opacity-50">
                  
-                    <span className="number">
-                     {formatDate(pageContent.properties.creationDate)}
-                    </span>
+                  <p className="accent-heading type-opacity-50">
+                 
+                    
+                    In {pageContent.properties.Tags}, 
+                  
                   </p>
+
+                  <p className="accent-heading type-opacity-50">
+                 
+                    
+                 &nbsp;{formatDate(pageContent.properties.creationDate)}
+              
+              </p>
                   
                  
-                </>
+                </div>
               )}
             </motion.div>
           </div>
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 1,
-              transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
-            }}
+           
             style={{ height: "26px" }}
           ></motion.div>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
-              transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
+              transition: { duration: 0.5, delay: 0, ease: "easeInOut" },
             }}
             className="icon"
           >
@@ -233,7 +205,7 @@ function RenderRightContent()  {
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
-              transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
+              transition: { duration: 0.5, delay: 0.1, ease: "easeInOut" },
             }}
             className="type title"
           >
@@ -245,7 +217,7 @@ function RenderRightContent()  {
               initial={{ opacity: 0 }}
               animate={{
                 opacity: 1,
-                transition: { duration: 0.45, delay: 0.1, ease: "easeInOut" },
+                transition: { duration: 0.6, delay: 0.2, ease: "easeInOut" },
               }}
               key={index}
             >
@@ -367,6 +339,17 @@ function RenderRightContent()  {
               {/* Handle other block types as needed */}
             </motion.div>
           ))}
+                    <div style={{ height: "26px" }}></div>
+
+          <motion.div
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
+          }}
+          >
+           <a className="accent-heading type-opacity-50" onClick={handleClick} href={`/post/${nextPageSlug}`}>/go to Next Post</a>
+           </motion.div>
         </div>
         <div className="mobile-show">
         
@@ -390,7 +373,6 @@ function RenderRightContent()  {
     <Layout
       topContent={renderTopContent()}
       bottomContent={RenderBottomContent()}
-      rightContent={RenderRightContent()}
       isPostPage={true}
     >
       <>
@@ -468,13 +450,12 @@ export async function getStaticProps({ params }) {
       const nextPageSlug = pageProperties[nextIndex].slug;
 
       const pageContent = await retrievePageData(slug);
-      
+
       return {
         props: {
           pageContent,
           nextPageSlug,
         },
-        revalidate: 1800,
       };
     }
   } catch (error) {
@@ -487,10 +468,8 @@ export async function getStaticProps({ params }) {
       pageContent: null,
       nextPageSlug: null,
     },
-    revalidate: 1800,
   };
 }
-
 
 export async function getStaticPaths() {
   // Fetch all page properties to build dynamic paths
