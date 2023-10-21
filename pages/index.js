@@ -368,7 +368,7 @@ function Home({ pageProperties, databaseInfo }) {
             >
               <p className="para lowercase blogtype">
                 Bhabani (23, Odisha/India). Previously co-founder of Evy Energy,
-                acquired by Zemetric USA, and product-designed on workforce
+                and product-designed on workforce
                 forecasting systems at Sprinklr.
               </p>
               <div style={{ height: "13px" }}></div>
