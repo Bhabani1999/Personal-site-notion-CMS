@@ -6,17 +6,17 @@ import retrievePageData from "../../notioncontentModule";
 import { retrievePageProperties } from "../../notionModule";
 import Head from "next/head";
 import { motion, useAnimation } from "framer-motion";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 
 
 function BlogPage({ pageContent }) {
-  const controls = useAnimation();
+  const pageControls = useAnimation();
   const SCROLL_THRESHOLD = 400; // Adjust this value to set the scroll threshold
 
   const handleClick = async () => {
     // Trigger a fade-out animation for other elements
-    await controls.start({
+    await pageControls.start({
       opacity: 0,
       transition: { duration: 0.2, ease: "easeOut" },
     });
@@ -55,7 +55,7 @@ function BlogPage({ pageContent }) {
           <Link
             href={`#${heading.text}`}
             key={index}
-            className="para block type-opacity-50"
+            className="para h2link block type-opacity-50"
             onClick={(event) => scrollToHeading(event, heading.text)}
           >
             {heading.text}
@@ -67,7 +67,7 @@ function BlogPage({ pageContent }) {
   // Define content for top-container and bottom-container
   function renderTopContent() {
     return (
-      <motion.div initial={{ opacity: 1 }} animate={controls}>
+      <motion.div initial={{ opacity: 1 }} animate={pageControls}>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{
@@ -87,10 +87,10 @@ function BlogPage({ pageContent }) {
       </motion.div>
     );
   }
-
   function RenderBottomContent() {
     const controls = useAnimation();
     const [showDiv, setShowDiv] = useState(false);
+    const isMounted = useRef(true); // Use a ref to track the mounted state
   
     const scrollToTop = () => {
       // Your scrollToTop logic here
@@ -101,32 +101,40 @@ function BlogPage({ pageContent }) {
         if (window.scrollY > SCROLL_THRESHOLD) {
           if (!showDiv) {
             setShowDiv(true);
-            controls.start({ opacity: 1 });
+            if (isMounted.current) {
+              controls.start({ opacity: 1 });
+            }
           }
         } else {
           if (showDiv) {
             setShowDiv(false);
-            controls.start({ opacity: 0 });
+            if (isMounted.current) {
+              controls.start({ opacity: 0 });
+            }
           }
-        };
+        }
       };
   
       window.addEventListener('scroll', handleScroll);
   
+      // Clean up the event listener and update the mounted state when the component unmounts
       return () => {
+        isMounted.current = false;
         window.removeEventListener('scroll', handleScroll);
       };
     }, [controls, showDiv]);
   
     return (
       <motion.div initial={{ opacity: 0 }} animate={controls}>
-        <Link
-          href="#top"
-          className="accent-heading block type-opacity-50"
-          onClick={scrollToTop}
-        >
-          back to top
-        </Link>
+        <motion.div initial={{ opacity: 1 }} animate={pageControls}>
+          <Link
+            href="#top"
+            className="accent-heading block type-opacity-50"
+            onClick={scrollToTop}
+          >
+            back to top
+          </Link>
+        </motion.div>
       </motion.div>
     );
   }
@@ -139,13 +147,12 @@ function BlogPage({ pageContent }) {
     // Render the content based on the structure returned by the notionContentModule
     // You can customize this part based on your specific content structure
     return (
-      <motion.div initial={{ opacity: 1 }} animate={controls}>
+      <motion.div initial={{ opacity: 1 }} animate={pageControls}>
         <div className="mobile-show">
           <div className="nav-container-mobile nav-container">
             <Link onClick={handleClick} className="accent-heading type-opacity-50 " href="../">/go home</Link>
           </div>
           <div className="line mobile-show" style={{ height: "1px" }}></div>
-          <div style={{ height: "13px" }}></div>
         </div>
         <div className="main-content">
           <div>
@@ -333,7 +340,7 @@ function BlogPage({ pageContent }) {
           ))}
         </div>
         <div className="mobile-show">
-          <div style={{ height: "13px" }}></div>
+        
           <div className="line mobile-show" style={{ height: "1px" }}></div>
           <div className="nav-container-mobile">
             <Link

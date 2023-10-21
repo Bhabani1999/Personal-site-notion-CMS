@@ -239,7 +239,7 @@ function Home({ pageProperties, databaseInfo }) {
           </div>
         </motion.div>
         <motion.div initial={{ opacity: 1 }} animate={controls}  className="line mobile-show" style={{ height: "1px" }}></motion.div>
-        <div className="mobile-show" style={{ height: "13px" }}></div>
+       
 
         <motion.div
           initial={{ opacity: 1 }}
@@ -274,13 +274,13 @@ function Home({ pageProperties, databaseInfo }) {
                     <div>
                       <a
                         onClick={handleClick}
-                        className="para lowercase  type pageTitleLink"
+                        className="para   type pageTitleLink"
                         href={`/post/${property.slug}`}
                       >
                         {property.pageTitle}
                       </a>
                     </div>
-                    <p className="para lowercase type-opacity-50 pageDescription">
+                    <p className="para  type-opacity-50 pageDescription">
                       {property.pageDescription}
                     </p>
                   </div>
@@ -324,13 +324,13 @@ function Home({ pageProperties, databaseInfo }) {
                     <div>
                       <a
                         onClick={handleClick}
-                        className="para lowercase type pageTitleLink"
+                        className="para  type pageTitleLink"
                         href={`/post/${property.slug}`}
                       >
                         {property.pageTitle}
                       </a>
                     </div>
-                    <p className="para lowercase type-opacity-50 pageDescription">
+                    <p className="para  type-opacity-50 pageDescription">
                       {property.pageDescription}
                     </p>
                   </div>

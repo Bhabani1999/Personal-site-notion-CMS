@@ -145,6 +145,17 @@ span.number {
     text-transform: lowercase;
 }
 
+a.h2link:hover {
+
+    color: #BFBFBF;
+}
+
+a.h2link {
+    transition: color 0.15s,;
+
+    color: #808080;
+}
+
 .accent-heading {
     font-size: 13px;
     text-decoration: none;
@@ -226,7 +237,7 @@ a {
     text-decoration: none;
   
   
-    transition: color 0s, 
+    transition: color 0.15s, 
 }
 
 a:hover {
