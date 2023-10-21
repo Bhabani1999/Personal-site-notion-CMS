@@ -7,12 +7,21 @@ import { retrievePageProperties } from "../../notionModule";
 import Head from "next/head";
 import { motion, useAnimation } from "framer-motion";
 import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router';
 
 
 
-function BlogPage({ pageContent }) {
+function BlogPage({ pageContent, nextPageSlug }) {
   const pageControls = useAnimation();
   const SCROLL_THRESHOLD = 400; // Adjust this value to set the scroll threshold
+  const router = useRouter();
+  const handleNextPostClick = () => {
+    // Construct the URL for the next post
+    const nextPostUrl = `/post/${nextPageSlug}`;
+
+    // Navigate to the next post
+    router.push(nextPostUrl);
+  }
 
   const handleClick = async () => {
     // Trigger a fade-out animation for other elements
@@ -85,6 +94,26 @@ function BlogPage({ pageContent }) {
           {renderH2Headings()} {/* Render H2 headings in top content */}
         </div>
       </motion.div>
+    );
+  }
+
+function RenderRightContent()  {
+    return (
+      <motion.div initial={{ opacity: 1 }} animate={pageControls}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: { duration: 0.6, ease: "easeInOut" },
+        }}
+        
+      >
+              <button onClick={handleNextPostClick} >Next Post</button>
+
+      </motion.div>
+    </motion.div>
+
+      
     );
   }
   function RenderBottomContent() {
@@ -356,10 +385,12 @@ function BlogPage({ pageContent }) {
     );
   };
 
+ 
   return (
     <Layout
       topContent={renderTopContent()}
       bottomContent={RenderBottomContent()}
+      rightContent={RenderRightContent()}
       isPostPage={true}
     >
       <>
@@ -422,23 +453,44 @@ const scrollToTop = (event) => {
 export async function getStaticProps({ params }) {
   const { slug } = params;
 
-  let pageContent = null; // Initialize page content
-
   try {
+    // Fetch all page properties to build dynamic paths
+    const pageProperties = await retrievePageProperties(process.env.NOTION_DATABASE_ID);
+
     if (slug) {
-      pageContent = await retrievePageData(slug); // Fetch content based on the slug
+      // Find the index of the current post
+      const currentIndex = pageProperties.findIndex((property) => property.slug === slug);
+
+      // Calculate the index of the next post
+      const nextIndex = (currentIndex + 1) % pageProperties.length;
+
+      // Get the slug of the next post
+      const nextPageSlug = pageProperties[nextIndex].slug;
+
+      const pageContent = await retrievePageData(slug);
+      
+      return {
+        props: {
+          pageContent,
+          nextPageSlug,
+        },
+        revalidate: 1800,
+      };
     }
   } catch (error) {
     console.error("Error fetching page content:", error);
   }
 
+  // Return a fallback value or handle errors as needed
   return {
     props: {
-      pageContent,
+      pageContent: null,
+      nextPageSlug: null,
     },
     revalidate: 1800,
   };
 }
+
 
 export async function getStaticPaths() {
   // Fetch all page properties to build dynamic paths
@@ -455,5 +507,7 @@ export async function getStaticPaths() {
     fallback: false, // Render a 404 page if the path doesn't match any page
   };
 }
+
+
 
 export default BlogPage;
