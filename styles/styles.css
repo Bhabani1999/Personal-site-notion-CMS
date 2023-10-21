@@ -1,27 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap');
-
-@font-face {
-    font-family: 'PP Hatton';
-    src: url('/fonts/PPHatton-Medium.otf') format('opentype');
-    src: url('/fonts/PPHatton-Ultralight.otf') format('opentype');
-    font-display: swap;
-
-}
 
 
-@font-face {
-    font-family: 'PP Supply Mono';
-    src: url('/fonts/PPSupplyMono-Regular.otf') format('opentype');
-    font-display: swap;
-
-}
-
-@font-face {
-    font-family: 'PP Supply Sans';
-    src: url('/fonts/PPSupplySans-Regular.otf') format('opentype');
-    font-display: swap;
-
-}
 
 
 
@@ -29,7 +7,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #141414;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: var(--font-ibmplexsans);
     overflow-x: hidden;
 
 }
@@ -111,7 +89,7 @@ span.number,
 .accent-heading {
     font-size: 15px;
     text-decoration: none;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: var(--font-ibmplexsans);
     font-weight: 400;
     font-style: normal;
     font-stretch: normal;
@@ -123,22 +101,21 @@ span.number,
 
 
 h1.title {
-    font-family: 'PP Hatton';
-    font-weight: 300;
+    font-family: var(--font-hatton);
+        font-weight: 300;
 
     font-size: 43.35px;
     line-height: 52px;
 }
 
 h2.heading-md {
-    font-family: 'PP Hatton';
-    font-weight: 300;
+    font-family: var(--font-hatton);    font-weight: 300;
     font-size: 25.5px;
     line-height: 39px;
 }
 
 span.number {
-    font-family: 'PP Supply Mono', monospace;
+    font-family: var(--font-supply);
     font-size: 13px;
     white-space: nowrap;
     text-transform: uppercase;
@@ -165,7 +142,7 @@ a.h2link {
 .accent-heading {
     font-size: 13px;
     text-decoration: none;
-    font-family: 'PP Supply Mono', monospace;
+    font-family: var(--font-supply);
     font-weight: 400;
     font-style: normal;
     font-stretch: normal;
@@ -336,7 +313,7 @@ body {
 .icon {
     font-size: 43.35px;
     line-height: 52px;
-    font-family: 'IBM Plex Sans', sans-serif;
+    font-family: var(--font-ibmplexsans);
     font-weight: 400;
     font-style: normal;
     font-stretch: normal;
@@ -455,7 +432,7 @@ body {
 
     font-size: 13px;
     text-decoration: none;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--font-ibmplexsans);
     font-weight: 400;
     font-style: normal;
     font-stretch: normal;

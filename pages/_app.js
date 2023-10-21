@@ -1,6 +1,27 @@
 // pages/_app.js
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { IBM_Plex_Sans } from '@next/font/google';
+import localfont from '@next/font/local';
+
+export const fontLoader = IBM_Plex_Sans({
+  variable: "--font-ibmplexsans",
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
+
+export const hatton = localfont({
+  src: '../fonts/PPHatton-Ultralight.otf',
+  variable: "--font-hatton",
+  weight: '300',
+
+
+});
+
+export const Supply = localfont({
+  src: '../fonts/PPSupplyMono-Regular.otf',
+  variable: "--font-supply",
+});
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -10,7 +31,11 @@ function MyApp({ Component, pageProps }) {
     document.documentElement.lang = lang;
   }, [router]);
 
-  return <Component {...pageProps} />;
+  return (
+    <main className={`${fontLoader.variable} ${hatton.variable} ${Supply.variable}`}>
+      <Component {...pageProps} />
+    </main>
+  );
 }
 
 export default MyApp;
