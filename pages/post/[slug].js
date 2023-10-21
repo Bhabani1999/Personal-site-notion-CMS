@@ -75,7 +75,7 @@ function BlogPage({ pageContent, nextPageSlug }) {
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
-            transition: { duration: 0.6, ease: "easeInOut" },
+            transition: { duration: 0.5, ease: "easeInOut" },
           }}
           className="nav-container"
         >
@@ -194,7 +194,7 @@ function BlogPage({ pageContent, nextPageSlug }) {
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
-              transition: { duration: 0.5, delay: 0, ease: "easeInOut" },
+              transition: { duration: 0.4, delay: 0, ease: "easeInOut" },
             }}
             className="icon"
           >
@@ -205,7 +205,7 @@ function BlogPage({ pageContent, nextPageSlug }) {
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
-              transition: { duration: 0.5, delay: 0.1, ease: "easeInOut" },
+              transition: { duration: 0.5, delay: 0, ease: "easeInOut" },
             }}
             className="type title"
           >
@@ -217,7 +217,7 @@ function BlogPage({ pageContent, nextPageSlug }) {
               initial={{ opacity: 0 }}
               animate={{
                 opacity: 1,
-                transition: { duration: 0.6, delay: 0.2, ease: "easeInOut" },
+                transition: { duration: 0.5, delay: 0.1, ease: "easeInOut" },
               }}
               key={index}
             >
