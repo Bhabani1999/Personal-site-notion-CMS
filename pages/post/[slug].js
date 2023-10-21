@@ -142,7 +142,7 @@ function BlogPage({ pageContent }) {
       <motion.div initial={{ opacity: 1 }} animate={controls}>
         <div className="mobile-show">
           <div className="nav-container-mobile nav-container">
-            <Link onClick={handleClick} className="accent-heading type-opacity-50 " href="../">home</Link>
+            <Link onClick={handleClick} className="accent-heading type-opacity-50 " href="../">/go home</Link>
           </div>
           <div className="line mobile-show" style={{ height: "1px" }}></div>
           <div style={{ height: "13px" }}></div>
