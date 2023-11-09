@@ -246,7 +246,7 @@ function Home({ pageProperties, databaseInfo }) {
           animate={controls}
           className="main-content"
         >
-          
+        
           <div className="inner-container">
             <motion.h3
               initial={{ opacity: 0 }}
@@ -255,9 +255,9 @@ function Home({ pageProperties, databaseInfo }) {
                 transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
               }}
               id="_work"
-              className="heading-md"
+              className="accent-heading"
             >
-              <span className=" type"><span className="nomobileshow accent">  </span>All work</span>
+              <span className=" accent"><span className="nomobileshow "> ✦ </span>All work</span>
             </motion.h3>
             <div style={{ height: "26px" }}></div>
             {workPageProperties.map((property) => (
@@ -296,7 +296,7 @@ function Home({ pageProperties, databaseInfo }) {
               </motion.div>
             ))}
           </div>
-          <div style={{ height: "26px" }}></div>
+          <div style={{ height: "52px" }}></div>
           <div className="inner-container">
             <motion.h3
               initial={{ opacity: 0 }}
@@ -305,9 +305,9 @@ function Home({ pageProperties, databaseInfo }) {
                 transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
               }}
               id="_notes"
-              className="heading-md"
+              className="accent-heading"
             >
-              <span className="type"> <span className="nomobileshow accent">  </span>All notes</span>
+              <span className="accent"> <span className="nomobileshow "> ✦ </span>All notes</span>
             </motion.h3>
             <div style={{ height: "26px" }}></div>
             {notesPageProperties.map((property) => (
@@ -346,7 +346,7 @@ function Home({ pageProperties, databaseInfo }) {
               </motion.div>
             ))}
           </div>
-          <div style={{ height: "26px" }}></div>
+          <div style={{ height: "52px" }}></div>
           <div className="inner-container">
             <motion.h3
               initial={{ opacity: 0 }}
@@ -355,9 +355,9 @@ function Home({ pageProperties, databaseInfo }) {
                 transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
               }}
               id="_about"
-              className="heading-md"
+              className="accent-heading"
             >
-              <span className="type"><span className="nomobileshow accent">  </span>About</span>
+              <span className="accent"><span className="nomobileshow "> ✦ </span>About</span>
             </motion.h3>
             <div style={{ height: "26px" }}></div>
             <motion.div

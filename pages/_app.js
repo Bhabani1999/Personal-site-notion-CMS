@@ -11,7 +11,7 @@ export const fontLoader = IBM_Plex_Sans({
 });
 
 export const hatton = localfont({
-  src: '../fonts/hatton-regular.otf',
+  src: '../fonts/PPHatton-Ultralight.otf',
   variable: "--font-hatton",
   weight: '300',
 

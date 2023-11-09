@@ -37,7 +37,6 @@ body {
     overflow-y: auto;
     padding: 78px;
     z-index: 1222222;
-    background: linear-gradient(#161616, #141414);
 
 }
 
@@ -46,7 +45,6 @@ body {
     max-width: 804px;
     position: relative;
     padding: 78px;
-    background: linear-gradient(#161616, #141414);
 
 }
 
@@ -110,7 +108,7 @@ span.number,
 .title {
     font-family: var(--font-hatton);
         font-weight: 300;
-        letter-spacing: -1px;
+        letter-spacing: -0.6px;
 
     font-size: 43.35px;
     line-height: 52px;
@@ -264,7 +262,6 @@ a:hover {
 }
 
 .column.right {
-    background: linear-gradient(#161616, #141414);
 
     @media (max-width: 768px) {
         display: none;
@@ -339,6 +336,7 @@ body {
     margin: 0 auto;
     /* Center the image horizontally within the container */
 }
+
 
 .image {
     max-width: 100%;
