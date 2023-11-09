@@ -63,6 +63,7 @@ const retrievePageData = async (slug) => {
               block.bulleted_list_item.rich_text[0]?.text?.content || "";
             content.push({ type: "bullet", text: bulletContent });
             break;
+            
 
           case "numbered_list_item":
             // Handle numbered lists

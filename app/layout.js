@@ -11,6 +11,13 @@ function Layout({ children, topContent, bottomContent, middleContent,rightConten
     
     
     <div className="container" id="postContainer">
+      <div className={middleColumnClass}>
+        {children}
+        {middleContent} {/* Add the middle content here */}
+      </div>
+      
+      
+      <div className="column right">{rightContent}</div>
       <div className="column left">
         <div className="top-container">
           {topContent}
@@ -19,11 +26,6 @@ function Layout({ children, topContent, bottomContent, middleContent,rightConten
           {bottomContent}
         </div>
       </div>
-      <div className={middleColumnClass}>
-        {children}
-        {middleContent} {/* Add the middle content here */}
-      </div>
-      <div className="column right">{rightContent}</div>
     </div>
 
 

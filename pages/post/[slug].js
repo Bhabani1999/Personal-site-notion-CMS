@@ -6,13 +6,34 @@ import retrievePageData from "../../notioncontentModule";
 import { retrievePageProperties } from "../../notionModule";
 import Head from "next/head";
 import { motion, useAnimation } from "framer-motion";
-import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/router';
-
-
-
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 
 function BlogPage({ pageContent, nextPageSlug }) {
+  const [codeResult, setCodeResult] = useState(null);
+
+  const executeCode = async (code) => {
+    try {
+      const response = await fetch('/api/execCode', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ code }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setCodeResult(data.result);
+      } else {
+        throw new Error('Code execution failed');
+      }
+    } catch (error) {
+      console.error('Error executing code:', error);
+      // Handle the error as needed
+    }
+  };
+
   const pageControls = useAnimation();
   const SCROLL_THRESHOLD = 400; // Adjust this value to set the scroll threshold
   const router = useRouter();
@@ -79,8 +100,12 @@ function BlogPage({ pageContent, nextPageSlug }) {
           }}
           className="nav-container"
         >
-          <Link className= 'accent-heading type-opacity-50' onClick={handleClick} href="../">
-          /go home
+          <Link
+            className="accent-heading type-opacity-50"
+            onClick={handleClick}
+            href="../"
+          >
+            /go home
           </Link>
         </motion.div>
         <div>
@@ -91,15 +116,14 @@ function BlogPage({ pageContent, nextPageSlug }) {
     );
   }
 
-
   function RenderBottomContent() {
     const controls = useAnimation();
     const isMounted = useRef(true); // Use a ref to track the mounted state
-  
+
     const scrollToTop = () => {
       // Your scrollToTop logic here
     };
-  
+
     useEffect(() => {
       if (isMounted.current) {
         const handleScroll = () => {
@@ -107,19 +131,19 @@ function BlogPage({ pageContent, nextPageSlug }) {
             controls.start({ opacity: 1 });
           } else {
             controls.start({ opacity: 0 });
-          };
+          }
         };
-  
-        window.addEventListener('scroll', handleScroll);
-  
+
+        window.addEventListener("scroll", handleScroll);
+
         // Clean up the event listener and update the mounted state when the component unmounts
         return () => {
           isMounted.current = false;
-          window.removeEventListener('scroll', handleScroll);
+          window.removeEventListener("scroll", handleScroll);
         };
       }
     }, [controls]);
-  
+
     return (
       <motion.div initial={{ opacity: 0 }} animate={controls}>
         <motion.div initial={{ opacity: 1 }} animate={pageControls}>
@@ -134,7 +158,7 @@ function BlogPage({ pageContent, nextPageSlug }) {
       </motion.div>
     );
   }
-  
+
   // Render the page content when it's available
   const renderPageContent = () => {
     if (!pageContent) {
@@ -147,7 +171,13 @@ function BlogPage({ pageContent, nextPageSlug }) {
       <motion.div initial={{ opacity: 1 }} animate={pageControls}>
         <div className="mobile-show">
           <div className="nav-container-mobile nav-container">
-            <Link onClick={handleClick} className="accent-heading type-opacity-50 " href="../">/go home</Link>
+            <Link
+              onClick={handleClick}
+              className="accent-heading type-opacity-50 "
+              href="../"
+            >
+              /go home
+            </Link>
           </div>
           <div className="line mobile-show" style={{ height: "1px" }}></div>
         </div>
@@ -155,41 +185,7 @@ function BlogPage({ pageContent, nextPageSlug }) {
           <div>
             <div id="top"></div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{
-                opacity: 1,
-                transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
-              }}
-              
-            >
-              {pageContent && pageContent.properties && (
-                <div className="sidebyside">
-                 
-                 
-                  <p className="accent-heading type-opacity-50">
-                 
-                    
-                    In {pageContent.properties.Tags}, 
-                  
-                  </p>
-
-                  <p className="accent-heading type-opacity-50">
-                 
-                    
-                 &nbsp;{formatDate(pageContent.properties.creationDate)}
-              
-              </p>
-                  
-                 
-                </div>
-              )}
-            </motion.div>
           </div>
-          <motion.div
-           
-            style={{ height: "26px" }}
-          ></motion.div>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{
@@ -212,6 +208,26 @@ function BlogPage({ pageContent, nextPageSlug }) {
             {pageContent.properties.pageTitle}
           </motion.h1>
           <div style={{ height: "26px" }}></div>
+          <motion.div
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
+              }}
+            >
+              {pageContent && pageContent.properties && (
+                <div className="sidebyside">
+                  <p className="para type-opacity-50">
+                    In {pageContent.properties.Tags},
+                  </p>
+
+                  <p className="para type-opacity-50">
+                    &nbsp;{formatDate(pageContent.properties.creationDate)}
+                  </p>
+                </div>
+              )}
+            </motion.div>
+          <div style={{ height: "26px" }}></div>
           {pageContent.content.map((block, index) => (
             <motion.div
               initial={{ opacity: 0 }}
@@ -222,87 +238,116 @@ function BlogPage({ pageContent, nextPageSlug }) {
               key={index}
             >
               {block.type === "paragraph" && (
-  <p className="para blogtype top-padding-13 bottom-padding-13">
-    {block.content.reduce((acc, text, textIndex, content) => {
-      if (text.contentType === "sidenote") {
-        if (!acc.currentSidenote) {
-          acc.currentSidenote = [text];
-        } else {
-          acc.currentSidenote.push(text);
-        }
-      } else {
-        if (acc.currentSidenote) {
-          const sidenoteText = acc.currentSidenote.map((sidenote, sidenoteIndex) => {
-            if (sidenote.href) {
-              return (
-                <a
-                  key={sidenoteIndex}
-                  className="sidenote-link underline"
-                  href={sidenote.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {sidenote.text}
-                </a>
-              );
-            } else {
-              return <span key={sidenoteIndex}>{sidenote.text}</span>;
-            }
-          })
-          acc.result.push(
-            <span key={acc.result.length} className="sidenote">
-              {sidenoteText}
-            </span>
-          );
-          delete acc.currentSidenote;
-        }
-        if (text.href) {
-          acc.result.push(
-            <a
-              key={textIndex}
-              className="blogtype noorange underline"
-              href={text.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {text.text}
-            </a>
-          );
-        } else {
-          acc.result.push(<span key={textIndex}>{text.text}</span>);
-        }
-      }
-      if (textIndex === content.length - 1 && acc.currentSidenote) {
-        const sidenoteText = acc.currentSidenote.map((sidenote, sidenoteIndex) => {
-          if (sidenote.href) {
-            return (
-              <a
-                key={sidenoteIndex}
-                className="sidenote-link  underline"
-                href={sidenote.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {sidenote.text}
-              </a>
-            );
-          } else {
-            return <span key={sidenoteIndex}>{sidenote.text}</span>;
-          }
-        })
-        acc.result.push(
-          <span key={acc.result.length} className="sidenote">
-            {sidenoteText}
-          </span>
-        );
-        delete acc.currentSidenote;
-      }
-      return acc;
-    }, { currentSidenote: null, result: [] }).result}
-  </p>
-)}
-
-            
+                <p className="para blogtype top-padding-13 bottom-padding-13">
+                  {
+                    block.content.reduce(
+                      (acc, text, textIndex, content) => {
+                        if (text.contentType === "sidenote") {
+                          if (!acc.currentSidenote) {
+                            acc.currentSidenote = [text];
+                          } else {
+                            acc.currentSidenote.push(text);
+                          }
+                        } else {
+                          if (acc.currentSidenote) {
+                            const sidenoteText = acc.currentSidenote.map(
+                              (sidenote, sidenoteIndex) => {
+                                if (sidenote.href) {
+                                  return (
+                                    <a
+                                      key={sidenoteIndex}
+                                      className="sidenote-link underline"
+                                      href={sidenote.href}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                    >
+                                      {sidenote.text}
+                                    </a>
+                                  );
+                                } else {
+                                  return (
+                                    <span key={sidenoteIndex}>
+                                      {sidenote.text}
+                                    </span>
+                                  );
+                                }
+                              }
+                            );
+                            acc.result.push(
+                              <span
+                                key={acc.result.length}
+                                className="sidenote"
+                              >
+                                {sidenoteText}
+                              </span>
+                            );
+                            delete acc.currentSidenote;
+                          }
+                          if (text.href) {
+                            acc.result.push(
+                              <a
+                                key={textIndex}
+                                className="blogtype noorange underline"
+                                href={text.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {text.text}
+                              </a>
+                            );
+                          } else {
+                            acc.result.push(
+                              <span key={textIndex}>{text.text}</span>
+                            );
+                          }
+                        }
+                        if (
+                          textIndex === content.length - 1 &&
+                          acc.currentSidenote
+                        ) {
+                          const sidenoteText = acc.currentSidenote.map(
+                            (sidenote, sidenoteIndex) => {
+                              if (sidenote.href) {
+                                return (
+                                  <a
+                                    key={sidenoteIndex}
+                                    className="sidenote-link  underline"
+                                    href={sidenote.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {sidenote.text}
+                                  </a>
+                                );
+                              } else {
+                                return (
+                                  <span key={sidenoteIndex}>
+                                    {sidenote.text}
+                                  </span>
+                                );
+                              }
+                            }
+                          );
+                          acc.result.push(
+                            <span key={acc.result.length} className="sidenote">
+                              {sidenoteText}
+                            </span>
+                          );
+                          delete acc.currentSidenote;
+                        }
+                        return acc;
+                      },
+                      { currentSidenote: null, result: [] }
+                    ).result
+                  }
+                </p>
+              )}
+      {block.type === "code" && (
+    <div className="code-block">
+      <button onClick={() => executeCode(block.code)}>Run Code</button>
+      {codeResult && <pre>{codeResult}</pre>}
+    </div>
+  )}
               {block.type === "h2" && (
                 <h2
                   id={block.text}
@@ -311,6 +356,7 @@ function BlogPage({ pageContent, nextPageSlug }) {
                   {block.text}
                 </h2>
               )}
+              
               {block.type === "image" && (
                 <Image
                   className="image top-padding-26 bottom-padding-26"
@@ -332,27 +378,32 @@ function BlogPage({ pageContent, nextPageSlug }) {
                 </div>
               )}
               {block.type === "bullet" && (
-               <ul className='para'>
-               <li className="para blogtype">{block.text}</li>
-              </ul>
+                <ul className="para">
+                  <li className="para blogtype">{block.text}</li>
+                </ul>
               )}
               {/* Handle other block types as needed */}
             </motion.div>
           ))}
-                    <div style={{ height: "26px" }}></div>
+          <div style={{ height: "26px" }}></div>
 
           <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
-          }}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
+            }}
           >
-           <a className="accent-heading type-opacity-50" onClick={handleClick} href={`/post/${nextPageSlug}`}>/go to Next Post</a>
-           </motion.div>
+            <a
+              className="accent-heading type-opacity-50"
+              onClick={handleClick}
+              href={`/post/${nextPageSlug}`}
+            >
+              /go to Next Post
+            </a>
+          </motion.div>
         </div>
         <div className="mobile-show">
-        
           <div className="line mobile-show" style={{ height: "1px" }}></div>
           <div className="nav-container-mobile">
             <Link
@@ -368,7 +419,6 @@ function BlogPage({ pageContent, nextPageSlug }) {
     );
   };
 
- 
   return (
     <Layout
       topContent={renderTopContent()}
@@ -437,11 +487,15 @@ export async function getStaticProps({ params }) {
 
   try {
     // Fetch all page properties to build dynamic paths
-    const pageProperties = await retrievePageProperties(process.env.NOTION_DATABASE_ID);
+    const pageProperties = await retrievePageProperties(
+      process.env.NOTION_DATABASE_ID
+    );
 
     if (slug) {
       // Find the index of the current post
-      const currentIndex = pageProperties.findIndex((property) => property.slug === slug);
+      const currentIndex = pageProperties.findIndex(
+        (property) => property.slug === slug
+      );
 
       // Calculate the index of the next post
       const nextIndex = (currentIndex + 1) % pageProperties.length;
@@ -486,7 +540,5 @@ export async function getStaticPaths() {
     fallback: false, // Render a 404 page if the path doesn't match any page
   };
 }
-
-
 
 export default BlogPage;

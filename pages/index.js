@@ -51,7 +51,7 @@ function Home({ pageProperties, databaseInfo }) {
               opacity: 1,
               transition: { duration: 0.6, ease: "easeInOut" },
             }}
-            className="accent-heading accent work-link"
+            className="accent-heading  type-opacity-50 work-link"
             onClick={() => scrollToSection("_work")}
           >
             /work 
@@ -62,7 +62,7 @@ function Home({ pageProperties, databaseInfo }) {
               opacity: 1,
               transition: { duration: 0.8, delay: 0.04, ease: "easeInOut" },
             }}
-            className="accent-heading accent notes-link"
+            className="accent-heading type-opacity-50 notes-link"
             onClick={() => scrollToSection("_notes")}
           >
            /notes
@@ -75,7 +75,7 @@ function Home({ pageProperties, databaseInfo }) {
               opacity: 1,
               transition: { duration: 1.0, delay: 0.08, ease: "easeInOut" },
             }}
-            className="accent-heading accent notes-link"
+            className="accent-heading type-opacity-50 notes-link"
             onClick={() => scrollToSection("_about")}
           >
             /about
@@ -246,6 +246,7 @@ function Home({ pageProperties, databaseInfo }) {
           animate={controls}
           className="main-content"
         >
+          
           <div className="inner-container">
             <motion.h3
               initial={{ opacity: 0 }}
@@ -254,9 +255,9 @@ function Home({ pageProperties, databaseInfo }) {
                 transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
               }}
               id="_work"
-              className="accent-heading slash"
+              className="heading-md"
             >
-              <span className="accent"><span className="nomobileshow">-- </span>work</span>
+              <span className=" type"><span className="nomobileshow accent">  </span>All work</span>
             </motion.h3>
             <div style={{ height: "26px" }}></div>
             {workPageProperties.map((property) => (
@@ -295,7 +296,7 @@ function Home({ pageProperties, databaseInfo }) {
               </motion.div>
             ))}
           </div>
-          <div style={{ height: "13px" }}></div>
+          <div style={{ height: "26px" }}></div>
           <div className="inner-container">
             <motion.h3
               initial={{ opacity: 0 }}
@@ -304,9 +305,9 @@ function Home({ pageProperties, databaseInfo }) {
                 transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
               }}
               id="_notes"
-              className="accent-heading slash"
+              className="heading-md"
             >
-              <span className="accent"><span className="nomobileshow">-- </span> notes</span>
+              <span className="type"> <span className="nomobileshow accent">  </span>All notes</span>
             </motion.h3>
             <div style={{ height: "26px" }}></div>
             {notesPageProperties.map((property) => (
@@ -345,7 +346,7 @@ function Home({ pageProperties, databaseInfo }) {
               </motion.div>
             ))}
           </div>
-          <div style={{ height: "13px" }}></div>
+          <div style={{ height: "26px" }}></div>
           <div className="inner-container">
             <motion.h3
               initial={{ opacity: 0 }}
@@ -354,9 +355,9 @@ function Home({ pageProperties, databaseInfo }) {
                 transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
               }}
               id="_about"
-              className="accent-heading slash"
+              className="heading-md"
             >
-              <span className="accent"><span className="nomobileshow">-- </span>about</span>
+              <span className="type"><span className="nomobileshow accent">  </span>About</span>
             </motion.h3>
             <div style={{ height: "26px" }}></div>
             <motion.div
