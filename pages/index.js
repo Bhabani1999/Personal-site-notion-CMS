@@ -7,7 +7,6 @@ import Head from "next/head";
 import { motion, useAnimation } from "framer-motion";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import Image from "next/image";
 
 
 function Home({ pageProperties, databaseInfo }) {
@@ -159,6 +158,7 @@ function Home({ pageProperties, databaseInfo }) {
             </span>
           </motion.p>
         )}
+
       </motion.div>
     );
   }
@@ -278,7 +278,7 @@ function Home({ pageProperties, databaseInfo }) {
                         className="para   type pageTitleLink"
                         href={`/post/${property.slug}`}
                       >
-                        {property.pageTitle}
+                      {property.pageTitle} 
                       </a>
                     </div>
                     <p className="para  type-opacity-50 pageDescription">
@@ -328,7 +328,7 @@ function Home({ pageProperties, databaseInfo }) {
                         className="para  type pageTitleLink"
                         href={`/post/${property.slug}`}
                       >
-                        {property.pageTitle}
+                        {property.pageTitle} 
                       </a>
                     </div>
                     <p className="para  type-opacity-50 pageDescription">

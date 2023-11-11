@@ -351,7 +351,7 @@ function BlogPage({ pageContent, nextPageSlug }) {
               {block.type === "h2" && (
                 <h2
                   id={block.text}
-                  className="type heading-md top-padding-26 bottom-padding-13"
+                  className="type heading-md top-padding-39 bottom-padding-13"
                 >
                   {block.text}
                 </h2>

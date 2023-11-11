@@ -1,8 +1,3 @@
-
-
-
-
-
 body {
     margin: 0;
     padding: 0;
@@ -11,6 +6,10 @@ body {
     overflow-x: hidden;
 
 }
+
+
+
+
 
 .container {
     max-width: 1660px;
@@ -107,14 +106,16 @@ span.number,
 
 .title {
     font-family: var(--font-hatton);
-        font-weight: 300;
-        letter-spacing: -0.6px;
+    font-weight: 300;
+    letter-spacing: -0.6px;
 
     font-size: 43.35px;
     line-height: 52px;
 }
+
 .heading-md {
-    font-family: var(--font-hatton);    font-weight: 300;
+    font-family: var(--font-hatton);
+    font-weight: 300;
     font-size: 25.5px;
     line-height: 39px;
     letter-spacing: -0.1px;
@@ -140,7 +141,7 @@ a.h2link:hover {
 }
 
 a.h2link {
-    transition: color 0.15s,;
+    transition: color 0.15s, ;
 
     color: #808080;
 }
@@ -157,8 +158,8 @@ a.h2link {
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.3px;
-    
-    
+
+
 }
 
 
@@ -176,18 +177,20 @@ a.h2link {
 }
 
 .accent {
-    color: #E3623A;
+    color: #FF3C00;
 }
 
 .row {
     display: flex;
     justify-content: space-between;
+
     @media (max-width: 425px) {
-flex-direction: column        /* Change display to flex under 768px */
-       
+        flex-direction: column
+            /* Change display to flex under 768px */
+
 
     }
-    
+
 }
 
 .sidebyside {
@@ -199,60 +202,69 @@ flex-direction: column        /* Change display to flex under 768px */
 /* Add styling for left and right content within the row */
 .left-content {
     flex-grow: 1;
+
     @media (max-width: 425px) {
-       
+
         order: 2;
         /* Change display to flex under 768px */
-       
+
 
     }
 }
 
 .right-content {
     margin-left: 13px;
+
     @media (max-width: 425px) {
         margin-left: 0px;
         order: 1;
         /* Change display to flex under 768px */
-       
+
 
     }
-    
+
 }
 
 /* Remove default link styling */
 a {
-    
+
     text-decoration: none;
-  
-  
-    transition: color 0.15s, 
+
+
+    transition: color 0.15s,
 }
 
 a:hover {
-    color: #E3623A;
+    color: #FF3C00;
+}
+
+a.pageTitleLink:hover{
+    color: #C2AAA3;
+
+
+
 }
 
 
 
 .inheight {
- display: flex;
- height: 22px;
- width: fit-content;
+    display: flex;
+    height: 22px;
+    width: fit-content;
 }
 
 /* Sticky left column */
 .column.left {
     flex: 2;
     display: flex;
-    
+
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
     align-items: flex-start;
     position: sticky;
     top: 0;
-    
+
 
     @media (max-width: 768px) {
         display: none;
@@ -288,18 +300,22 @@ html,
 body {
     overscroll-behavior-y: none;
 }
-.work-link,.notes-link {
+
+.work-link,
+.notes-link {
 
     transition: color 0s, ;
 
 
 }
+
 /* Style the "work" and "notes" links */
 .work-link:hover,
 .notes-link:hover {
     cursor: pointer;
     /* Change cursor to pointer on hover */
-    color: #E3623A;    /* Underline the text on hover */
+    color: #FF3C00;
+    /* Underline the text on hover */
 }
 
 /* Add this CSS to your stylesheet */
@@ -347,6 +363,9 @@ body {
 
 .top-padding-13 {
     padding-top: 13px;
+}
+.top-padding-39 {
+    padding-top: 39px;
 }
 
 .bottom-padding-13 {
@@ -463,9 +482,10 @@ body {
 
 .nomobileshow {
     display: inline;
+
     @media (max-width: 768px) {
         display: none;
-       
+
     }
 }
 
@@ -503,7 +523,8 @@ body {
 }
 
 .full-width-content {
-    width: 100vw; /* Extend the width to the viewport width */
+    width: 100vw;
+    /* Extend the width to the viewport width */
     height: auto;
     max-width: 1920px;
 }
@@ -511,7 +532,7 @@ body {
 .image-flex {
     display: grid;
     justify-content: center;
-       
+
 
 }
 
@@ -520,37 +541,39 @@ body {
     text-decoration: underline;
 }
 
-a.noorange:hover{
+a.noorange:hover {
     color: #BFBFBF;
 
 }
+
 .sidenote {
     position: absolute;
     left: 766px;
     width: 247px;
     color: #808080;
-font-size: 13px;
-line-height: 22px; 
-        @media (max-width: 1024px) {
-         display: none;
-    /* Change display to flex under 768px */
-   
+    font-size: 13px;
+    line-height: 22px;
+
+    @media (max-width: 1024px) {
+        display: none;
+        /* Change display to flex under 768px */
+
 
     }
 
 }
 
 .sidenote-link {
-    
+
     color: #808080;
-font-size: 13px;
-line-height: 22px;
-text-decoration: underline;
+    font-size: 13px;
+    line-height: 22px;
+    text-decoration: underline;
 
 
 }
 
-.sidenote-link:hover{
+.sidenote-link:hover {
     color: #808080;
 
 
@@ -559,35 +582,35 @@ text-decoration: underline;
 
 .hover-effect {
     opacity: 0;
-    transition: opacity 0.3s; /* Add a transition for a smoother effect */
-  }
-  
-  /* When the .notes-text is hovered, show the .hover-effect element */
-  .notes-text:hover + .hover-effect {
+    transition: opacity 0.3s;
+    /* Add a transition for a smoother effect */
+}
+
+/* When the .notes-text is hovered, show the .hover-effect element */
+.notes-text:hover+.hover-effect {
     opacity: 1;
-  }
+}
 
-  p{
+p {
     margin: 0;
-  }
+}
 
-  .slash{
+.slash {
     @media (max-width: 768px) {
         margin-left: 0px;
-       
-    }
-  }
 
-  p{
-  display: block;
+    }
+}
+
+p {
+    display: block;
     margin-block-start: 0;
     margin-block-end: 0;
     margin-inline-start: 0px;
-    margin-inline-end: 0px; 
+    margin-inline-end: 0px;
 }
 
 
 .blackbg {
     background-color: #141414;
 }
-  

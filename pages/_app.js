@@ -14,8 +14,6 @@ export const hatton = localfont({
   src: '../fonts/PPHatton-Ultralight.otf',
   variable: "--font-hatton",
   weight: '300',
-
-
 });
 
 export const Supply = localfont({
@@ -37,9 +35,9 @@ function MyApp({ Component, pageProps }) {
   }, [router]);
 
   return (
-    <main className={`${fontLoader.variable} ${hatton.variable} ${Supply.variable} ${neue.variable}`}>
-      <Component {...pageProps} />
-    </main>
+      <main className={`${fontLoader.variable} ${hatton.variable} ${Supply.variable} ${neue.variable}`}>
+        <Component {...pageProps} />
+      </main>
   );
 }
 
