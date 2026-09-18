@@ -10,30 +10,6 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
 function BlogPage({ pageContent, nextPageSlug }) {
-  const [codeResult, setCodeResult] = useState(null);
-
-  const executeCode = async (code) => {
-    try {
-      const response = await fetch('/api/execCode', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ code }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setCodeResult(data.result);
-      } else {
-        throw new Error('Code execution failed');
-      }
-    } catch (error) {
-      console.error('Error executing code:', error);
-      // Handle the error as needed
-    }
-  };
-
   const pageControls = useAnimation();
   const SCROLL_THRESHOLD = 400; // Adjust this value to set the scroll threshold
   const router = useRouter();
@@ -342,12 +318,6 @@ function BlogPage({ pageContent, nextPageSlug }) {
                   }
                 </p>
               )}
-      {block.type === "code" && (
-    <div className="code-block">
-      <button onClick={() => executeCode(block.code)}>Run Code</button>
-      {codeResult && <pre>{codeResult}</pre>}
-    </div>
-  )}
               {block.type === "h2" && (
                 <h2
                   id={block.text}
@@ -367,14 +337,15 @@ function BlogPage({ pageContent, nextPageSlug }) {
                 />
               )}
               {block.type === "bookmark" && (
-                <div className="image-flex">
-                  <Image
-                    className="full-width-content top-padding-26 bottom-padding-26"
-                    width="200"
-                    height="200"
-                    src={block.url}
-                    alt="Image"
-                  />
+                <div className="top-padding-26 bottom-padding-26">
+                  <a
+                    className="blogtype noorange underline"
+                    href={block.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {block.url}
+                  </a>
                 </div>
               )}
               {block.type === "bullet" && (
@@ -531,9 +502,9 @@ export async function getStaticPaths() {
     process.env.NOTION_DATABASE_ID
   );
 
-  const paths = pageProperties.map((property) => ({
-    params: { slug: property.slug }, // Use "slug" from your properties
-  }));
+  const paths = pageProperties
+    .filter((property) => property.slug)
+    .map((property) => ({ params: { slug: property.slug } }));
 
   return {
     paths,
