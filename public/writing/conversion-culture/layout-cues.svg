@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+  <title id="title">Four cues that change how an irregular grid is read</title>
+  <desc id="desc">Examples show separation, overlap, staggering, and an eyeline directing attention through a grid.</desc>
+  <defs>
+    <marker id="cue-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L7,3 z" fill="#ff5b35"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="690" rx="8" fill="#171819"/>
+  <g font-family="Arial, sans-serif">
+    <text x="52" y="58" fill="#efefef" font-size="22">Small layout changes, different reading cues</text>
+    <text x="52" y="88" fill="#8e9093" font-size="15">The container sets a route; the content inside it can reinforce or redirect that route.</text>
+
+    <g transform="translate(52 132)">
+      <text x="0" y="0" fill="#efefef" font-size="18">SEPARATION</text>
+      <text x="0" y="25" fill="#8e9093" font-size="14">Distance creates groups.</text>
+      <g fill="#242628" stroke="#505357" stroke-width="2">
+        <rect x="0" y="58" width="112" height="112" rx="5"/>
+        <rect x="126" y="58" width="112" height="112" rx="5"/>
+        <rect x="0" y="184" width="112" height="112" rx="5"/>
+        <rect x="126" y="184" width="112" height="112" rx="5"/>
+        <rect x="282" y="58" width="112" height="112" rx="5"/>
+        <rect x="282" y="184" width="112" height="112" rx="5"/>
+      </g>
+      <path d="M254 50 V304" stroke="#ff5b35" stroke-width="2" stroke-dasharray="5 6"/>
+    </g>
+
+    <g transform="translate(650 132)">
+      <text x="0" y="0" fill="#efefef" font-size="18">OVERLAP</text>
+      <text x="0" y="25" fill="#8e9093" font-size="14">A bridge makes two cards feel related.</text>
+      <g fill="#242628" stroke="#505357" stroke-width="2">
+        <rect x="0" y="58" width="190" height="190" rx="5"/>
+        <rect x="226" y="58" width="190" height="190" rx="5"/>
+        <rect x="153" y="125" width="112" height="112" rx="5" fill="#303235" stroke="#ff5b35"/>
+      </g>
+      <path d="M105 270 C166 306 246 306 310 270" fill="none" stroke="#ff5b35" stroke-width="3" marker-end="url(#cue-arrow)"/>
+    </g>
+
+    <g transform="translate(52 505)">
+      <text x="0" y="0" fill="#efefef" font-size="18">STAGGERING</text>
+      <text x="0" y="25" fill="#8e9093" font-size="14">Broken gutters weaken the row.</text>
+      <g fill="#242628" stroke="#505357" stroke-width="2">
+        <rect x="0" y="52" width="112" height="82" rx="5"/>
+        <rect x="126" y="72" width="112" height="82" rx="5"/>
+        <rect x="252" y="42" width="112" height="82" rx="5"/>
+      </g>
+      <path d="M52 93 C128 50 227 130 320 82" fill="none" stroke="#ff5b35" stroke-width="3" stroke-dasharray="6 7" marker-end="url(#cue-arrow)"/>
+    </g>
+
+    <g transform="translate(650 505)">
+      <text x="0" y="0" fill="#efefef" font-size="18">EYELINE</text>
+      <text x="0" y="25" fill="#8e9093" font-size="14">Content pulls attention across the frame.</text>
+      <g fill="#242628" stroke="#505357" stroke-width="2">
+        <rect x="0" y="42" width="190" height="112" rx="5"/>
+        <rect x="226" y="42" width="190" height="112" rx="5"/>
+      </g>
+      <circle cx="70" cy="94" r="21" fill="none" stroke="#d7d8da" stroke-width="3"/>
+      <path d="M84 91 L102 84" stroke="#d7d8da" stroke-width="3" stroke-linecap="round"/>
+      <path d="M102 84 C176 52 236 56 304 86" fill="none" stroke="#ff5b35" stroke-width="3" marker-end="url(#cue-arrow)"/>
+      <circle cx="322" cy="94" r="10" fill="#ff5b35"/>
+    </g>
+  </g>
+</svg>

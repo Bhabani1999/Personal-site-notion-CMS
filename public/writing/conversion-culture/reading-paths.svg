@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-labelledby="title desc">
+  <title id="title">Reading paths through regular and blocked grids</title>
+  <desc id="desc">A regular grid follows a Z-shaped route. In a blocked grid, stacked panels encourage a vertical route before the eye moves across.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L7,3 z" fill="#ff5b35"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="560" rx="8" fill="#171819"/>
+
+  <g font-family="Arial, sans-serif">
+    <text x="52" y="58" fill="#efefef" font-size="22">A. Regular grid</text>
+    <text x="650" y="58" fill="#efefef" font-size="22">B. Blockage</text>
+    <text x="52" y="88" fill="#8e9093" font-size="15">Rows make the Z-path easy to predict.</text>
+    <text x="650" y="88" fill="#8e9093" font-size="15">A tall panel interrupts the row and changes the likely route.</text>
+
+    <g fill="#242628" stroke="#505357" stroke-width="2">
+      <rect x="52" y="128" width="230" height="142" rx="5"/>
+      <rect x="302" y="128" width="230" height="142" rx="5"/>
+      <rect x="52" y="290" width="230" height="142" rx="5"/>
+      <rect x="302" y="290" width="230" height="142" rx="5"/>
+
+      <rect x="650" y="128" width="230" height="142" rx="5"/>
+      <rect x="650" y="290" width="230" height="142" rx="5"/>
+      <rect x="900" y="128" width="248" height="304" rx="5"/>
+    </g>
+
+    <g fill="#d7d8da" font-size="20" text-anchor="middle">
+      <text x="167" y="205">1</text>
+      <text x="417" y="205">2</text>
+      <text x="167" y="367">3</text>
+      <text x="417" y="367">4</text>
+      <text x="765" y="205">1</text>
+      <text x="765" y="367">2</text>
+      <text x="1024" y="286">3</text>
+    </g>
+
+    <g fill="none" stroke="#ff5b35" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)">
+      <path d="M188 196 H385"/>
+      <path d="M417 221 C417 266 352 278 188 348"/>
+      <path d="M188 358 H385"/>
+      <path d="M765 220 V334"/>
+      <path d="M790 361 C870 361 895 320 972 289"/>
+    </g>
+
+    <g fill="#ff5b35" font-size="14" font-weight="700">
+      <text x="52" y="486">LEFT TO RIGHT, THEN DOWN</text>
+      <text x="650" y="486">DOWN THE STACK, THEN ACROSS</text>
+    </g>
+    <path d="M600 42 V510" stroke="#303235" stroke-width="1"/>
+  </g>
+</svg>

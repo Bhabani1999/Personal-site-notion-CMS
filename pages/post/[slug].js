@@ -1,5 +1,4 @@
-import Layout from "../../app/layout";
-import "../../styles/styles.css";
+import Layout from "../../components/Layout";
 import Link from "next/link";
 import Image from "next/image";
 import retrievePageData from "../../notioncontentModule";
@@ -8,8 +7,22 @@ import Head from "next/head";
 import { motion, useAnimation } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
+import { nextAfterPost } from "../../navigationOrder";
+import conversionCulture from "../../content/posts/conversion-culture";
 
-function BlogPage({ pageContent, nextPageSlug }) {
+const localPosts = {
+  "conversion-culture": conversionCulture,
+};
+
+const postMetadataOverrides = {
+  "why-how-create-personal-space2": {
+    pageTitle: "Designing a Timeless Website",
+    pageDescription:
+      "On owning a corner of the internet and separating its visual system from its content.",
+  },
+};
+
+function BlogPage({ pageContent, nextHref }) {
   const pageControls = useAnimation();
   const SCROLL_THRESHOLD = 400; // Adjust this value to set the scroll threshold
   const router = useRouter();
@@ -68,25 +81,9 @@ function BlogPage({ pageContent, nextPageSlug }) {
   function renderTopContent() {
     return (
       <motion.div initial={{ opacity: 1 }} animate={pageControls}>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: { duration: 0.5, ease: "easeInOut" },
-          }}
-          className="nav-container"
-        >
-          <Link
-            className="accent-heading type-opacity-50"
-            onClick={handleClick}
-            href="../"
-          >
-            /go home
-          </Link>
-        </motion.div>
         <div>
           <div className="spacer"></div>
-          {renderH2Headings()} {/* Render H2 headings in top content */}
+          {renderH2Headings()}
         </div>
       </motion.div>
     );
@@ -152,7 +149,7 @@ function BlogPage({ pageContent, nextPageSlug }) {
               className="accent-heading type-opacity-50 "
               href="../"
             >
-              /go home
+              /back
             </Link>
           </div>
           <div className="line mobile-show" style={{ height: "1px" }}></div>
@@ -160,7 +157,22 @@ function BlogPage({ pageContent, nextPageSlug }) {
         <div className="main-content">
           <div>
             <div id="top"></div>
-
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: 1,
+                transition: { duration: 0.5, ease: "easeInOut" },
+              }}
+            >
+              <Link
+                className="accent-heading type-opacity-50"
+                onClick={handleClick}
+                href="../"
+              >
+                /back
+              </Link>
+            </motion.div>
+            <div style={{ height: "52px" }}></div>
           </div>
           <motion.p
             initial={{ opacity: 0 }}
@@ -330,10 +342,10 @@ function BlogPage({ pageContent, nextPageSlug }) {
               {block.type === "image" && (
                 <Image
                   className="image top-padding-26 bottom-padding-26"
-                  width="20000000"
-                  height="200"
+                  width={block.width || 20000000}
+                  height={block.height || 200}
                   src={block.url}
-                  alt="Image"
+                  alt={block.alt || "Article illustration"}
                 />
               )}
               {block.type === "bookmark" && (
@@ -359,19 +371,29 @@ function BlogPage({ pageContent, nextPageSlug }) {
           <div style={{ height: "26px" }}></div>
 
           <motion.div
+            className="page-nav"
             initial={{ opacity: 0 }}
             animate={{
               opacity: 1,
               transition: { duration: 0.3, delay: 0, ease: "easeInOut" },
             }}
           >
-            <a
+            <Link
               className="accent-heading type-opacity-50"
               onClick={handleClick}
-              href={`/post/${nextPageSlug}`}
+              href="/"
             >
-              /go to Next Post
-            </a>
+              /back
+            </Link>
+            {nextHref && (
+              <Link
+                className="accent-heading type-opacity-50"
+                onClick={handleClick}
+                href={nextHref}
+              >
+                /next
+              </Link>
+            )}
           </motion.div>
         </div>
         <div className="mobile-show">
@@ -437,8 +459,8 @@ function formatDate(dateString) {
     "August",
     "September",
     "October",
-    "Novemeber",
-    "Decemeber",
+    "November",
+    "December",
   ];
 
   const day = String(date.getDate()).padStart(2, "0");
@@ -457,58 +479,71 @@ export async function getStaticProps({ params }) {
   const { slug } = params;
 
   try {
-    // Fetch all page properties to build dynamic paths
-    const pageProperties = await retrievePageProperties(
-      process.env.NOTION_DATABASE_ID
-    );
+    const retrievedContent = localPosts[slug] || (await retrievePageData(slug));
+    const pageContent = postMetadataOverrides[slug]
+      ? {
+          ...retrievedContent,
+          properties: {
+            ...retrievedContent.properties,
+            ...postMetadataOverrides[slug],
+          },
+        }
+      : retrievedContent;
+    let pageProperties = [];
 
-    if (slug) {
-      // Find the index of the current post
-      const currentIndex = pageProperties.findIndex(
-        (property) => property.slug === slug
+    try {
+      pageProperties = await retrievePageProperties(
+        process.env.NOTION_DATABASE_ID
       );
-
-      // Calculate the index of the next post
-      const nextIndex = (currentIndex + 1) % pageProperties.length;
-
-      // Get the slug of the next post
-      const nextPageSlug = pageProperties[nextIndex].slug;
-
-      const pageContent = await retrievePageData(slug);
-
-      return {
-        props: {
-          pageContent,
-          nextPageSlug,
-        },
-      };
+    } catch (error) {
+      console.error("Error fetching post navigation:", error);
     }
+
+    // The reading order runs through the writing and on into the work pages,
+    // so the last post hands over rather than looping back to the first.
+    const notionSlugs = pageProperties
+      .filter((p) => p.Tags === "notes" && p.slug)
+      .map((p) => p.slug);
+    const postSlugs = Array.from(
+      new Set([...Object.keys(localPosts), ...notionSlugs])
+    );
+    const nextHref = nextAfterPost(slug, postSlugs);
+
+    return {
+      props: { pageContent, nextHref },
+      revalidate: 1800,
+    };
   } catch (error) {
     console.error("Error fetching page content:", error);
+    return {
+      props: { pageContent: null, nextHref: null },
+      revalidate: 60,
+    };
   }
-
-  // Return a fallback value or handle errors as needed
-  return {
-    props: {
-      pageContent: null,
-      nextPageSlug: null,
-    },
-  };
 }
 
 export async function getStaticPaths() {
-  // Fetch all page properties to build dynamic paths
-  const pageProperties = await retrievePageProperties(
-    process.env.NOTION_DATABASE_ID
-  );
+  let pageProperties = [];
 
-  const paths = pageProperties
-    .filter((property) => property.slug)
-    .map((property) => ({ params: { slug: property.slug } }));
+  try {
+    pageProperties = await retrievePageProperties(
+      process.env.NOTION_DATABASE_ID
+    );
+  } catch (error) {
+    console.error("Error fetching post paths:", error);
+  }
+
+  const slugs = Array.from(
+    new Set([
+      ...Object.keys(localPosts),
+      ...pageProperties.filter((p) => p.slug).map((p) => p.slug),
+    ])
+  );
+  const paths = slugs.map((slug) => ({ params: { slug } }));
 
   return {
     paths,
-    fallback: false, // Render a 404 page if the path doesn't match any page
+    fallback: "blocking",
   };
 }
 

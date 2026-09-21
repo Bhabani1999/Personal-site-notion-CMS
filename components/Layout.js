@@ -13,19 +13,19 @@ function Layout({ children, topContent, bottomContent, middleContent,rightConten
     <div className="container" id="postContainer">
       <div className={middleColumnClass}>
         {children}
-        {middleContent} {/* Add the middle content here */}
+        {middleContent}
       </div>
-      
-      
       <div className="column right">{rightContent}</div>
-      <div className="column left">
-        <div className="top-container">
-          {topContent}
+      {(topContent || bottomContent) ? (
+        <div className="column left">
+          <div className="top-container">
+            {topContent}
+          </div>
+          <div className="bottom-container">
+            {bottomContent}
+          </div>
         </div>
-        <div className="bottom-container">
-          {bottomContent}
-        </div>
-      </div>
+      ) : null}
     </div>
 
 

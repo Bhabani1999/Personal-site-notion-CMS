@@ -1,0 +1,207 @@
+.page, .dialog { --work-type: #f3f3f3; --work-body: #bfbfbf; --work-muted: #808080; --work-accent: #ff3c00; }
+.page { min-width: 0; }
+.back { display: inline-block; margin-bottom: 39px; }
+.intro { margin-bottom: 96px; }
+.eyebrow { margin: 0 0 10px; }
+/* The title is not shown, but the page still needs one h1 for its outline. */
+.srOnly { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.intro .para, .intro p { max-width: 68ch; }
+.title { margin: 0 0 10px; letter-spacing: 0; overflow-wrap: anywhere; }
+.projectHeader { margin-bottom: 20px; padding-top: 10px; }
+.heading { margin: 0 0 5px; letter-spacing: 0; transition: color 150ms ease; }
+.context { max-width: 68ch; margin: 0; color: #6a6a6a; font-size: 14px; font-weight: 400; line-height: 22px; letter-spacing: 0; }
+.contextLead { font-style: normal; color: #9d9d9d; }
+.sectionStackWrap { container-type: inline-size; }
+.section { margin: 0 0 72px; scroll-margin-top: 26px; }
+.projectLink { display: grid; grid-template-columns: 93px minmax(0, 1fr); align-items: start; column-gap: 44px; color: inherit; }
+/* The global a:hover paints links full accent orange; these sections use the
+   softer hover from the homepage's writing list instead. */
+.projectLink:hover, .projectLink:focus-visible { color: #C2AAA3; }
+.projectLink:hover .heading, .projectLink:focus-visible .heading { color: #C2AAA3; }
+.projectLink:hover .moreTile::before { transform: translate(15px, -5px) rotate(14deg) scale(.91); }
+.projectLink:hover .moreTile::after { transform: translate(8px, -3px) rotate(7deg) scale(.96); }
+.projectLink:hover .moreFront { box-shadow: inset 0 -1px 0 #0000003d, 0 2px 0 #090909, 0 7px 13px #00000029; }
+.projectLink:focus-visible { outline: 2px solid var(--work-accent); outline-offset: 8px; border-radius: 4px; }
+.sectionStack { width: 93px; margin-top: 4px; }
+.description { margin-bottom: 26px; }
+.tile { position: relative; display: block; box-sizing: border-box; appearance: none; width: 100%; min-width: 0; aspect-ratio: 1; overflow: hidden; border: 0; border-radius: clamp(10px, 22.7cqw, 28px); background: linear-gradient(145deg, #2c2c2c, #1d1d1d); box-shadow: inset 0 -1px 0 #0000003d, 0 1px 0 #0a0a0a, 0 5px 10px #0000001c; padding: 0; cursor: pointer; transition: box-shadow 220ms ease; }
+.tile:not(.moreTile)::after { content: ""; position: absolute; z-index: 1; right: 0; bottom: 0; left: 0; height: 88%; background: linear-gradient(to bottom, transparent 0%, #1d1d1d08 22%, #1d1d1d1f 44%, #1d1d1d4d 64%, #1d1d1d99 84%, #1d1d1d 100%); pointer-events: none; }
+.moreTile { overflow: visible; border: 0; padding: 0; background: transparent; box-shadow: none; }
+.moreTile::before, .moreTile::after { content: ""; position: absolute; inset: 3px; border-radius: clamp(9px, 20.5cqw, 26px); pointer-events: none; transform-origin: 18% 88%; transition: transform 320ms cubic-bezier(.2, .72, .2, 1), box-shadow 220ms ease; }
+.moreTile::before { z-index: 0; background: linear-gradient(145deg, #292929, #181818); box-shadow: 0 5px 10px #00000024; transform: translate(12px, -4px) rotate(10deg) scale(.91); }
+.moreTile::after { z-index: 1; background: linear-gradient(145deg, #343434, #202020); box-shadow: 0 4px 9px #00000029; transform: translate(6px, -2px) rotate(5deg) scale(.96); }
+.moreFront { position: absolute; z-index: 2; inset: 0; overflow: hidden; box-sizing: border-box; border: 0; border-radius: clamp(10px, 22.7cqw, 28px); background: linear-gradient(145deg, #2c2c2c, #1d1d1d); box-shadow: inset 0 -1px 0 #0000003d, 0 1px 0 #0a0a0a, 0 5px 10px #0000001c; }
+.moreFront::after { content: ""; position: absolute; z-index: 1; right: 0; bottom: 0; left: 0; height: 88%; background: linear-gradient(to bottom, transparent 0%, #1d1d1d08 22%, #1d1d1d1f 44%, #1d1d1d4d 64%, #1d1d1d99 84%, #1d1d1d 100%); pointer-events: none; }
+.morePill { position: absolute; z-index: 3; right: 8px; bottom: 8px; display: inline-flex; align-items: center; justify-content: center; width: max-content; box-sizing: border-box; padding: 5px 7px; border-radius: 999px; background: #101010d9; color: var(--work-type); font-family: var(--font-supply); font-size: 11px; line-height: 1; letter-spacing: 0; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tile.moreTile:hover { box-shadow: none; }
+.moreTile:hover::before { transform: translate(15px, -5px) rotate(14deg) scale(.91); }
+.moreTile:hover::after { transform: translate(8px, -3px) rotate(7deg) scale(.96); }
+.moreTile:hover .moreFront { box-shadow: inset 0 -1px 0 #0000003d, 0 2px 0 #090909, 0 7px 13px #00000029; }
+.tile img, .tile video { position: absolute; top: 6%; left: 10%; display: block; width: 80%; height: 82%; border-radius: 6px; object-fit: contain; object-position: center; transition: transform 320ms cubic-bezier(.2, .72, .2, 1); }
+.tile img.roundedPreview, .tile video.roundedPreview { border-radius: 10% / 5%; }
+.tile .shotPreview { top: 12%; left: 12%; width: 76%; height: 76%; border-radius: 3px; object-fit: contain; object-position: center; }
+.tile .mobilePreview { top: 12%; left: 10%; width: 80%; height: 76%; object-position: center top; transform-origin: center top; }
+.tile img.mobilePreview.roundedPreview, .tile video.mobilePreview.roundedPreview { left: 50%; width: auto; height: 76%; translate: -50% 0; border-radius: 10% / 5%; }
+.tile:not(.moreTile):hover img, .tile:not(.moreTile):hover video { transform: scale(1.065); }
+.tile:hover { box-shadow: inset 0 -1px 0 #0000003d, 0 2px 0 #090909, 0 7px 13px #00000029; }
+.tile:focus-visible, .iconButton:focus-visible { outline: 2px solid var(--work-accent); outline-offset: 3px; }
+.play { position: absolute; z-index: 2; top: 8px; right: 8px; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; color: var(--work-type); background: #141414d9; }
+/* The footer spans the text column, not the full page width. ch resolves
+   against this element's own font, so the body's font and size are restated
+   here to get the same measure the writing uses. */
+.footer { max-width: 68ch; padding: 13px 0 26px;
+  font-family: var(--font-ibmplexsans); font-size: 15px; }
+.dialog { position: fixed; inset: 0; width: 100vw; max-width: none; height: 100dvh; max-height: none; box-sizing: border-box; padding: 0; border: 0; border-radius: 0; background: #141414; color: var(--work-type); overflow-x: hidden; overflow-y: auto; margin: 0; font-family: var(--font-ibmplexsans); }
+.dialog::backdrop { background: #000; }
+.dialogInner { width: 100%; max-width: 1660px; min-height: 100%; box-sizing: border-box; margin: 0 auto; padding: 0 78px; }
+.dialogColumn { width: 100%; box-sizing: border-box; }
+.toolbar { position: relative; z-index: 2; padding: 78px 0 6px; }
+.galleryHeading { min-width: 0; max-width: 648px; }
+.galleryTitle { margin: 0 0 8px; color: var(--work-type); font-family: var(--font-hatton); font-size: 25.5px; font-weight: 300; line-height: 34px; letter-spacing: 0; }
+.galleryDescription { margin: 0; color: var(--work-body); font-size: 15px; line-height: 24px; letter-spacing: 0; }
+.backButton { display: inline-flex; align-items: center; margin-bottom: 26px; padding: 0; border: 0; background: none; color: var(--work-muted); font-family: var(--font-supply); font-size: 13px; line-height: 22px; letter-spacing: 0.3px; text-transform: uppercase; cursor: pointer; transition: color 150ms ease; }
+/* Matches the orange link hover used everywhere else on the site. */
+.backButton:hover { color: var(--work-accent); }
+.backButton:focus-visible { outline: 2px solid var(--work-accent); outline-offset: 3px; border-radius: 4px; }
+.galleryGrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-flow: row; align-items: start; gap: 26px 16px; padding: 26px 0 78px; }
+.flowCard { display: grid; grid-column: span var(--flow-span, 4); grid-template-rows: auto auto; gap: 11px; min-width: 0; margin: 0; }
+.flowMedia { display: flex; align-items: center; justify-content: center; gap: clamp(12px, 1.6vw, 30px); width: 100%; height: clamp(300px, 34vw, 470px); box-sizing: border-box; padding: 20px; overflow: hidden; border-radius: 18px; background: #101010; }
+.flowAsset { position: relative; display: flex; flex: 0 1 auto; align-items: center; justify-content: center; height: 100%; min-width: 0; min-height: 0; overflow: hidden; }
+.flowCardPair .flowMedia { gap: clamp(24px, 3vw, 40px); }
+.flowCardPair .flowAsset { flex-basis: 180px; }
+/* Two square posters fit the generic fixed-height panel badly: contain sizes
+   them by height, so each square is left far narrower than the space beside it.
+   Letting the panel take its height from the squares themselves keeps them
+   square at every width, since the padding is fixed while the artwork scales. */
+.flowCardSquares .flowMedia { height: auto; align-items: stretch; padding: clamp(20px, 3.4vw, 46px); }
+.flowCardSquares .flowAsset { flex: 1 1 0; min-width: 0; aspect-ratio: 1; }
+.flowCardSquares .flowAsset img { width: 100%; height: 100%; object-fit: contain; }
+.flowAsset img { display: block; width: auto; height: 96%; max-width: 100%; object-fit: contain; object-position: center; }
+.flowAssetFocusTop, .flowAssetFocusMiddle, .flowAssetFocusBottom { width: 100%; }
+.flowAssetFocusTop img, .flowAssetFocusMiddle img, .flowAssetFocusBottom img { position: absolute; left: 0; width: 100%; height: auto; max-width: none; max-height: none; object-fit: initial; }
+.flowAssetFocusTop img { top: 0; }
+.flowAssetFocusMiddle img { top: 50%; transform: translateY(-50%); }
+.flowAssetFocusBottom img { bottom: 0; }
+.flowCardWideImage .flowMedia { height: auto; padding: 24px 24px 0; }
+.flowCardWideImage .flowAsset { width: 100%; height: auto; align-items: flex-end; }
+.flowCardWideImage .flowAsset img { width: min(80%, 1200px); height: auto; max-width: 1200px; max-height: none; object-fit: contain; object-position: center bottom; }
+.flowCardPan .flowMedia { aspect-ratio: auto; padding: 0; }
+.flowAssetPan { width: 100%; }
+.flowAssetPan img { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center top; animation: reportPan 18s ease-in-out infinite; }
+.flowCardCropTop .flowMedia { height: auto; aspect-ratio: 1; padding: 0; }
+.flowCardCropTop .flowAsset { width: 100%; }
+.flowCardCropTop .flowAsset img { width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center top; }
+/* Desktop captures -------------------------------------------------------- */
+/* A near-viewport screen sits flush against the panel's bottom edge, so its
+   rounded top reads as a window and the square base meets the frame. */
+.flowCardShot .flowMedia { height: auto; aspect-ratio: 634 / 363; padding: 22px 44px 0; overflow: hidden; align-items: flex-end; border-radius: 18px; }
+.flowCardShot .flowAsset { width: 100%; height: 100%; align-items: flex-end; }
+.flowCardShot .flowAsset img { width: auto; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; object-position: center bottom; }
+/* A tall capture keeps the same panel and pans from its top down to its
+   bottom, anchored to the same flush base. */
+.flowCardScroll .flowMedia { height: auto; aspect-ratio: 634 / 363; padding: 0 44px 0; overflow: hidden; align-items: flex-start; border-radius: 18px; }
+.flowCardScroll .flowAsset { position: relative; width: 100%; height: 100%; align-items: flex-start; overflow: hidden; container-type: size; --scroll-inset: 22px; }
+.flowCardScroll .flowAsset img { width: 100%; height: auto; max-width: none; max-height: none; object-fit: fill; will-change: transform; animation: shotScroll 18s linear infinite; }
+/* The image is taller than its frame, so it is translated up by exactly its
+   own overflow: the pan ends on the true bottom of the capture. */
+@keyframes shotScroll {
+  0%, 8% { transform: translateY(var(--scroll-inset, 22px)); }
+  88%, 100% { transform: translateY(calc(-100% + 100cqh)); }
+}
+.flowCardStill .flowAsset img { animation: none; transform: translateY(var(--scroll-inset, 22px)); }
+.flowCardMixed .flowAsset:first-child { flex-basis: 360px; }
+/* A full-bleed capture fills the panel edge to edge: no side gutters, and the
+   pan starts flush at the top rather than inset. The device-frame captures
+   keep their gutters, so this is opt-in per flow. */
+.flowCardBleed .flowMedia { padding: 0; border-radius: 18px; }
+.flowCardBleed .flowAsset { --scroll-inset: 0px; border-radius: inherit; overflow: hidden; }
+.flowCardMixed .flowAsset:last-child { flex-basis: 180px; }
+.flowCardMixed .flowAsset:first-child img { max-height: 76%; }
+/* Raw screenshots carry their rounded corners baked into the asset's
+   alpha channel, so no CSS radius is needed at any size. */
+.flowCardMotion .flowMedia { padding: 20px; border-radius: 18px; overflow: hidden; }
+/* Panel is painted in the clip's own backdrop, so the two are seamless. */
+.flowCardMotion .flowAsset { width: 100%; height: 100%; border-radius: 14px; overflow: hidden; }
+.flowCardMotion video { display: block; width: 92%; height: 92%; max-width: 100%; max-height: 100%; margin: auto; border-radius: 14px; object-fit: contain; object-position: center; }
+.flowCaption { display: grid; gap: 3px; min-width: 0; padding: 0 12px; color: var(--work-body); font-size: 13px; line-height: 20px; opacity: 0.62; }
+.flowCaption span { max-width: 58ch; }
+.figure { display: grid; grid-template-rows: auto auto; gap: 11px; width: 100%; min-width: 0; margin: 0; }
+.media { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 1 / 1.12; box-sizing: border-box; padding: 20px; border-radius: 18px; background: #101010; overflow: hidden; }
+.assetViewport { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-width: 0; min-height: 0; }
+.figure img, .figure video { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; border-radius: 8px; object-fit: contain; object-position: center; }
+.media_device .assetViewport { width: 84%; }
+.media_device .landscape { width: 100%; height: 78%; }
+.media_plain .assetViewport { width: 100%; height: 100%; overflow: visible; border-radius: 0; background: transparent; box-shadow: none; }
+.media_plain img { width: auto; height: auto; max-width: 100%; max-height: 100%; border-radius: 0; box-shadow: none; object-fit: contain; }
+.media_plain img.portrait { border-radius: 6% / 3%; }
+.media_plain img.landscape { border-radius: 3% / 5%; }
+.media_rawScreen .assetViewport { width: 78%; height: 94%; overflow: hidden; border-radius: 27px; background: #080808; box-shadow: 0 0 0 5px #292929, 0 14px 30px #00000042; }
+.media_rawScreen img { width: 100%; height: 100%; border-radius: 22px; object-fit: cover; }
+.media_composition .assetViewport { width: 96%; height: 92%; }
+.media_composition img { border-radius: 13px; }
+.media_detail .assetViewport { width: 98%; height: 76%; }
+.media_detail img { border-radius: 16px; }
+.media_motionPhone .assetViewport { width: auto; height: 96%; aspect-ratio: 350 / 650; overflow: hidden; border-radius: 28px; background: #080808; box-shadow: 0 0 0 2px #353535, 0 14px 30px #00000042; }
+.media_motionPhone video { width: 100%; height: 100%; max-width: none; border-radius: 0; object-fit: cover; object-position: center; }
+/* Videos carrying a measured blank margin get an exact scale inline; the rest
+   fall back to a mild zoom that hides letterboxing. */
+.media_motionPhone video:not([style*="scale"]) { transform: scale(1.02); }
+.figure figcaption { text-align: left; font-size: 13px; line-height: 20px; color: var(--work-body); }
+.isPending .assetViewport { opacity: 0; }
+.isLoaded .assetViewport { opacity: 1; transition: opacity 280ms ease; }
+.mediaStatus { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.media.isPending { background: linear-gradient(100deg, #101010 30%, #171717 50%, #101010 70%) #101010; background-size: 240% 100%; animation: shimmer 1.4s ease-in-out infinite; }
+.flowAsset.isPending { border-radius: 12px; background: linear-gradient(100deg, #101010 30%, #171717 50%, #101010 70%) #101010; background-size: 240% 100%; animation: shimmer 1.4s ease-in-out infinite; }
+.spinner { width: 20px; height: 20px; border: 2px solid #2f2f2f; border-top-color: #6d6d6d; border-radius: 50%; animation: spin 700ms linear infinite; }
+.mediaError { color: var(--work-muted); font-family: var(--font-supply); font-size: 11px; letter-spacing: 0.3px; text-transform: uppercase; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes shimmer { 0% { background-position: 140% 0; } 100% { background-position: -40% 0; } }
+@keyframes reportPan {
+  0%, 10% { object-position: center top; }
+  90%, 100% { object-position: center bottom; }
+}
+@media (max-width: 768px) {
+  .page { padding: 26px; }
+  .title { font-size: 36px; line-height: 44px; }
+  .back { margin-bottom: 32px; }
+  .intro { margin-bottom: 64px; }
+  .projectLink { grid-template-columns: 93px minmax(0, 1fr); column-gap: 26px; }
+  .section { margin-bottom: 52px; }
+  .dialogInner { padding: 0 26px; }
+  .toolbar { padding: 26px 0 4px; }
+  .galleryTitle { font-size: 23px; line-height: 31px; }
+  .galleryDescription { font-size: 14px; line-height: 22px; }
+  .galleryGrid { grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 18px 0 40px; }
+  .flowCard { grid-column: span 1; }
+  .flowCardWide { grid-column: span 1; }
+  .flowCardFull { grid-column: span 1; }
+  .flowMedia, .flowCardWide .flowMedia { aspect-ratio: 1 / 1.02; gap: 10px; padding: 16px; border-radius: 16px; }
+  /* Desktop captures keep their own geometry on phones: same 16px top
+     margin on every card, flush base, no bottom padding. */
+  .flowCardShot .flowMedia { aspect-ratio: 343 / 203; padding: 16px 22px 0; border-radius: 16px; }
+  .flowCardScroll .flowMedia { aspect-ratio: 343 / 203; padding: 0 22px 0; border-radius: 16px; }
+  .flowCardScroll .flowAsset { --scroll-inset: 16px; }
+  .flowCardBleed .flowMedia { padding: 0; border-radius: 16px; }
+  .flowCardBleed .flowAsset { --scroll-inset: 0px; border-radius: inherit; overflow: hidden; }
+  .flowCardFull .flowMedia { aspect-ratio: 1 / 1.02; }
+  .flowCardWideImage .flowMedia { height: auto; aspect-ratio: auto; padding: 16px 16px 0; }
+  .flowCardPan .flowMedia { aspect-ratio: auto; padding: 0; }
+  .flowCardCropTop .flowMedia { height: auto; aspect-ratio: 1; padding: 0; }
+  .flowCaption { gap: 2px; }
+  .media { aspect-ratio: 1 / 1.08; padding: 18px; border-radius: 16px; }
+  .media_rawScreen .assetViewport { border-radius: 24px; }
+  .media_rawScreen img { border-radius: 19px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .media.isPending { animation: none; }
+  .spinner { animation-duration: 1600ms; }
+  .isLoaded .assetViewport { transition: none; }
+  .tile, .tile img, .tile video, .moreTile::before, .moreTile::after { transition: none; }
+  .tile:hover img, .tile:hover video { transform: none; }
+  .flowAssetPan img { animation: none; object-position: center top; }
+  .flowCardScroll .flowAsset img { animation: none; object-position: center top; }
+  .moreTile:hover::before { transform: translate(12px, -4px) rotate(10deg) scale(.91); }
+  .moreTile:hover::after { transform: translate(6px, -2px) rotate(5deg) scale(.96); }
+  .projectLink:hover .moreTile::before { transform: translate(12px, -4px) rotate(10deg) scale(.91); }
+  .projectLink:hover .moreTile::after { transform: translate(6px, -2px) rotate(5deg) scale(.96); }
+}

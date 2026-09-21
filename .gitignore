@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local originals kept outside the web root (pre-AVIF source images)
+/.asset-originals

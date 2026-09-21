@@ -1,0 +1,886 @@
+[
+  {
+    "slug": "blip",
+    "title": "Peer Knowledge for Early-Career Hiring",
+    "context": "[[Built and ran Blip]] across design, product and distribution, reaching 15,000 readers across 10+ institutes.",
+    "source": "https://www.figma.com/design/urzHdbOj23BjFRMJ28XMhZ/Blip?node-id=0-1",
+    "description": "Blip gave students and recent graduates who had secured internships or early-career roles a structured page for sharing how they prepared, what they studied, and which organizations they interviewed with. Others could search those pages by role or organization instead of cold-messaging for advice. Our three-person team built and distributed Blip independently; I shaped the contribution flow and worked with career-services teams across 10+ institutes, reaching roughly 3,000 contributor profiles and 15,000 readers.",
+    "galleryDescription": "Early Figma explorations for Blip: the contribution flow, published experience pages, and the search and aggregation views that connected them. We wound Blip down in 2022 when the three-person team moved to separate initiatives, then returned the collected material to the career-services teams that had helped gather it.",
+    "items": [
+      {
+        "src": "/work/undergraduate/blip/landing.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Blip landing page",
+        "width": 1440,
+        "height": 900,
+        "raw": true,
+        "shot": "viewport",
+        "thumb": "/work/undergraduate/thumbs/landing-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 900
+      },
+      {
+        "src": "/work/undergraduate/blip/create-wizard.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Blip creation wizard",
+        "width": 1440,
+        "height": 900,
+        "raw": true,
+        "shot": "viewport",
+        "thumb": "/work/undergraduate/thumbs/create-wizard-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 900
+      },
+      {
+        "src": "/work/undergraduate/blip/blip-profile.avif",
+        "poster": null,
+        "type": "image",
+        "title": "A published blip",
+        "width": 1440,
+        "height": 1093,
+        "raw": true,
+        "shot": "viewport",
+        "thumb": "/work/undergraduate/thumbs/blip-profile-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 1037
+      },
+      {
+        "src": "/work/undergraduate/blip/job-profile.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Job profile aggregation",
+        "width": 1440,
+        "height": 1556,
+        "raw": true,
+        "shot": "scroll",
+        "thumb": "/work/undergraduate/thumbs/job-profile-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 1037,
+        "still": true
+      },
+      {
+        "src": "/work/undergraduate/blip/search.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Search and discovery",
+        "width": 1440,
+        "height": 1326,
+        "raw": true,
+        "shot": "scroll",
+        "thumb": "/work/undergraduate/thumbs/search-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 1037,
+        "still": true
+      },
+      {
+        "src": "/work/undergraduate/blip/share.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Blip ready to share",
+        "width": 1440,
+        "height": 900,
+        "raw": true,
+        "shot": "viewport",
+        "thumb": "/work/undergraduate/thumbs/share-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 900
+      }
+    ]
+  },
+  {
+    "slug": "toli",
+    "title": "Community Platform for Interest Groups",
+    "context": "[[Design work for the Toli team]] on its design system and core member and admin flows for interest-based communities.",
+    "source": "https://www.figma.com/design/wDgdRnzaNqaPDf3yLQSMDK/UXhack",
+    "description": "Toli was a platform for running interest-based communities, with topic channels, a feed for posts, questions and discussions, and admin tools for managing members and community settings. I worked with the team on the design system, layout language, and core flows from account setup through publishing.",
+    "galleryDescription": "Selected screens from the Toli work, tracing account setup, channel selection, posting, and member administration.",
+    "items": [
+      {
+        "src": "/work/undergraduate/toli/login.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Toli login",
+        "width": 1440,
+        "height": 900,
+        "raw": true,
+        "shot": "viewport",
+        "thumb": "/work/undergraduate/thumbs/login-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 900
+      },
+      {
+        "src": "/work/undergraduate/toli/community-setup.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Community setup",
+        "width": 1440,
+        "height": 900,
+        "raw": true,
+        "shot": "viewport",
+        "thumb": "/work/undergraduate/thumbs/community-setup-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 900
+      },
+      {
+        "src": "/work/undergraduate/toli/choose-interests.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Choose your interests",
+        "width": 1440,
+        "height": 900,
+        "raw": true,
+        "shot": "viewport",
+        "thumb": "/work/undergraduate/thumbs/choose-interests-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 900
+      },
+      {
+        "src": "/work/undergraduate/toli/community-feed.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Community feed",
+        "width": 1440,
+        "height": 900,
+        "raw": true,
+        "shot": "viewport",
+        "thumb": "/work/undergraduate/thumbs/community-feed-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 900
+      },
+      {
+        "src": "/work/undergraduate/toli/post-composer.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Post composer",
+        "width": 1440,
+        "height": 900,
+        "raw": true,
+        "shot": "viewport",
+        "thumb": "/work/undergraduate/thumbs/post-composer-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 900
+      },
+      {
+        "src": "/work/undergraduate/toli/member-directory.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Member directory",
+        "width": 1440,
+        "height": 900,
+        "raw": true,
+        "shot": "viewport",
+        "thumb": "/work/undergraduate/thumbs/member-directory-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 900
+      }
+    ]
+  },
+  {
+    "slug": "sprinklr",
+    "title": "Forecasting for Customer Care Teams",
+    "context": "[[Designed inside the product design team at Sprinklr]] in 2022, focusing on supervisor workflows for reviewing workforce forecasts.",
+    "source": "https://www.figma.com/design/0JdDGMFYJQPGn82jSq5laU/CARE-14259_-Workforce-Management?node-id=1-3",
+    "items": [
+      {
+        "src": "/work/undergraduate/sprinklr/report-library.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Forecast report library",
+        "width": 1487,
+        "height": 1058,
+        "raw": true,
+        "shot": "viewport",
+        "thumb": "/work/undergraduate/thumbs/report-library-thumb.avif",
+        "thumbWidth": 1487,
+        "thumbHeight": 1058
+      },
+      {
+        "src": "/work/undergraduate/sprinklr/forecast-summary.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Forecast summary report",
+        "width": 1440,
+        "height": 2329,
+        "raw": true,
+        "shot": "scroll",
+        "thumb": "/work/undergraduate/thumbs/forecast-summary-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 1037
+      },
+      {
+        "src": "/work/undergraduate/sprinklr/applied-adjustments.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Applied adjustments insight",
+        "width": 1440,
+        "height": 1938,
+        "raw": true,
+        "shot": "scroll",
+        "still": true,
+        "thumb": "/work/undergraduate/thumbs/applied-adjustments-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 1037
+      },
+      {
+        "src": "/work/undergraduate/sprinklr/call-volume.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Call-volume report",
+        "width": 1440,
+        "height": 1938,
+        "raw": true,
+        "shot": "scroll",
+        "thumb": "/work/undergraduate/thumbs/call-volume-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 1037
+      },
+      {
+        "src": "/work/undergraduate/sprinklr/manage-adjustments.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Manage adjustments",
+        "width": 1440,
+        "height": 900,
+        "raw": true,
+        "shot": "viewport",
+        "thumb": "/work/undergraduate/thumbs/manage-adjustments-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 900
+      },
+      {
+        "src": "/work/undergraduate/sprinklr/add-adjustment.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Add adjustment",
+        "width": 1440,
+        "height": 914,
+        "raw": true,
+        "shot": "viewport",
+        "thumb": "/work/undergraduate/thumbs/add-adjustment-thumb.avif",
+        "thumbWidth": 1440,
+        "thumbHeight": 914
+      }
+    ],
+    "description": "At Sprinklr in 2022, I explored how workforce supervisors could move from a report library into a readable forecast. The work organizes report metadata, adherence, call-volume trends, queue breakdowns, utilisation, and adjustment controls into one review flow.",
+    "galleryDescription": "Selected Forecasting work from Sprinklr Workforce Management, covering report discovery, forecast review, call-volume analysis, and queue-level detail."
+  },
+  {
+    "slug": "saksham",
+    "title": "Accessible City Travel for Mo Bus",
+    "context": "[[Partnered with the technology team at Mo Bus]], Bhubaneswar's city bus service, to bring accessibility into the core travel experience.",
+    "source": "https://app.pitch.com/app/public/player/9ec27c15-a3c5-4ec3-991c-e7af8b8bae2c",
+    "items": [
+      {
+        "src": "/work/undergraduate/saksham/002.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Travel dashboard",
+        "width": 830,
+        "height": 1456,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/saksham/006.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Route map",
+        "width": 678,
+        "height": 1468,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/saksham/008.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Start a journey",
+        "width": 350,
+        "height": 650,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/saksham/011.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Bus accessibility details",
+        "width": 452,
+        "height": 883,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/saksham/012.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Upcoming trips",
+        "width": 678,
+        "height": 1468,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/saksham/013.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Digital ticket",
+        "width": 678,
+        "height": 1468,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/saksham/014.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Journey progress",
+        "width": 678,
+        "height": 1468,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/saksham/015.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Arrival",
+        "width": 678,
+        "height": 1468,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/saksham/016.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Accessibility alert",
+        "width": 678,
+        "height": 1468,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/saksham/019.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Compare routes",
+        "width": 678,
+        "height": 1468,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/saksham/020.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Welcome mockup",
+        "width": 500,
+        "height": 484,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/saksham/023.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Route summary card",
+        "width": 1306,
+        "height": 764,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/saksham/024.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Account setup",
+        "width": 500,
+        "height": 1005,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/saksham/026.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Onboarding",
+        "width": 526,
+        "height": 1057,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/saksham/028.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Trip details",
+        "width": 678,
+        "height": 1468,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/saksham/029.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Ticket booking",
+        "width": 678,
+        "height": 1468,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/saksham/030.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Travel companion",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/saksham/031.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Live journey progress",
+        "width": 678,
+        "height": 1468,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/saksham/032.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Onboarding stories",
+        "width": 500,
+        "height": 1005,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/saksham/033.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Disruption report",
+        "width": 678,
+        "height": 1468,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/saksham/034.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Trip reminder",
+        "width": 1080,
+        "height": 1013,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/saksham/035.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Welcome and sign-in",
+        "width": 500,
+        "height": 1005,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/saksham/motion-01.mp4",
+        "poster": "/work/undergraduate/saksham/motion-01.jpg",
+        "type": "video",
+        "title": "Explore route and bus details",
+        "width": 350,
+        "height": 650,
+        "backdrop": "#242424"
+      },
+      {
+        "src": "/work/undergraduate/saksham/motion-02.mp4",
+        "poster": "/work/undergraduate/saksham/motion-02.jpg",
+        "type": "video",
+        "title": "Read accessibility reports",
+        "width": 350,
+        "height": 650,
+        "backdrop": "#242424"
+      },
+      {
+        "src": "/work/undergraduate/saksham/motion-03.mp4",
+        "poster": "/work/undergraduate/saksham/motion-03.jpg",
+        "type": "video",
+        "title": "Report an accessibility problem",
+        "width": 350,
+        "height": 650,
+        "backdrop": "#222222"
+      },
+      {
+        "src": "/work/undergraduate/saksham/motion-04.mp4",
+        "poster": "/work/undergraduate/saksham/motion-04.jpg",
+        "type": "video",
+        "title": "Prepare a trip checklist",
+        "width": 350,
+        "height": 650,
+        "backdrop": "#252525"
+      }
+    ],
+    "description": "I explored how accessibility could become part of the core bus journey. The experience helps wheelchair users compare routes, check vehicle and stop conditions, follow trips, access tickets and assistance, and report unavailable ramps, lifts, or services.",
+    "galleryDescription": "Interface explorations for planning an accessible bus journey, comparing routes, checking vehicle accessibility, and following a trip in progress."
+  },
+  {
+    "slug": "wikipedia",
+    "title": "Wikipedia Mobile UX Exploration",
+    "context": "[[An open-source design initiative]] exploring a more connected Wikipedia experience on mobile.",
+    "source": "https://app.pitch.com/app/public/player/7831ce87-d8d9-4781-b91c-aa22830316a9",
+    "items": [
+      {
+        "src": "/work/undergraduate/wikipedia/002.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Discovery home",
+        "width": 830,
+        "height": 1456,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/wikipedia/011.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Research sessions",
+        "width": 500,
+        "height": 977,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/wikipedia/012.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Article hierarchy",
+        "width": 500,
+        "height": 977,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/wikipedia/013.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Saved lists",
+        "width": 500,
+        "height": 977,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/wikipedia/017.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Saved notes and references",
+        "width": 500,
+        "height": 977,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/wikipedia/018.avif",
+        "poster": null,
+        "type": "image",
+        "title": "News and discovery",
+        "width": 500,
+        "height": 977,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/wikipedia/019.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Search results",
+        "width": 500,
+        "height": 977,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/wikipedia/motion-02.mp4",
+        "poster": "/work/undergraduate/wikipedia/motion-02.jpg",
+        "type": "video",
+        "title": "Discover and resume reading",
+        "width": 350,
+        "height": 650,
+        "backdrop": "#fcfcfc"
+      },
+      {
+        "src": "/work/undergraduate/wikipedia/motion-03.mp4",
+        "poster": "/work/undergraduate/wikipedia/motion-03.jpg",
+        "type": "video",
+        "title": "Explore topics",
+        "width": 350,
+        "height": 650,
+        "backdrop": "#fcfcfc"
+      },
+      {
+        "src": "/work/undergraduate/wikipedia/motion-04.mp4",
+        "poster": "/work/undergraduate/wikipedia/motion-04.jpg",
+        "type": "video",
+        "title": "Browse discovery options",
+        "width": 350,
+        "height": 650,
+        "backdrop": "#fcfcfc"
+      },
+      {
+        "src": "/work/undergraduate/wikipedia/motion-06.mp4",
+        "poster": "/work/undergraduate/wikipedia/motion-06.jpg",
+        "type": "video",
+        "title": "Navigate articles and reading tools",
+        "width": 350,
+        "height": 650,
+        "backdrop": "#fcfcfc"
+      },
+      {
+        "src": "/work/undergraduate/wikipedia/motion-08.mp4",
+        "poster": "/work/undergraduate/wikipedia/motion-08.jpg",
+        "type": "video",
+        "title": "Preview linked information",
+        "width": 368,
+        "height": 720,
+        "backdrop": "#fcfcfc"
+      }
+    ],
+    "description": "I explored how Wikipedia on mobile could support discovery and sustained learning beyond one article at a time. Research sessions, link previews, topic hierarchy, saved collections, and notes help readers follow ideas, preserve context, and return later.",
+    "galleryDescription": "Selected screens for discovering articles, organizing research sessions, navigating topic hierarchies, and returning to saved knowledge."
+  },
+  {
+    "slug": "biote",
+    "title": "Personal Health From Genetic Data",
+    "context": "[[A product design exercise for Sprinklr]] in 2022, which led to a product design internship.",
+    "source": "https://app.pitch.com/app/public/player/7c51afbd-226d-45fc-9d74-7ab37d3c3464",
+    "items": [
+      {
+        "src": "/work/undergraduate/biote/002.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Health dashboard",
+        "width": 830,
+        "height": 1456,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/steps-breakdown.png",
+        "poster": null,
+        "type": "image",
+        "title": "Monthly steps breakdown",
+        "width": 452,
+        "height": 883,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/reports-overview.png",
+        "poster": null,
+        "type": "image",
+        "title": "Reports overview",
+        "width": 452,
+        "height": 883,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/031.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Account login",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/035.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Welcome",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/036.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Finding existing reports",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/037.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Health tracking walkthrough",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/038.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Account setup",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/039.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Health metrics walkthrough",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/040.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Preparing a health plan",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/041.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Understanding the report",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/042.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Connect a smartwatch",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/043.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Report details and consultation",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/044.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Pairing a watch",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/045.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Report arrival",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      },
+      {
+        "src": "/work/undergraduate/biote/046.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Testing-kit walkthrough",
+        "width": 714,
+        "height": 1395,
+        "raw": false
+      }
+    ],
+    "description": "I designed a health experience that turns genetic test results into guidance people can understand and act on. It connects onboarding, report status, risk summaries, a personalised health plan, and smartwatch activity in one clear everyday experience.",
+    "galleryDescription": "A visual walkthrough of the core product experience, from onboarding and report discovery to health insights, planning, and smartwatch pairing."
+  },
+  {
+    "slug": "miscellaneous",
+    "title": "Miscellaneous Design Work",
+    "context": "A mixed archive of product, web, brand, and campaign work.",
+    "source": "https://stranges-ultra-awesome-project.webflow.io/about",
+    "items": [
+      {
+        "src": "/work/undergraduate/miscellaneous/olive-website.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Olive coliving website and branding",
+        "width": 1280,
+        "height": 6981,
+        "raw": true,
+        "shot": "scroll"
+      },
+      {
+        "src": "/work/undergraduate/miscellaneous/creative-01.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Anweshan ecommerce",
+        "width": 664,
+        "height": 498,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/miscellaneous/creative-04.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Evy Energy campaign",
+        "width": 1315,
+        "height": 489,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/miscellaneous/creative-06.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Ideas Forum merchandise",
+        "width": 664,
+        "height": 498,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/miscellaneous/creative-07.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Roff website",
+        "width": 664,
+        "height": 498,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/miscellaneous/creative-09.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Anweshan product collection",
+        "width": 664,
+        "height": 498,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/miscellaneous/udgam-disrupt.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Udgam Disrupt winners announcement",
+        "width": 1148,
+        "height": 1148,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/miscellaneous/udgam-workshop.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Udgam stock-market workshop campaign",
+        "width": 1148,
+        "height": 1148,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/miscellaneous/creative-11.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Udgam lecture series",
+        "width": 1329,
+        "height": 494,
+        "raw": true
+      },
+      {
+        "src": "/work/undergraduate/miscellaneous/creative-12.avif",
+        "poster": null,
+        "type": "image",
+        "title": "Udgam campaign",
+        "width": 1329,
+        "height": 494,
+        "raw": true
+      }
+    ],
+    "description": "A collection of smaller projects and visual experiments across product interfaces, websites, identity, merchandise, and campaigns.",
+    "galleryDescription": "Selected product, web, brand, and campaign work collected in one place."
+  }
+]

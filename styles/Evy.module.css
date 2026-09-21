@@ -1,0 +1,284 @@
+.page, .dialog { --work-type: #f3f3f3; --work-body: #bfbfbf; --work-muted: #808080; --work-accent: #ff3c00; }
+.page { min-width: 0; }
+
+/* The footer spans the text column, not the full page width, so /next lands
+   at the end of the writing rather than out in the sidenote margin. The cap
+   is expressed at the body's own font size, because ch resolves against the
+   element's font and the footer's is smaller. */
+/* The footer spans the text column, not the full page width, so /next lands
+   at the end of the writing rather than out in the sidenote margin. The ch
+   unit resolves against this element's own font, so the body's font and size
+   are restated here to get the same 68ch measure. */
+.footer { max-width: 68ch; padding: 13px 0 26px;
+  font-family: var(--font-ibmplexsans); font-size: 15px; }
+.back { display: inline-block; margin-bottom: 39px; }
+
+.intro { margin-bottom: 96px; }
+.eyebrow { margin: 0 0 10px; }
+.title { margin: 0 0 10px; letter-spacing: 0; overflow-wrap: anywhere; }
+.lede { max-width: 68ch; color: #bfbfbf; }
+
+/* Each beat of the narrative. The rhythm is generous because this page is
+   read start to finish rather than scanned. */
+.section { margin: 0 0 72px; scroll-margin-top: 26px; }
+/* A section with no heading continues the one above it, so it sits closer
+   rather than leaving a gap where a title would be. */
+.sectionContinued { margin-top: -46px; }
+.heading { margin: 0 0 13px; letter-spacing: 0; }
+.bodyWithNote { position: relative; }
+.referenceMarker { margin-left: 3px; color: #bfbfbf; font-family: var(--font-ibmplexsans); font-size: 9px; font-weight: 500; line-height: 1; vertical-align: super; }
+.alignedSidenote { top: 0; }
+.sidenoteMarker { margin-right: 4px; color: #808080; font-family: var(--font-ibmplexsans); font-size: 9px; font-weight: 500; line-height: 1; vertical-align: super; }
+.body { max-width: 68ch; margin: 0 0 13px; color: #bfbfbf; font-size: 15px; line-height: 26px; }
+.body:last-child { margin-bottom: 0; }
+
+.stats { max-width: 68ch; margin: 0 0 13px; padding: 0; list-style: none; }
+.stat { position: relative; margin: 0 0 6px; padding-left: 18px; color: #bfbfbf; font-family: var(--font-ibmplexsans); font-size: 15px; line-height: 26px; }
+.stat::before { content: ""; position: absolute; top: 12px; left: 0; width: 6px; height: 1px; background: #5a5a5a; }
+
+/* A gallery stop: the stacked tile from the other work page, with its
+   label beside it. The wrapper is a container so the tile's corner radius
+   can respond to its own width. */
+/* The whole row is the link, so the title and caption open the gallery too.
+   The visible effects stay on the stack and the title. */
+.stopWrap { display: grid; grid-template-columns: 118px minmax(0, 1fr); align-items: start; column-gap: 28px; margin: 42px 0 0;
+  color: inherit; text-decoration: none; cursor: pointer; }
+.stopWrap:focus-visible { outline: 2px solid var(--work-accent); outline-offset: 6px; border-radius: 6px; }
+.stopWrap:hover { color: inherit; }
+/* Padding rather than margin: the stack is often the last child, so a
+   bottom margin would collapse through the section instead of showing. */
+.section:has(.stopWrap) { padding-bottom: 38px; }
+.stopWrap > .tile { container-type: inline-size; width: 118px; margin-top: 4px; }
+
+.tile { position: relative; display: block; box-sizing: border-box; appearance: none; width: 100%; min-width: 0; aspect-ratio: 1; overflow: visible; border: 0; padding: 0; background: transparent; box-shadow: none; cursor: pointer; }
+.tile:disabled { cursor: default; }
+.tile:focus-visible { outline: 2px solid var(--work-accent); outline-offset: 3px; }
+
+.moreTile::before, .moreTile::after { content: ""; position: absolute; inset: 3px; border-radius: clamp(9px, 20.5cqw, 26px); pointer-events: none; transform-origin: 18% 88%; transition: transform 320ms cubic-bezier(.2, .72, .2, 1), box-shadow 220ms ease; }
+.moreTile::before { z-index: 0; background: linear-gradient(145deg, #292929, #181818); box-shadow: 0 5px 10px #00000024; transform: translate(12px, -4px) rotate(10deg) scale(.91); }
+.moreTile::after { z-index: 1; background: linear-gradient(145deg, #343434, #202020); box-shadow: 0 4px 9px #00000029; transform: translate(6px, -2px) rotate(5deg) scale(.96); }
+.stopWrap:hover .moreTile::before { transform: translate(15px, -5px) rotate(14deg) scale(.91); }
+.stopWrap:hover .moreTile::after { transform: translate(8px, -3px) rotate(7deg) scale(.96); }
+.stopWrap:hover .moreFront { box-shadow: inset 0 -1px 0 #0000003d, 0 2px 0 #090909, 0 7px 13px #00000029; }
+
+.moreFront { position: absolute; z-index: 2; inset: 0; overflow: hidden; box-sizing: border-box; border: 0; border-radius: clamp(10px, 22.7cqw, 28px); background: linear-gradient(145deg, #2c2c2c, #1d1d1d); box-shadow: inset 0 -1px 0 #0000003d, 0 1px 0 #0a0a0a, 0 5px 10px #0000001c; }
+.moreFront::after { content: ""; position: absolute; z-index: 1; right: 0; bottom: 0; left: 0; height: 88%; background: linear-gradient(to bottom, transparent 0%, #1d1d1d08 22%, #1d1d1d1f 44%, #1d1d1d4d 64%, #1d1d1d99 84%, #1d1d1d 100%); pointer-events: none; }
+.moreFront img { position: absolute; display: block; border-radius: 9px; object-fit: contain; object-position: center; }
+.shotPreview { top: 12%; left: 12%; width: 76%; height: 76%; border-radius: 5px; }
+.mobilePreview { top: 12%; left: 10%; width: 80%; height: 76%; border-radius: 9px; object-position: center top; }
+
+.morePill { position: absolute; z-index: 3; right: 8px; bottom: 8px; display: inline-flex; align-items: center; justify-content: center; width: max-content; box-sizing: border-box; padding: 5px 7px; border-radius: 999px; background: #101010d9; color: var(--work-type); font-family: var(--font-supply); font-size: 11px; line-height: 1; letter-spacing: 0; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* Placeholder until the exported screens land. */
+.stopPending { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, #232323, #232323 6px, #1c1c1c 6px, #1c1c1c 12px); }
+
+.stopText { display: block; min-width: 0; padding-top: 18px; }
+.stopTitle { display: block; margin-bottom: 4px; color: #f3f3f3; font-family: var(--font-ibmplexsans); font-size: 16px; line-height: 24px; transition: color 150ms ease; }
+.stopWrap:hover .stopTitle { color: #c2aaa3; }
+.stopCaption { display: block; max-width: 52ch; color: #6a6a6a; font-family: var(--font-ibmplexsans); font-size: 13px; line-height: 20px; }
+
+/* Full-screen gallery, matching the pattern on the other work page. */
+.dialog { width: 100vw; max-width: 100vw; height: 100vh; max-height: 100vh; margin: 0; padding: 0; border: 0; background: #141414; color: var(--work-type); overflow-y: auto; }
+.dialog::backdrop { background: #141414; }
+.dialogInner { box-sizing: border-box; width: 100%; max-width: 1400px; margin: 0 auto; padding: 42px 48px 96px; }
+
+.toolbar { position: relative; z-index: 2; padding: 0 0 6px; }
+.backButton { display: inline-flex; align-items: center; margin-bottom: 26px; padding: 0; border: 0; background: none; color: var(--work-muted); font-family: var(--font-supply); font-size: 13px; line-height: 22px; letter-spacing: 0.3px; text-transform: uppercase; cursor: pointer; transition: color 150ms ease; }
+/* Matches the orange link hover used everywhere else on the site. */
+.backButton:hover { color: var(--work-accent); }
+.backButton:focus-visible { outline: 2px solid var(--work-accent); outline-offset: 3px; border-radius: 4px; }
+.galleryHeading { min-width: 0; max-width: 648px; margin-bottom: 34px; }
+.galleryTitle { margin: 0 0 8px; color: var(--work-type); font-family: var(--font-hatton); font-size: 25.5px; font-weight: 300; line-height: 34px; letter-spacing: 0; }
+.dialogCaption { max-width: 68ch; margin: 0 0 34px; color: #6a6a6a; font-family: var(--font-ibmplexsans); font-size: 14px; line-height: 22px; }
+
+/* A 12-column bed. Each unit claims a span depending on how many screens
+   it holds, so a flow of three reads as one group rather than three cards. */
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 26px 22px; align-items: start; }
+.card { display: grid; grid-column: span var(--unit-span, 6); grid-template-rows: auto auto; gap: 11px; min-width: 0; margin: 0; align-content: start; }
+
+/* Screens sit side by side inside one panel. */
+.cardMedia { container-type: size; display: flex; align-items: center; justify-content: center; gap: clamp(14px, 2vw, 34px); width: 100%; height: clamp(300px, 32vw, 460px); box-sizing: border-box; padding: 26px; overflow: hidden; border-radius: 18px; background: #1a1a1a; }
+/* The pan track only does work on a phone; elsewhere it passes its children
+   straight through to the panel's own flex row. */
+.panTrack { display: contents; }
+
+.cardAsset { position: relative; display: flex; flex: 0 1 auto; align-items: center; justify-content: center; height: 100%; min-width: 0; }
+/* Each screen fades in as it decodes; until then a shimmer holds its place,
+   matching the loading treatment on the other work page. */
+.cardAsset.isPending { border-radius: 8%; background: linear-gradient(100deg, #151515 30%, #1f1f1f 50%, #151515 70%) #151515; background-size: 240% 100%; animation: shimmer 1.4s ease-in-out infinite; }
+.cardAsset.isPending img { opacity: 0; }
+.cardAsset.isLoaded img { opacity: 1; transition: opacity 320ms ease; }
+@keyframes shimmer {
+  0% { background-position: 140% 0; }
+  100% { background-position: -40% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cardAsset.isPending { animation: none; }
+  .cardAsset.isLoaded img { transition: none; }
+}
+
+.cardMedia img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.topRounded,
+.topRounded img { border-radius: 12px 12px 0 0; }
+.topRounded { overflow: hidden; }
+.phoneFrame { flex: 0 0 auto; width: auto; height: 100%; }
+.phoneFrame img { --shell-width: 1.016cqh; --shell-radius: 4.71cqh; }
+.phoneFrame img { display: block; width: auto; height: 100%; max-width: none; max-height: none; box-sizing: content-box; border: var(--shell-width) solid #0a0a0a; border-radius: var(--shell-radius); object-fit: contain; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.34); }
+
+/* Four screens in one row need a tighter gap and less padding so each one
+   stays legible rather than shrinking to fit the panel. */
+/* Desktop captures are landscape, so their panel is short and wide rather
+   than the tall one that suits phone screens. */
+/* Zemetric only: capture plus its chrome bar, stacked. The bar sizes from
+   the capture's own width so it scales with the screen. */
+/* The shell's width is set per capture in GalleryImage, from the panel's
+   size and the capture's ratio, so the bar and the capture below it are
+   always exactly the same width. It is computed there rather than in CSS
+   because whether width or height constrains a capture depends on the unit,
+   and an inline-size container with auto width collapses to zero. */
+.chromeShell { display: inline-flex; flex-direction: column; justify-content: flex-end;
+  align-self: flex-end; width: auto; height: auto; max-height: 100%;
+  /* Slim and proportional: --chrome-h is set per capture from its measured
+     width (see GalleryImage), because neither a container query nor the
+     capture's ratio can predict whether width or height constrains it. */
+  --chrome-h: 11px; --chrome-r: calc(var(--chrome-h) * 0.3); }
+.assetCentered { align-self: center; }
+.assetCropBottom { overflow: hidden; }
+/* Both of the shell's dimensions are computed from the panel, so the capture
+   fills what the bar leaves and keeps its own proportions. */
+.chromeShell > img { display: block; flex: 0 0 auto; width: 100%; height: auto;
+  max-width: none; max-height: none; min-height: 0; object-fit: contain; }
+.chromeShell img { border-radius: 0 !important; }
+
+/* A browser chrome bar above each desktop capture: traffic lights and back
+   and forward arrows, drawn in CSS. The bar carries the rounded top corners
+   so the capture below it sits square. */
+.chromeBar { position: relative; display: block; flex: 0 0 auto; width: 100%;
+  height: var(--chrome-h, 12px);
+  background: #2e2e2e; border-radius: var(--chrome-r, 4px) var(--chrome-r, 4px) 0 0; }
+.chromeBar::before { content: ""; position: absolute; top: 50%; left: calc(var(--chrome-h, 26px) * 0.46);
+  width: calc(var(--chrome-h, 26px) * 0.23); height: calc(var(--chrome-h, 26px) * 0.23);
+  border-radius: 50%; transform: translateY(-50%);
+  background: #ff5f57;
+  box-shadow: calc(var(--chrome-h, 26px) * 0.38) 0 0 #febc2e, calc(var(--chrome-h, 26px) * 0.76) 0 0 #28c840; }
+/* The back and forward arrows, as Material Symbols chevrons. They scale with
+   the bar and sit just right of the traffic lights. */
+.chromeNav { position: absolute; top: 50%; left: calc(var(--chrome-h, 26px) * 1.75);
+  display: flex; align-items: center; gap: calc(var(--chrome-h, 26px) * 0.28);
+  transform: translateY(-50%); }
+.chromeIcon { display: block; width: calc(var(--chrome-h, 26px) * 0.62);
+  height: calc(var(--chrome-h, 26px) * 0.62); color: #9a9a9a; }
+.chromeIconNext { color: #6f6f6f; }
+
+.cardWide .cardMedia { height: auto; aspect-ratio: 634 / 363; align-items: flex-end; padding: 22px 44px 0; overflow: hidden; }
+.cardWide .cardAsset { width: 100%; height: 100%; align-items: flex-end; }
+.cardWide .cardAsset.chromeShell { width: auto; }
+.cardWide .cardMedia img { width: auto; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; object-position: center bottom; }
+/* The shell is sized per capture (see GalleryImage), so the capture fills
+   the space the bar leaves inside it and keeps its own proportions. */
+.cardWide .cardMedia .chromeShell > img { width: 100%; height: auto;
+  max-width: none; max-height: none; min-height: 0; object-fit: contain; }
+
+/* ChargeConnect uses the Sites capture as its desktop viewport. This keeps
+   every card aligned and crops longer captures from the bottom. The logs
+   export is unusually shallow, so it opts out and remains fully visible. */
+.chargeconnectHeading { margin-bottom: 18px; }
+.chargeconnectGrid .cardMedia {
+  height: auto;
+  aspect-ratio: 2 / 1;
+  align-items: flex-end;
+  padding: 12px 44px 0;
+  overflow: hidden;
+}
+/* Captures here run from 0.84 to 2.45, so forcing them all into the sites
+   screen's ratio cropped the wide ones down their sides. Instead the shell
+   is sized per capture in GalleryImage, to a common stack height taken from
+   that same sites screen: units line up down the page, and each screen
+   keeps its own shape inside its panel. */
+.chargeconnectGrid .cardAsset.chromeShell { height: auto; }
+.chargeconnectGrid .chromeShell > img {
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.cardDense .cardMedia { gap: clamp(8px, 1.2vw, 20px); padding: 20px; }
+
+/* A very tall capture fills the panel width and pans from its top to its
+   bottom, so the whole itinerary is readable without shrinking it. */
+.cardTall .cardMedia { padding: 26px; overflow: hidden; }
+.cardTall.cardDesktopPan .cardMedia { height: auto; aspect-ratio: 634 / 363; align-items: flex-start; padding: 0 44px 0; }
+/* The capture keeps a phone-sized column inside the panel and pans within
+   it, rather than bleeding to the panel edges. */
+.cardTall .cardAsset { display: block; flex: 0 0 auto; width: auto; aspect-ratio: var(--pan-ratio, 375 / 812); height: 100%; overflow: hidden; border-radius: 8px; container-type: size; }
+.cardTall.cardDesktopPan .cardAsset { width: 100%; height: 100%; max-height: none; aspect-ratio: auto; overflow: hidden; border-radius: 0; --scroll-inset: 22px; }
+.cardTall.cardDesktopPan .cardMedia img { animation: desktopScroll 20s linear infinite; }
+@keyframes desktopScroll {
+  0%, 8% { transform: translateY(var(--scroll-inset, 22px)); }
+  88%, 100% { transform: translateY(calc(-100% + 100cqh)); }
+}
+.cardTall .cardMedia img { display: block; width: 100%; height: auto; max-width: none; max-height: none; object-fit: fill; will-change: transform; animation: planScroll 22s linear infinite; }
+@keyframes planScroll {
+  0%, 8% { transform: translateY(0); }
+  88%, 100% { transform: translateY(calc(-100% + 100cqh)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cardTall .cardMedia img { animation: none; }
+}
+
+.galleryDescription { margin: 0; color: var(--work-body); font-family: var(--font-ibmplexsans); font-size: 15px; line-height: 24px; letter-spacing: 0; }
+.cardCaption { min-width: 0; padding: 0 12px; color: var(--work-body); font-family: var(--font-ibmplexsans); font-size: 13px; line-height: 20px; opacity: 0.62; }
+
+@media (max-width: 1280px) {
+  .page { max-width: 100%; }
+}
+
+@media (max-width: 768px) {
+  /* The global .column.middlepost drops its padding here, so the page
+     supplies its own gutter, as the other work page does. */
+  .page { padding: 26px; }
+  .title { font-size: 36px; line-height: 44px; }
+  .back { margin-bottom: 32px; }
+  .intro { margin-bottom: 64px; }
+  .section { margin-bottom: 52px; }
+  .stopWrap { grid-template-columns: 118px minmax(0, 1fr); column-gap: 20px; margin: 32px 0 0; }
+  .section:has(.stopWrap) { padding-bottom: 28px; }
+  .dialogInner { padding: 26px 26px 72px; }
+  .galleryHeading { margin-bottom: 26px; }
+  .galleryTitle { font-size: 23px; line-height: 31px; }
+  .galleryDescription { font-size: 14px; line-height: 22px; }
+  .grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  /* A unit of three or four cannot fit across a phone, so the row keeps two
+     screens in view and pans sideways through the rest. Nothing is cropped
+     and no screen has to shrink. */
+  .cardPan .cardMedia { justify-content: flex-start; overflow: hidden; gap: 10px; height: 354px; }
+  .cardPan .phoneFrame { flex: 0 0 auto; height: 100%; width: auto; }
+  .cardPan .panTrack { display: flex !important; align-items: center; gap: inherit; flex: 0 0 auto; height: 100%;
+    animation: panRow 18s ease-in-out infinite alternate; }
+  @keyframes panRow {
+    0%, 14% { transform: translateX(0); }
+    86%, 100% { transform: translateX(calc(-100% + 100cqw)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cardPan .panTrack { animation: none; }
+  }
+
+  .card { grid-column: 1 / -1; }
+  .cardMedia { height: auto; aspect-ratio: 1 / 1.05; gap: 10px; padding: 16px; border-radius: 16px; }
+
+  /* A capture panel keeps desktop's 44px side padding otherwise, which on a
+     phone costs a quarter of the panel width. Tighten the gutters and give
+     the panel a shorter box so the screen fills it. */
+  /* Desktop's 44px side padding costs a quarter of a phone-width panel, and
+     the 634/363 box leaves a dead band above the screen. Tighter gutters and
+     a box shaped to the captures let the screen fill the panel. The panel
+     keeps a definite height: GalleryImage sizes each shell from it. */
+  .cardWide .cardMedia,
+  .chargeconnectGrid .cardMedia {
+    aspect-ratio: 634 / 372;
+    align-items: center;
+    padding: 14px;
+  }
+}

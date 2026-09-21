@@ -1,0 +1,341 @@
+{
+  "slug": "zemetric",
+  "title": "Building Zemetric's product suite",
+  "dateLabel": "2024–2025",
+  "intro": "After Zemetric acquired Evy Energy for its software platform and access to India, I continued as product owner across design and engineering: adapting ChargeConnect for the US market and taking EnergyConnect and FleetConnect from 0→1 to customer pilots over eight months.",
+  "sections": [
+    {
+      "id": "chargeconnect",
+      "heading": "Adapting ChargeConnect for US operators",
+      "body": [
+        "ChargeConnect already managed chargers, sessions, payments, revenue, and customer support. The product now had to work for US operators with different payment flows, regulation, utility relationships, and much larger networks.",
+        "We rebuilt it on a modern design system, adapted the core workflows, and onboarded US operators including Electrada. Their operating requirements went directly into the roadmap and product releases."
+      ],
+      "gallery": "chargeconnect"
+    },
+    {
+      "id": "new-products",
+      "heading": "Building EnergyConnect and FleetConnect from 0→1",
+      "body": [
+        "Energy management was for charging operators serving commercial fleets, residential properties, and business sites. Each location had a fixed power limit; crossing it increased costs and reduced charging margins. I led EnergyConnect from 0→1, defining site limits, load schedules, charger groups, and intelligent power allocation.",
+        "FleetConnect addressed a different job: keeping vehicles ready for their next route. I worked with fleet teams to turn vehicle telematics, departure schedules, charger availability, and charging priorities into one operating workflow."
+      ],
+      "galleries": [
+        "energyconnect",
+        "fleetconnect"
+      ]
+    },
+    {
+      "id": "after",
+      "heading": "EnergyConnect became part of Blink's energy strategy",
+      "body": [
+        "Blink Charging acquired Zemetric in July 2025. It later launched EnergyConnect across 13 Blink-owned DC fast-charging sites in Florida, with phased expansion across the US, UK, and Belgium. Blink described the product as a key part of its long-term strategy to connect, monitor, and manage distributed energy assets across its network."
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "section": "chargeconnect",
+      "marker": 1,
+      "paragraph": 1,
+      "text": "Electrada's fleet program covered 25 sites and 150+ installed high-power DC chargers, substantially larger than Evy's earlier operator base."
+    },
+    {
+      "section": "new-products",
+      "marker": 2,
+      "paragraph": 1,
+      "text": "EnergyConnect completed 3 customer pilots, including Electrada. FleetConnect reached a successful customer pilot."
+    },
+    {
+      "section": "after",
+      "marker": 3,
+      "paragraph": 0,
+      "text": "Blink Charging (Nasdaq: BLNK) is a publicly listed global EV charging equipment and services company. ",
+      "link": {
+        "href": "https://ir.blinkcharging.com/news-events/press-releases/detail/2627/blink-launches-energyconnect-helping-ev-charging-sites",
+        "label": "EnergyConnect launch announcement"
+      },
+      "after": "."
+    }
+  ],
+  "galleries": {
+    "chargeconnect": {
+      "title": "ChargeConnect",
+      "description": "Adapted Evy's platform for larger US networks with scalable operations, flexible tariffs, and faster fault diagnosis.",
+      "units": [
+        {
+          "caption": "Gave CPOs one live view of the network, directing attention to the sites, chargers, and faults affecting service.",
+          "items": [
+            {
+              "src": "/work/zemetric/chargeconnect/cc01-dashboard.avif",
+              "title": "Network overview",
+              "width": 2000,
+              "height": 1131
+            }
+          ]
+        },
+        {
+          "caption": "Made multi-site operations manageable by keeping ownership, access, and reporting organized around each location.",
+          "items": [
+            {
+              "src": "/work/zemetric/chargeconnect/cc02-sites.avif",
+              "title": "Sites",
+              "width": 1903,
+              "height": 967
+            }
+          ]
+        },
+        {
+          "caption": "Created a reliable asset record from commissioning to redeployment, reducing blind spots as charger fleets grew.",
+          "items": [
+            {
+              "src": "/work/zemetric/chargeconnect/cc03-chargers.avif",
+              "title": "Chargers",
+              "width": 1763,
+              "height": 899
+            }
+          ]
+        },
+        {
+          "caption": "Redesigned tariff plans for US clients, supporting flexible flat and dynamic pricing across connectors without configuring each one separately.",
+          "items": [
+            {
+              "src": "/work/zemetric/chargeconnect/cc04-tariffs.avif",
+              "title": "Tariff plans",
+              "width": 1755,
+              "height": 894
+            }
+          ]
+        },
+        {
+          "caption": "Helped operations teams monitor every charging session, including energy delivered, failures, and revenue.",
+          "items": [
+            {
+              "src": "/work/zemetric/chargeconnect/cc05-sessions.avif",
+              "title": "Sessions",
+              "width": 2000,
+              "height": 1245
+            }
+          ]
+        },
+        {
+          "caption": "One fault queue combined disconnections, charger errors, failed sessions, and authorization failures for faster support triage.",
+          "items": [
+            {
+              "src": "/work/zemetric/chargeconnect/cc06-faults.avif",
+              "title": "Charger faults",
+              "width": 2000,
+              "height": 1147
+            }
+          ]
+        },
+        {
+          "caption": "Created a troubleshooting page that helped operations teams understand asset issues and act on likely causes.",
+          "items": [
+            {
+              "src": "/work/zemetric/chargeconnect/cc07-fault-detail.avif",
+              "title": "Fault details",
+              "displayScale": 0.86,
+              "cropBottom": 0.08,
+              "width": 2000,
+              "height": 1227
+            }
+          ]
+        },
+        {
+          "caption": "Streamed charger logs directly from hardware and intelligently parsed them so technicians could understand and diagnose issues faster.",
+          "items": [
+            {
+              "src": "/work/zemetric/chargeconnect/cc08-logs.avif",
+              "title": "Charger logs",
+              "fit": "contain",
+              "width": 2000,
+              "height": 817
+            }
+          ]
+        },
+        {
+          "caption": "Made reliability measurable by separating true downtime from exclusions and exposing the assets lowering network uptime.",
+          "items": [
+            {
+              "src": "/work/zemetric/chargeconnect/cc09-uptime.avif",
+              "title": "Uptime",
+              "width": 1459,
+              "height": 1063
+            }
+          ]
+        },
+        {
+          "caption": "Connected utilization to energy and revenue, helping CPOs decide where to fix performance, expand capacity, or reconsider an asset.",
+          "items": [
+            {
+              "src": "/work/zemetric/chargeconnect/cc10-utilization-revenue.avif",
+              "title": "Utilization and revenue",
+              "width": 1449,
+              "height": 963
+            }
+          ]
+        }
+      ]
+    },
+    "energyconnect": {
+      "title": "EnergyConnect",
+      "description": "Built from 0→1 to help CPOs allocate charging intelligently without breaching site power limits.",
+      "units": [
+        {
+          "caption": "Gave energy managers early visibility into sites nearing their power limits before constraints affected charging operations.",
+          "items": [
+            {
+              "src": "/work/zemetric/energyconnect/ec01-sites.avif",
+              "title": "Site demand",
+              "width": 1905,
+              "height": 1031
+            }
+          ]
+        },
+        {
+          "caption": "Connected live demand to site limits so operators could catch overdraw risk before penalties or breaker trips.",
+          "items": [
+            {
+              "src": "/work/zemetric/energyconnect/ec02-site-overview.avif",
+              "title": "Live site load",
+              "width": 1504,
+              "height": 865
+            }
+          ]
+        },
+        {
+          "caption": "Revealed where shared capacity was being consumed across charger groups, making demand peaks explainable instead of opaque.",
+          "items": [
+            {
+              "src": "/work/zemetric/energyconnect/ec03-trends-groups.avif",
+              "title": "Group demand",
+              "width": 1898,
+              "height": 987
+            }
+          ]
+        },
+        {
+          "caption": "Pinned demand to individual chargers, helping teams isolate abnormal load and rebalance available capacity.",
+          "items": [
+            {
+              "src": "/work/zemetric/energyconnect/ec04-trends-charger.avif",
+              "title": "Charger demand",
+              "width": 1895,
+              "height": 991
+            }
+          ]
+        },
+        {
+          "caption": "Used live meter data to adjust charging against actual building demand, protecting capacity shared with other electrical loads.",
+          "items": [
+            {
+              "src": "/work/zemetric/energyconnect/ec12-measurement-device.avif",
+              "title": "Site meter",
+              "width": 1895,
+              "height": 1015
+            }
+          ]
+        },
+        {
+          "caption": "Translated the site's physical grid setup into enforceable software limits, keeping load decisions grounded in real capacity.",
+          "items": [
+            {
+              "src": "/work/zemetric/energyconnect/ec07-electrical-config.avif",
+              "title": "Electrical setup",
+              "width": 1903,
+              "height": 1027
+            }
+          ]
+        },
+        {
+          "caption": "Mapping each charger to its electrical phase let the system distribute demand without overloading one phase.",
+          "items": [
+            {
+              "src": "/work/zemetric/energyconnect/ec11-phase-rotation.avif",
+              "title": "Phase rotation",
+              "width": 1888,
+              "height": 1025
+            }
+          ]
+        },
+        {
+          "caption": "Let clients choose equal or arrival-based priority, preserve headroom, and keep idle connectors ready to start sessions.",
+          "items": [
+            {
+              "src": "/work/zemetric/energyconnect/ec08-load-strategy.avif",
+              "title": "Load strategy",
+              "width": 1896,
+              "height": 1021
+            }
+          ]
+        },
+        {
+          "caption": "Load groups reserved portions of site capacity for selected chargers while keeping the overall site limit enforced.",
+          "items": [
+            {
+              "src": "/work/zemetric/energyconnect/ec09-load-groups.avif",
+              "title": "Load groups",
+              "width": 1891,
+              "height": 1023
+            }
+          ]
+        },
+        {
+          "caption": "Recurring limits reduced charging during grid-constrained or peak-cost hours and restored capacity automatically afterward.",
+          "items": [
+            {
+              "src": "/work/zemetric/energyconnect/ec10-recurring-load.avif",
+              "title": "Recurring schedules",
+              "width": 1891,
+              "height": 1018
+            }
+          ]
+        },
+        {
+          "caption": "Made every power command traceable from request to charger response, so control failures could be found and verified.",
+          "items": [
+            {
+              "src": "/work/zemetric/energyconnect/ec13-profiles-table.avif",
+              "title": "Charging profiles",
+              "width": 1900,
+              "height": 1030
+            }
+          ]
+        }
+      ]
+    },
+    "fleetconnect": {
+      "title": "FleetConnect",
+      "description": "Built from 0→1 to help fleet operators prioritize charging and keep vehicles ready for departure.",
+      "units": [
+        {
+          "caption": "Showed vehicle readiness at a glance through driver, charge, range, and priority.",
+          "items": [
+            {
+              "src": "/work/zemetric/fleetconnect/fc01-vehicles.avif",
+              "title": "Fleet status",
+              "displayScale": 0.86,
+              "centered": true,
+              "width": 2000,
+              "height": 1249
+            }
+          ]
+        },
+        {
+          "caption": "Combined trips, idle periods, and charging into one timeline to explain missed departures.",
+          "items": [
+            {
+              "src": "/work/zemetric/fleetconnect/fc02-vehicle-detail.avif",
+              "title": "Vehicle activity",
+              "displayScale": 0.86,
+              "centered": true,
+              "width": 2000,
+              "height": 1252
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

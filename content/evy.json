@@ -1,0 +1,573 @@
+{
+  "slug": "evy-energy",
+  "title": "Building Evy Energy",
+  "dateLabel": "2022–2024",
+  "intro": "Evy Energy was an EV charging software company that helped businesses connect and operate chargers, while giving drivers one app to find, access, and pay for charging. I co-founded it and led product design, product, and parts of engineering from 2022 until its acquisition by Zemetric in 2024.",
+  "sections": [
+    {
+      "id": "the-map",
+      "heading": "Starting with charger discovery",
+      "body": [
+        "Our first problem statement was simple: help EV drivers find a charger they could rely on. Existing listings were fragmented and often stale, so we assembled our own dataset from public information, driver groups, and site visits."
+      ],
+      "gallery": "discovery"
+    },
+    {
+      "id": "not-enough",
+      "body": [
+        "The directory answered where a charger was, not whether a driver could use it. Each network had its own driver app, payment system, and operating rules. Completing the journey required live availability, reservations, payments, and direct integrations with charging businesses."
+      ]
+    },
+    {
+      "id": "operator-side",
+      "heading": "What charging businesses needed",
+      "body": [
+        "As we tried to onboard charging businesses as partners, they pushed us to solve the problem underneath the partnership: downtime. An offline charger meant a failed session and lost revenue, yet faults were often discovered only after a driver complained.",
+        "We needed connected chargers for the driver app. Charging businesses needed software infrastructure to keep those chargers online. The same system could solve both needs."
+      ]
+    },
+    {
+      "id": "chargeconnect",
+      "heading": "Building ChargeConnect",
+      "body": [
+        "ChargeConnect was the charger-management platform. Its infrastructure layer exchanged data with connected chargers, while its web dashboard gave charging business teams one place to manage daily operations.",
+        "We built it closely with early charging businesses, turning recurring requirements into shared features instead of separate systems for every customer."
+      ],
+      "gallery": "chargeconnect"
+    },
+    {
+      "id": "hardware",
+      "body": [
+        "Chargers from different manufacturers did not always communicate or behave in the same way. We built the infrastructure layer of ChargeConnect to support multiple charger brands, so charging businesses could choose their hardware without changing their management platform."
+      ]
+    },
+    {
+      "id": "session",
+      "heading": "Enabled charging session booking on driver app",
+      "body": [
+        "Once charging businesses connected their chargers to ChargeConnect, the driver app no longer depended only on manually maintained listings. Drivers could now find a live charger, reserve it, start a session, pay, and track charging progress in one app."
+      ],
+      "gallery": "booking"
+    },
+    {
+      "id": "next-chapter",
+      "heading": "Choosing how to scale Evy",
+      "body": [
+        "By 2024, public charging was growing more slowly than we had expected, while white-label work was pulling us toward services. Scaling required larger customers and a stronger route through hardware, but becoming a hardware manufacturer was not what we wanted to build."
+      ],
+      "outro": [
+        "Joining Zemetric placed ChargeConnect inside an established US charging company with its own hardware, access to new markets, and use cases across fleets, grids, and energy management. Zemetric acquired Evy Energy in April 2024."
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "section": "the-map",
+      "marker": 1,
+      "paragraph": 0,
+      "text": "750+ verified chargers, with locations, status, connectors, and nearby amenities. The driver app is still listed on the ",
+      "link": {
+        "href": "https://play.google.com/store/apps/details?id=com.evy.android",
+        "label": "Play Store"
+      },
+      "after": "."
+    },
+    {
+      "section": "operator-side",
+      "marker": 2,
+      "paragraph": 0,
+      "text": "Below 10% utilization in much of the public network. For charging businesses, uptime and more completed sessions mattered more than another listing integration."
+    },
+    {
+      "section": "chargeconnect",
+      "marker": 3,
+      "paragraph": 0,
+      "text": "98% uptime SLA. The dashboard covered asset management, transactions, and customer support, including charger status, tariffs, revenue, payments, settlement, and tickets. This UI layer ran on top of the software infrastructure powering the charging stations."
+    },
+    {
+      "section": "hardware",
+      "marker": 4,
+      "paragraph": 0,
+      "text": "20+ manufacturers, 40+ charger models, 3 months. That work made ChargeConnect compatible with about 90% of the chargers in the market and let a charging business go live within a day."
+    },
+    {
+      "section": "next-chapter",
+      "marker": 5,
+      "paragraph": 0,
+      "text": "18+ charging businesses, 1,500+ charging assets, 4,000+ charging ports, and 17,000 drivers across India and South Asia at acquisition."
+    }
+  ],
+  "galleries": {
+    "discovery": {
+      "title": "Charger discovery",
+      "caption": "Helped drivers find compatible chargers, judge reliability, and plan longer EV journeys.",
+      "units": [
+        {
+          "caption": "Reduced first-use friction so drivers could start finding chargers quickly.",
+          "items": [
+            {
+              "src": "/work/evy/discovery/u0a-onboarding-1.avif",
+              "title": "Step 1",
+              "width": 375,
+              "height": 812
+            },
+            {
+              "src": "/work/evy/discovery/u0b-onboarding-2.avif",
+              "title": "Step 2",
+              "width": 375,
+              "height": 812
+            },
+            {
+              "src": "/work/evy/discovery/u0c-onboarding-3.avif",
+              "title": "Step 3",
+              "width": 375,
+              "height": 812
+            },
+            {
+              "src": "/work/evy/discovery/u0-login.avif",
+              "title": "Sign in",
+              "width": 563,
+              "height": 1218
+            }
+          ]
+        },
+        {
+          "caption": "Gave drivers clear starting points for nearby charging and planned journeys.",
+          "items": [
+            {
+              "src": "/work/evy/discovery/u1a-home.avif",
+              "title": "Discover",
+              "width": 375,
+              "height": 812
+            },
+            {
+              "src": "/work/evy/discovery/u1b-trips-home.avif",
+              "title": "Trips",
+              "width": 375,
+              "height": 812
+            }
+          ],
+          "full": true
+        },
+        {
+          "caption": "Helped drivers narrow stations by compatibility and availability instead of trial and error.",
+          "items": [
+            {
+              "src": "/work/evy/discovery/u2a2-map-callout.avif",
+              "title": "Station on the map",
+              "width": 375,
+              "height": 812
+            },
+            {
+              "src": "/work/evy/discovery/u2b-list.avif",
+              "title": "List",
+              "width": 375,
+              "height": 812
+            },
+            {
+              "src": "/work/evy/discovery/u2c-filters.avif",
+              "title": "Filters",
+              "width": 375,
+              "height": 812
+            }
+          ]
+        },
+        {
+          "caption": "Combined availability, connector fit, pricing, and amenities into one charging decision.",
+          "items": [
+            {
+              "src": "/work/evy/discovery/u3b-station-full.avif",
+              "title": "Station detail",
+              "width": 375,
+              "height": 2500
+            }
+          ]
+        },
+        {
+          "caption": "Captured structured reliability feedback so drivers could avoid poor charging experiences.",
+          "items": [
+            {
+              "src": "/work/evy/discovery/u5e-add-review.avif",
+              "title": "Add a review",
+              "width": 375,
+              "height": 812
+            }
+          ]
+        },
+        {
+          "caption": "Used saved vehicle specifications to surface compatible chargers and estimate trip needs.",
+          "items": [
+            {
+              "src": "/work/evy/discovery/u7a-my-vehicles.avif",
+              "title": "My vehicles",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/discovery/u7b-vehicle-profile.avif",
+              "title": "Vehicle profile",
+              "width": 563,
+              "height": 1218
+            }
+          ]
+        },
+        {
+          "caption": "Let charging businesses offer discovery under their own brand and network.",
+          "items": [
+            {
+              "src": "/work/evy/discovery/u4a-network-map.avif",
+              "title": "Network map",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/discovery/u4b-network-list.avif",
+              "title": "Network list",
+              "width": 563,
+              "height": 1218
+            }
+          ]
+        },
+        {
+          "caption": "Planned charging stops around vehicle range, reducing uncertainty on longer routes.",
+          "items": [
+            {
+              "src": "/work/evy/discovery/u5a-choose-vehicle.avif",
+              "title": "Choose a vehicle",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/discovery/u5a2-set-route.avif",
+              "title": "Set route",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/discovery/u5c-plan-result.avif",
+              "title": "The plan",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/discovery/u6a-plan-stops.avif",
+              "title": "Route and stops",
+              "width": 563,
+              "height": 1218
+            }
+          ]
+        },
+        {
+          "caption": "Turned drivers into contributors, expanding coverage where network data was incomplete.",
+          "items": [
+            {
+              "src": "/work/evy/discovery/u8a-contribute.avif",
+              "title": "Contribute",
+              "width": 375,
+              "height": 812
+            },
+            {
+              "src": "/work/evy/discovery/u8b-add-station-1.avif",
+              "title": "Location",
+              "width": 375,
+              "height": 812
+            },
+            {
+              "src": "/work/evy/discovery/u8d-points.avif",
+              "title": "Points earned",
+              "width": 750,
+              "height": 1624
+            }
+          ]
+        }
+      ]
+    },
+    "chargeconnect": {
+      "title": "ChargeConnect",
+      "description": "Gave charging businesses one operating system for running reliable, profitable networks.",
+      "caption": "One operating workspace for the full charging network.",
+      "units": [
+        {
+          "caption": "Gave operators one live view of network health, demand, and revenue.",
+          "items": [
+            {
+              "src": "/work/evy/chargeconnect/command-center.avif",
+              "title": "Network command center",
+              "width": 1835,
+              "height": 2400,
+              "pan": true,
+              "panAspect": "16 / 10"
+            }
+          ]
+        },
+        {
+          "caption": "Made faults and disconnections visible across growing charger fleets.",
+          "items": [
+            {
+              "src": "/work/evy/chargeconnect/charger-management.png",
+              "title": "Charger management",
+              "width": 1440,
+              "height": 923
+            }
+          ]
+        },
+        {
+          "caption": "Connected reliability, usage, and revenue at asset level so teams could prioritize fixes.",
+          "items": [
+            {
+              "src": "/work/evy/chargeconnect/charger-health.png",
+              "title": "Charger health",
+              "width": 1440,
+              "height": 1751,
+              "pan": true,
+              "panAspect": "16 / 10"
+            }
+          ]
+        },
+        {
+          "caption": "Enabled remote diagnostics and port actions, reducing on-site intervention.",
+          "items": [
+            {
+              "src": "/work/evy/chargeconnect/charger-actions.avif",
+              "title": "Charger and port controls",
+              "width": 2400,
+              "height": 1521,
+              "topRounded": true
+            }
+          ]
+        },
+        {
+          "caption": "Let operators schedule power limits around site capacity and peak demand.",
+          "items": [
+            {
+              "src": "/work/evy/chargeconnect/load-scheduling.png",
+              "title": "Load scheduling",
+              "width": 2160,
+              "height": 1350,
+              "topRounded": true
+            }
+          ]
+        },
+        {
+          "caption": "Made every charging session traceable across status, energy, and revenue.",
+          "items": [
+            {
+              "src": "/work/evy/chargeconnect/sessions.avif",
+              "title": "Charging sessions",
+              "width": 2400,
+              "height": 1616
+            }
+          ]
+        },
+        {
+          "caption": "Supported connector-level fixed and variable pricing across different business models.",
+          "items": [
+            {
+              "src": "/work/evy/chargeconnect/tariffs.png",
+              "title": "Tariff management",
+              "width": 1440,
+              "height": 900
+            }
+          ]
+        },
+        {
+          "caption": "Enabled reusable promotions that brought drivers back without manual discounts.",
+          "items": [
+            {
+              "src": "/work/evy/chargeconnect/offer-creation.avif",
+              "title": "Offer creation",
+              "width": 2160,
+              "height": 1626,
+              "topRounded": true
+            }
+          ]
+        },
+        {
+          "caption": "Turned usage, uptime, energy, and revenue into maintenance and expansion decisions.",
+          "items": [
+            {
+              "src": "/work/evy/chargeconnect/analytics.avif",
+              "title": "Reports and analytics",
+              "width": 2075,
+              "height": 2400,
+              "pan": true,
+              "panAspect": "16 / 10"
+            }
+          ]
+        },
+        {
+          "caption": "Centralized driver issues so support teams could track ownership and resolution.",
+          "items": [
+            {
+              "src": "/work/evy/chargeconnect/support.png",
+              "title": "Support tickets",
+              "width": 1440,
+              "height": 900,
+              "topRounded": true
+            }
+          ]
+        }
+      ]
+    },
+    "booking": {
+      "title": "Booking and charging",
+      "caption": "Made charging predictable from reservation through payment, live control, and receipts.",
+      "units": [
+        {
+          "caption": "Took drivers from charger scan to a priced, payable booking without operator assistance.",
+          "items": [
+            {
+              "src": "/work/evy/booking/b1a-scan-qr.avif",
+              "title": "Scan QR",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/booking/b1b-choose-amount.avif",
+              "title": "Choose amount",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/booking/b1c-booking-review.avif",
+              "title": "Booking summary",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/booking/b1d-payment-method.avif",
+              "title": "Payment method",
+              "width": 563,
+              "height": 1218
+            }
+          ]
+        },
+        {
+          "caption": "Reserved a connector and gave drivers a verifiable booking reference.",
+          "items": [
+            {
+              "src": "/work/evy/booking/b2a-waiting.avif",
+              "title": "Waiting",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/booking/b2b-booked.avif",
+              "title": "Booked",
+              "width": 563,
+              "height": 1218
+            }
+          ]
+        },
+        {
+          "caption": "Made session activation clear while the charger connected to the network.",
+          "items": [
+            {
+              "src": "/work/evy/booking/b3a2-session-start-alt.avif",
+              "title": "Start",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/booking/b3b-initiating.avif",
+              "title": "Initiating",
+              "width": 563,
+              "height": 1218
+            }
+          ]
+        },
+        {
+          "caption": "Kept live energy and cost visible, giving drivers control over when to stop.",
+          "items": [
+            {
+              "src": "/work/evy/booking/b3c-charging.avif",
+              "title": "Charging",
+              "width": 561,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/booking/b3d-completing.avif",
+              "title": "Completing",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/booking/b3e-session-finish.avif",
+              "title": "Finish",
+              "width": 563,
+              "height": 1218
+            }
+          ]
+        },
+        {
+          "caption": "Closed each session with transparent charges and familiar payment options.",
+          "items": [
+            {
+              "src": "/work/evy/booking/b4b-summary.avif",
+              "title": "Summary",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/booking/b4c-pay.avif",
+              "title": "Pay",
+              "width": 563,
+              "height": 1218
+            }
+          ]
+        },
+        {
+          "caption": "Kept balances, top-ups, charges, and refunds in one auditable wallet.",
+          "items": [
+            {
+              "src": "/work/evy/booking/b6a-wallet.avif",
+              "title": "Wallet",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/booking/b6b-wallet-topup.avif",
+              "title": "Topped up",
+              "width": 563,
+              "height": 1218
+            }
+          ]
+        },
+        {
+          "caption": "Made charger quality visible through structured driver feedback.",
+          "items": [
+            {
+              "src": "/work/evy/booking/b5a-review-1.avif",
+              "title": "Review",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/booking/b5b-review-2.avif",
+              "title": "Rating the session",
+              "width": 563,
+              "height": 1218
+            }
+          ]
+        },
+        {
+          "caption": "Gave drivers a complete record of active and past sessions with receipts.",
+          "items": [
+            {
+              "src": "/work/evy/booking/b7-bookings.avif",
+              "title": "Bookings",
+              "width": 563,
+              "height": 1218
+            },
+            {
+              "src": "/work/evy/booking/b7b-booking-detail.avif",
+              "title": "Booking detail",
+              "width": 563,
+              "height": 1218
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

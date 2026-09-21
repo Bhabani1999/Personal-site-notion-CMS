@@ -2,28 +2,27 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { IBM_Plex_Sans } from '@next/font/google';
+import '../styles/styles.css';
 import localfont from '@next/font/local';
 
 export const fontLoader = IBM_Plex_Sans({
   variable: "--font-ibmplexsans",
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '500'],
+  display: 'swap',
 });
 
 export const hatton = localfont({
   src: '../fonts/PPHatton-Ultralight.otf',
   variable: "--font-hatton",
   weight: '300',
+  display: 'swap',
 });
 
 export const Supply = localfont({
   src: '../fonts/PPSupplyMono-Regular.otf',
   variable: "--font-supply",
-});
-
-export const neue = localfont({
-  src: '../fonts/PPNeueMontreal-Book.otf',
-  variable: "--font-neue",
+  display: 'swap',
 });
 
 function MyApp({ Component, pageProps }) {
@@ -35,7 +34,7 @@ function MyApp({ Component, pageProps }) {
   }, [router]);
 
   return (
-      <main className={`${fontLoader.variable} ${hatton.variable} ${Supply.variable} ${neue.variable}`}>
+      <main className={`${fontLoader.variable} ${hatton.variable} ${Supply.variable}`}>
         <Component {...pageProps} />
       </main>
   );

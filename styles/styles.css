@@ -614,3 +614,53 @@ p {
 .blackbg {
     background-color: #141414;
 }
+
+
+/* Work pages carry no wishlist column, so the writing column absorbs that
+   space while the right-hand nav keeps its position. */
+.work-page .column.right {
+    flex: 0 0 0;
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.work-page .column.middlepost {
+    max-width: 1068px;
+}
+
+.work-page .column.left {
+    flex: 0 0 280px;
+    min-width: 280px;
+    padding-right: 48px;
+    padding-left: 48px;
+}
+
+@media (max-width: 1280px) {
+    .work-page .column.left {
+        display: none;
+    }
+
+    .work-page .column.middlepost {
+        flex: 1 1 100%;
+        width: 100%;
+        max-width: 1068px;
+    }
+}
+
+@media (max-width: 768px) {
+    .work-page .column.middlepost {
+        max-width: 100%;
+    }
+}
+
+/* A consistent page footer: back on the left, next on the right, spanning the
+   text column rather than the full page, so /next lines up with the end of
+   the writing instead of drifting out into the sidenote margin. Back to top
+   lives in the layout's own third column, so it is not repeated here. */
+.page-nav {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 26px;
+}
