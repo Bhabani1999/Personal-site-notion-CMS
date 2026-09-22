@@ -42,7 +42,11 @@
 /* The whole row is the link, so the title and caption open the gallery too.
    The visible effects stay on the stack and the title. */
 .stopWrap { display: grid; grid-template-columns: 118px minmax(0, 1fr); align-items: start; column-gap: 28px; margin: 42px 0 0;
-  color: inherit; text-decoration: none; cursor: pointer; }
+  color: inherit; text-decoration: none; cursor: pointer;
+  /* The row is the link, so it stops at the text column rather than running
+     on under the sidenotes. ch resolves against this element's own font, so
+     the body's font and size are restated to get the same measure. */
+  max-width: 68ch; font-family: var(--font-ibmplexsans); font-size: 15px; }
 .stopWrap:focus-visible { outline: 2px solid var(--work-accent); outline-offset: 6px; border-radius: 6px; }
 .stopWrap:hover { color: inherit; }
 /* Padding rather than margin: the stack is often the last child, so a
@@ -179,23 +183,20 @@
 .cardWide .cardMedia .chromeShell > img { width: 100%; height: auto;
   max-width: none; max-height: none; min-height: 0; object-fit: contain; }
 
-/* ChargeConnect uses the Sites capture as its desktop viewport. This keeps
-   every card aligned and crops longer captures from the bottom. The logs
-   export is unusually shallow, so it opts out and remains fully visible. */
+/* Zemetric's desktop galleries use the same panel proportion as Evy's
+   ChargeConnect gallery. Each browser-framed capture then grows to the
+   largest complete size that fits inside that panel. */
 .chargeconnectHeading { margin-bottom: 18px; }
 .chargeconnectGrid .cardMedia {
   height: auto;
-  aspect-ratio: 2 / 1;
+  aspect-ratio: 634 / 363;
   align-items: flex-end;
-  padding: 12px 44px 0;
+  padding: 22px 44px 0;
   overflow: hidden;
 }
-/* Captures here run from 0.84 to 2.45, so forcing them all into the sites
-   screen's ratio cropped the wide ones down their sides. Instead the shell
-   is sized per capture in GalleryImage, to a common stack height taken from
-   that same sites screen: units line up down the page, and each screen
-   keeps its own shape inside its panel. */
-.chargeconnectGrid .cardAsset.chromeShell { height: auto; }
+/* GalleryImage sizes each shell from its own aspect ratio, preserving the
+   complete screen and keeping the browser bar attached at every size. */
+.zemetricGrid .cardAsset.chromeShell { height: auto; }
 .chargeconnectGrid .chromeShell > img {
   flex: 0 0 auto;
   width: 100%;

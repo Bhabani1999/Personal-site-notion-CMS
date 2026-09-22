@@ -63,7 +63,7 @@ function prefetchGallery(key, gallery) {
 
 // Each screen fades in once decoded, over a placeholder that holds its
 // space, so a slow connection shows a shimmer rather than a jump.
-export function GalleryImage({ item, priority }) {
+function GalleryImage({ item, priority }) {
   const ref = useRef(null);
   const [status, setStatus] = useState("loading");
   const isPhone = item.height > item.width * 1.45;

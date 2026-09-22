@@ -13,7 +13,11 @@
 .contextLead { font-style: normal; color: #9d9d9d; }
 .sectionStackWrap { container-type: inline-size; }
 .section { margin: 0 0 72px; scroll-margin-top: 26px; }
-.projectLink { display: grid; grid-template-columns: 93px minmax(0, 1fr); align-items: start; column-gap: 44px; color: inherit; }
+/* The row is the link, so it stops at the text column rather than running on
+   under the sidenotes. ch resolves against this element's own font, so the
+   body's font and size are restated to get the same measure. */
+.projectLink { display: grid; grid-template-columns: 93px minmax(0, 1fr); align-items: start; column-gap: 44px; color: inherit;
+  max-width: 68ch; font-family: var(--font-ibmplexsans); font-size: 15px; }
 /* The global a:hover paints links full accent orange; these sections use the
    softer hover from the homepage's writing list instead. */
 .projectLink:hover, .projectLink:focus-visible { color: #C2AAA3; }

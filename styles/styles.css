@@ -685,37 +685,3 @@ p {
     justify-content: space-between;
     gap: 26px;
 }
-
-/* The all-design-work gallery is the modal's layout as a page of its own, so
-   it spans the viewport rather than the writing column. The side columns
-   collapse and the content takes the modal's 1660px measure. */
-.gallery-page .column.left,
-.gallery-page .column.right {
-    flex: 0 0 0;
-    width: 0;
-    min-width: 0;
-    padding: 0;
-    overflow: hidden;
-}
-
-.gallery-page .column.middlepost {
-    flex: 1 1 100%;
-    width: 100%;
-    max-width: 1660px;
-    margin: 0 auto;
-    padding: 0 78px;
-}
-
-/* The column supplies the gutter here, so the article inside it must not add
-   its own on top. */
-.gallery-page .column.middlepost > * {
-    padding-left: 0;
-    padding-right: 0;
-}
-
-@media (max-width: 768px) {
-    .gallery-page .column.middlepost {
-        max-width: 100%;
-        padding: 0 26px;
-    }
-}

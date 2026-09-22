@@ -71,12 +71,7 @@ const BAR_MIN = 7.5;
 const BAR_MAX = 13;
 // A bar never takes more than this share of a small capture's width.
 const BAR_CAP = 0.04;
-// Every capture is sized to the same stack height, taken from the sites
-// screen (1903x967). Captures vary from 0.84 to 2.45, and letting each one
-// fill the panel made the page jump between very tall and very short units.
-const REFERENCE_RATIO = 1903 / 967;
-
-export function GalleryImage({ item, priority }) {
+function GalleryImage({ item, priority }) {
   const ref = useRef(null);
   const [status, setStatus] = useState("loading");
   const isPhone = item.height > item.width * 1.45;
@@ -115,24 +110,20 @@ export function GalleryImage({ item, priority }) {
         Math.max(Math.min(BAR_MIN, width * BAR_CAP), width * BAR_RATIO)
       );
 
-      // Every capture in a gallery gets the same stack height, set by the
-      // reference ratio, so the units line up down the page. A capture wider
-      // than the reference then sits narrower than the slot rather than
-      // being cropped, and a squarer one is scaled down to fit the height.
+      // Fit the complete capture at the largest size the panel allows. The
+      // card supplies the consistent rhythm; normalizing every image to one
+      // reference ratio only made desktop UI unnecessarily small.
       const ratio = item.width / item.height;
-      let capH = Math.min(innerH, slotW / REFERENCE_RATIO);
-      let w = capH * ratio;
-      if (w > slotW) {
-        w = slotW;
-        capH = w / ratio;
-      }
-      // Fit the bar into the same height so the whole stack matches.
+      let w = slotW;
+      let capH = w / ratio;
+      // The browser bar belongs inside the same available height. Repeating
+      // the calculation settles the small dependency between width and the
+      // proportional bar height without cropping the screenshot.
       for (let i = 0; i < 3; i += 1) {
         const bar = barFor(w);
-        const maxCapH = Math.min(innerH, slotW / REFERENCE_RATIO) - bar;
-        capH = maxCapH;
+        const maxCapH = Math.max(0, innerH - bar);
+        capH = Math.min(w / ratio, maxCapH);
         w = Math.min(slotW, capH * ratio);
-        capH = w / ratio;
       }
       const displayScale = item.displayScale || 1;
       w *= displayScale;
@@ -394,7 +385,7 @@ export default function Zemetric() {
             {gallery.description && <p className={styles.galleryDescription}>{gallery.description}</p>}
           </div>
         </motion.header>
-        <motion.div className={`${styles.grid} ${openKey === "chargeconnect" ? styles.chargeconnectGrid : ""}`} {...galleryFade(0.06)}>
+        <motion.div className={`${styles.grid} ${styles.zemetricGrid} ${openKey === "chargeconnect" ? styles.chargeconnectGrid : ""}`} {...galleryFade(0.06)}>
           {galleryUnits.map((unit, i) => {
             // A unit of three needs the full row; anything smaller takes half.
             const span = unit.full || unit.items.length >= 3 ? 12 : 6;
