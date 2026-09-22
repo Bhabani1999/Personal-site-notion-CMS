@@ -76,7 +76,7 @@ const BAR_CAP = 0.04;
 // fill the panel made the page jump between very tall and very short units.
 const REFERENCE_RATIO = 1903 / 967;
 
-function GalleryImage({ item, priority }) {
+export function GalleryImage({ item, priority }) {
   const ref = useRef(null);
   const [status, setStatus] = useState("loading");
   const isPhone = item.height > item.width * 1.45;
@@ -120,7 +120,10 @@ function GalleryImage({ item, priority }) {
       // than the reference then sits narrower than the slot rather than
       // being cropped, and a squarer one is scaled down to fit the height.
       const ratio = item.width / item.height;
-      let capH = Math.min(innerH, slotW / REFERENCE_RATIO);
+      // A phone screen is not a desktop capture, so it takes its height from
+      // the panel rather than from the desktop reference ratio.
+      const reference = isPhone ? ratio : REFERENCE_RATIO;
+      let capH = Math.min(innerH, slotW / reference);
       let w = capH * ratio;
       if (w > slotW) {
         w = slotW;
@@ -129,10 +132,16 @@ function GalleryImage({ item, priority }) {
       // Fit the bar into the same height so the whole stack matches.
       for (let i = 0; i < 3; i += 1) {
         const bar = barFor(w);
-        const maxCapH = Math.min(innerH, slotW / REFERENCE_RATIO) - bar;
+        const maxCapH = Math.min(innerH, slotW / reference) - bar;
         capH = maxCapH;
         w = Math.min(slotW, capH * ratio);
         capH = w / ratio;
+      }
+      // The bar sits above the capture, so the stack must fit the panel with
+      // the bar included or the screen runs past the panel's bottom edge.
+      if (capH + barFor(w) > innerH) {
+        capH = innerH - barFor(w);
+        w = capH * ratio;
       }
       const displayScale = item.displayScale || 1;
       w *= displayScale;
@@ -148,12 +157,14 @@ function GalleryImage({ item, priority }) {
     const observer = new ResizeObserver(apply);
     observer.observe(panel);
     return () => observer.disconnect();
-  }, [item.src, item.width, item.height, item.displayScale, item.cropBottom]);
+  }, [item.src, item.width, item.height, item.displayScale, item.cropBottom, isPhone]);
 
   return <span
     className={`${styles.cardAsset} ${styles.chromeShell} ${isPhone ? styles.phoneFrame : ""} ${item.fit === "contain" ? styles.assetContain : ""} ${item.centered ? styles.assetCentered : ""} ${item.cropBottom ? styles.assetCropBottom : ""} ${status === "loaded" ? styles.isLoaded : styles.isPending}`}
   >
-    <span className={styles.chromeBar} aria-hidden="true">
+    {/* A browser chrome bar belongs on a desktop capture, not on a phone
+        screen, which carries its own device frame instead. */}
+    {!isPhone && <span className={styles.chromeBar} aria-hidden="true">
       <span className={styles.chromeNav}>
         {/* Material Symbols chevrons, so the arrows stay crisp at any size. */}
         <svg className={styles.chromeIcon} viewBox="0 -960 960 960" fill="currentColor">
@@ -163,7 +174,7 @@ function GalleryImage({ item, priority }) {
           <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
         </svg>
       </span>
-    </span>
+    </span>}
     <img
       ref={ref}
       src={item.src}

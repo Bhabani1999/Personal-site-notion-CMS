@@ -3,30 +3,15 @@ import Link from "next/link";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import Layout from "../../components/Layout";
-import styles from "../../styles/Undergraduate.module.css";
-import { FlowCard, packFlows } from "./undergraduate-explorations";
-import { allDesignGroups, allDesignCount } from "../../allDesignWork";
+import styles from "../../styles/Evy.module.css";
+import { GalleryImage } from "./zemetric";
+import { allDesignUnits, allDesignCount } from "../../allDesignWork";
 import { retrievePageProperties } from "../../notionModule";
 
 const scrollToTop = event => {
   event.preventDefault();
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
-
-// Every screen from the three work pages, grouped by where it came from.
-// The case studies carry the explanation, so this view runs without
-// captions: it is for scanning the work, not reading about it.
-function groupUnits(group) {
-  return packFlows(
-    group.items.map(item => ({
-      title: item.title,
-      items: [item],
-      pan: item.pan,
-      crop: item.crop,
-      fit: item.fit,
-    }))
-  );
-}
 
 export default function AllDesignWork({ nextHref }) {
   const pageControls = useAnimation();
@@ -36,8 +21,8 @@ export default function AllDesignWork({ nextHref }) {
     await pageControls.start({ opacity: 0, transition: { duration: 0.2, ease: "easeOut" } });
   };
 
-  // This page is the gallery modal's layout standing on its own, so it drops
-  // the writing column and spans the viewport the way the modal does.
+  // This page is the gallery's layout standing on its own, so it drops the
+  // writing column and spans the viewport the way the modal does.
   useEffect(() => {
     const container = document.getElementById("postContainer");
     container?.classList.add("gallery-page");
@@ -86,29 +71,40 @@ export default function AllDesignWork({ nextHref }) {
       <header className={styles.intro}>
         <motion.p {...fadeIn(0)} className={`accent-heading type-opacity-50 ${styles.eyebrow}`}>{allDesignCount} screens</motion.p>
         <motion.h1 {...fadeIn(0.04)} className={`title type ${styles.title}`}>All design work</motion.h1>
-        <motion.p {...fadeIn(0.08)} className="para blogtype">
+        <motion.p {...fadeIn(0.08)} className={`para blogtype ${styles.lede}`}>
           Every screen from the work above, in one place. The case studies carry the reasoning; this is the visual record.
         </motion.p>
       </header>
 
-      {allDesignGroups.map((group, groupIndex) => (
-        <motion.section
-          key={group.id}
-          id={group.id}
-          className={styles.section}
-          {...fadeIn(Math.min(0.12 + groupIndex * 0.03, 0.3))}
-        >
-          <div className={styles.projectHeader}>
-            <p className={`accent-heading type-opacity-50 ${styles.eyebrow}`}>{group.source}</p>
-            <h2 className={`heading-md type ${styles.heading}`}>{group.title}</h2>
-          </div>
-          <div className={styles.galleryGrid}>
-            {groupUnits(group).map((flow, flowIndex) => (
-              <FlowCard key={`${group.id}-${flowIndex}`} flow={flow} index={flowIndex} />
-            ))}
-          </div>
-        </motion.section>
-      ))}
+      <motion.div className={styles.grid} {...fadeIn(0.12)}>
+        {allDesignUnits.map((unit, i) => {
+          // The same layout rules the individual galleries use, so a unit
+          // keeps the shape it was designed with.
+          const span = unit.full || unit.items.length >= 3 ? 12 : 6;
+          const dense = unit.items.length >= 4;
+          const wide = unit.items.every(x => x.width > x.height);
+          const tall = unit.items.length === 1 && (
+            unit.items[0].pan || unit.items[0].height > unit.items[0].width * 3
+          );
+          const desktopPan = tall && Boolean(unit.items[0].panAspect);
+          return <figure
+            key={`${unit.source}-${i}-${unit.items[0].src}`}
+            className={`${styles.card} ${tall ? styles.cardTall : ""} ${desktopPan ? styles.cardDesktopPan : ""} ${dense ? styles.cardDense : ""} ${wide ? styles.cardWide : ""} ${unit.items.length >= 3 ? styles.cardPan : ""}`}
+            style={{
+              "--unit-span": span,
+              "--pan-ratio": unit.items[0].panAspect || "375 / 812",
+            }}
+          >
+            <div className={styles.cardMedia}>
+              <div className={styles.panTrack}>
+                {unit.items.map(item => (
+                  <GalleryImage key={item.src} item={item} priority={i < 2} />
+                ))}
+              </div>
+            </div>
+          </figure>;
+        })}
+      </motion.div>
 
       <footer className={`${styles.footer} page-nav`}>
         <Link href="/" onClick={handleClick} className="accent-heading type-opacity-50">/back</Link>
