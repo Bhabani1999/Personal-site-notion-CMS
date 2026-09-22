@@ -3,10 +3,12 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { Play, Star } from "lucide-react";
+import { Play } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
 import Layout from "../../components/Layout";
 import projects from "../../content/undergraduate.json";
+import evyContent from "../../content/evy.json";
+import zemetricContent from "../../content/zemetric.json";
 import styles from "../../styles/Undergraduate.module.css";
 import { retrievePageProperties } from "../../notionModule";
 
@@ -19,6 +21,37 @@ const orderedProjects = [...projects].sort((a, b) => {
   if (bIndex === -1) return -1;
   return aIndex - bIndex;
 });
+function getGalleryItems(gallery) {
+  return gallery.units ? gallery.units.flatMap(unit => unit.items || []) : (gallery.items || []);
+}
+
+const combinedEnergyFleetGallery = {
+  title: "EnergyConnect and FleetConnect",
+  description: "Built EnergyConnect and FleetConnect from 0→1 for two linked operational problems: managing site power safely and keeping vehicles ready for departure. The products turn live demand, site constraints, telematics, schedules, and charging priorities into clear decisions for energy and fleet teams.",
+  units: [
+    ...zemetricContent.galleries.energyconnect.units,
+    ...zemetricContent.galleries.fleetconnect.units,
+  ],
+};
+
+const portfolioGalleryEntries = [
+  { slug: "zemetric-chargeconnect", title: "ChargeConnect at Zemetric", company: "Zemetric", summary: "Adapted ChargeConnect for larger US networks, flexible tariffs, and faster fault diagnosis.", href: { pathname: "/work/zemetric", query: { gallery: "chargeconnect" } }, gallery: zemetricContent.galleries.chargeconnect },
+  { slug: "zemetric-energy-fleetconnect", title: "EnergyConnect and FleetConnect", company: "Zemetric", summary: "Built energy and fleet products for safer power allocation and vehicle readiness.", href: { pathname: "/work/zemetric", query: { gallery: "energy-fleetconnect" } }, gallery: combinedEnergyFleetGallery },
+  { slug: "evy-discovery", title: "Charger discovery at Evy Energy", company: "Evy Energy", summary: "Helped drivers find compatible chargers, judge reliability, and plan longer EV journeys.", href: { pathname: "/work/evy-energy", query: { gallery: "discovery" } }, gallery: evyContent.galleries.discovery },
+  { slug: "evy-chargeconnect", title: "ChargeConnect at Evy Energy", company: "Evy Energy", summary: "One operating workspace for the full charging network.", href: { pathname: "/work/evy-energy", query: { gallery: "chargeconnect" } }, gallery: evyContent.galleries.chargeconnect },
+  { slug: "evy-booking", title: "Booking and charging at Evy Energy", company: "Evy Energy", summary: "Made charging predictable from reservation through payment, live control, and receipts.", href: { pathname: "/work/evy-energy", query: { gallery: "booking" } }, gallery: evyContent.galleries.booking },
+].map(({ gallery, company, summary, ...entry }) => {
+  const items = getGalleryItems(gallery);
+  return {
+    ...entry,
+    linkedGallery: true,
+    items,
+    screenCount: items.length,
+    context: `[[${company}.]] ${summary}`,
+  };
+});
+
+const galleryIndexEntries = [...portfolioGalleryEntries, ...orderedProjects];
 
 function Preview({ item }) {
   const ref = useRef(null);
@@ -288,6 +321,17 @@ function prefetchProject(project) {
   });
 }
 
+function prefetchLinkedGallery(entry) {
+  if (typeof window === "undefined" || warmed.has(entry.slug)) return;
+  warmed.add(entry.slug);
+  entry.items.slice(0, 8).forEach(item => {
+    if (!item.src) return;
+    const img = new Image();
+    img.decoding = "async";
+    img.src = item.src;
+  });
+}
+
 function FlowAsset({ item, priority }) {
   const imgRef = useRef(null);
   const [status, setStatus] = useState("loading");
@@ -400,7 +444,7 @@ export default function UndergraduateExplorations({ nextHref }) {
   const [selection, setSelection] = useState(null);
   const dialog = useRef(null);
   const trigger = useRef(null);
-  const openedFromOverview = useRef(false);
+  const backToTop = useRef(null);
   const pageControls = useAnimation();
 
   const backToTopControls = useAnimation();
@@ -410,13 +454,13 @@ export default function UndergraduateExplorations({ nextHref }) {
     // 400px threshold would only trip near the very end. Reveal at a quarter of
     // whatever the page can actually scroll, capped at the writing-page value.
     const handleScroll = () => {
+      if (!backToTop.current) return;
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
       const threshold = Math.min(400, scrollable * 0.25);
       backToTopControls.start({ opacity: window.scrollY > threshold ? 1 : 0 });
     };
-    // Not called immediately: controls.start() throws before the motion
-    // element has mounted, and the link's initial opacity of 0 is already
-    // correct at the top of the page.
+    // The control unmounts while a gallery is open, so scroll events during
+    // browser navigation must not address its animation controls.
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleScroll);
     return () => {
@@ -444,12 +488,7 @@ export default function UndergraduateExplorations({ nextHref }) {
   }, [router.isReady, router.query.project]);
 
   const closeGallery = () => {
-    if (openedFromOverview.current) {
-      openedFromOverview.current = false;
-      router.back();
-      return;
-    }
-    router.replace(router.pathname, undefined, { shallow: true, scroll: false });
+    router.back();
   };
 
   // This page has no wishlist column; the class lets the writing column widen
@@ -480,19 +519,19 @@ export default function UndergraduateExplorations({ nextHref }) {
     bottomContent={
       // A gallery covers the page, so back to top does not belong there.
       project ? null : (
-        <motion.div initial={{ opacity: 0 }} animate={backToTopControls}>
+        <motion.div ref={backToTop} initial={{ opacity: 0 }} animate={backToTopControls}>
           <motion.div initial={{ opacity: 1 }} animate={pageControls}>
-            <Link href="/work/undergraduate-explorations#top" onClick={scrollToTop} className="accent-heading block type-opacity-50">back to top</Link>
+            <Link href="/work/product-design#top" onClick={scrollToTop} className="accent-heading block type-opacity-50">back to top</Link>
           </motion.div>
         </motion.div>
       )
     }
   >
     <Head>
-      <title>Selected Work | Bhabani SM</title>
-      <meta name="description" content="Selected product and UX work from my college years, spanning independent products, company work, open-source initiatives, and public-service collaborations." />
-      <meta property="og:title" content="Selected Work | Bhabani SM" />
-      <meta property="og:description" content="Selected product and UX work created across independent, company, open-source, and public-service contexts." />
+      <title>Product Design Work | Bhabani SM</title>
+      <meta name="description" content="Selected product design work from 2020 to 2025 across charging infrastructure, energy and fleet operations, independent products, company teams, open-source initiatives, and public-service collaborations." />
+      <meta property="og:title" content="Product Design Work | Bhabani SM" />
+      <meta property="og:description" content="Selected product design work from 2020 to 2025 across company, independent, open-source, and public-service contexts." />
       <meta property="og:image" content="/work/undergraduate/biote/002.avif" />
     </Head>
     <motion.article initial={{ opacity: 1 }} animate={pageControls} className={styles.page}>
@@ -501,13 +540,19 @@ export default function UndergraduateExplorations({ nextHref }) {
         <Link href="/" onClick={handleClick} className={`accent-heading type-opacity-50 ${styles.back}`}>/back</Link>
       </motion.div>
       <header className={styles.intro}>
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.5, delay: 0, ease: "easeInOut" } }} className={`accent-heading type-opacity-50 ${styles.eyebrow}`}>2020–2022</motion.p>
-        <h1 className={styles.srOnly}>Selected Design Work</h1>
-        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.5, delay: 0.08, ease: "easeInOut" } }} className="para blogtype">Selected design work across independent products, company teams, open-source initiatives, and public-service collaborations.</motion.p>
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.5, delay: 0, ease: "easeInOut" } }} className={`accent-heading type-opacity-50 ${styles.eyebrow}`}>2020–2025</motion.p>
+        <h1 className={styles.srOnly}>Product Design Work</h1>
+        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.5, delay: 0.08, ease: "easeInOut" } }} className="para blogtype">Selected product design work across charging infrastructure, energy and fleet operations, independent products, company teams, open-source initiatives, and public-service collaborations.</motion.p>
       </header>
-      {orderedProjects.map((p, pi) => {
-        const items = p.items.filter(item => item.type === "image");
-        const remainingUnits = Math.max(0, getProjectFlows(p).length - 1);
+      {galleryIndexEntries.map((p, pi) => {
+        const linkedGallery = Boolean(p.linkedGallery);
+        const items = linkedGallery ? p.items : p.items.filter(item => item.type === "image");
+        const galleryUnitCount = linkedGallery ? p.screenCount : getProjectFlows(p).length;
+        const remainingUnits = Math.max(0, galleryUnitCount - 1);
+        const href = linkedGallery
+          ? p.href
+          : { pathname: router.pathname, query: { project: p.slug } };
+        const warm = linkedGallery ? () => prefetchLinkedGallery(p) : () => prefetchProject(p);
         return <motion.section
           key={p.slug}
           id={p.slug}
@@ -524,10 +569,21 @@ export default function UndergraduateExplorations({ nextHref }) {
             },
           }}
         >
-          <Link href={{ pathname: router.pathname, query: { project: p.slug } }} shallow scroll={false} className={styles.projectLink} aria-label={`View ${getProjectFlows(p).length} gallery units from ${p.title}`} onMouseEnter={() => prefetchProject(p)} onFocus={() => prefetchProject(p)} onTouchStart={() => prefetchProject(p)} onClick={e => { trigger.current = e.currentTarget; openedFromOverview.current = true; }}>
+          <Link
+            href={href}
+            shallow={!linkedGallery}
+            scroll={linkedGallery}
+            className={styles.projectLink}
+            aria-label={`View ${galleryUnitCount} ${linkedGallery ? "screens" : "gallery units"} from ${p.title}`}
+            onMouseEnter={warm}
+            onFocus={warm}
+            onTouchStart={warm}
+            onClick={linkedGallery
+              ? handleClick
+              : e => { trigger.current = e.currentTarget; }}
+          >
             <div className={styles.sectionStackWrap}><span className={`${styles.tile} ${styles.moreTile} ${styles.sectionStack}`}>
               <span className={styles.moreFront} aria-hidden="true"><Preview item={items[0]} /><span className={styles.morePill}>+{remainingUnits}</span></span>
-              {pi < 3 && <Star className={styles.galleryStar} strokeWidth={1.5} aria-hidden="true" />}
             </span></div>
             <div className={styles.projectHeader}>
               <h2 className={`heading-md type ${styles.heading}`}>{p.title}</h2>
@@ -544,7 +600,7 @@ export default function UndergraduateExplorations({ nextHref }) {
       {project && <div className={styles.dialogInner}>
         <div className={styles.dialogColumn}>
           <header className={styles.toolbar}>
-            <button type="button" className={styles.backButton} onClick={closeGallery} autoFocus aria-label="Close gallery">/back to Design Explorations</button>
+            <button type="button" className={styles.backButton} onClick={closeGallery} autoFocus aria-label="Close gallery">/back</button>
             <div className={styles.galleryHeading}>
               <h2 id="gallery-title" className={styles.galleryTitle}>{project.title}</h2>
               <p className={styles.galleryDescription}>{project.description}</p>

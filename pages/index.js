@@ -54,13 +54,13 @@ function Home({ pageProperties, databaseInfo }) {
       dateLabel: "2022–2024",
     },
     {
-      id: "undergraduate-explorations",
-      slug: "undergraduate-explorations",
-      href: "/work/undergraduate-explorations",
-      pageTitle: "Design work and explorations during my grad and early career years.",
+      id: "product-design",
+      slug: "product-design",
+      href: "/work/product-design",
+      pageTitle: "A complete collection of product work and design explorations.",
       pageDescription: null,
       creationDate: "2020-12-31",
-      dateLabel: "2020–2022",
+      dateLabel: "2020–2025",
     },
   ].sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
 

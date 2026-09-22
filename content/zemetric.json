@@ -20,10 +20,7 @@
         "Energy management was for charging operators serving commercial fleets, residential properties, and business sites. Each location had a fixed power limit; crossing it increased costs and reduced charging margins. I led EnergyConnect from 0→1, defining site limits, load schedules, charger groups, and intelligent power allocation.",
         "FleetConnect addressed a different job: keeping vehicles ready for their next route. I worked with fleet teams to turn vehicle telematics, departure schedules, charger availability, and charging priorities into one operating workflow."
       ],
-      "galleries": [
-        "energyconnect",
-        "fleetconnect"
-      ]
+      "gallery": "energy-fleetconnect"
     },
     {
       "id": "after",
@@ -61,7 +58,8 @@
   "galleries": {
     "chargeconnect": {
       "title": "ChargeConnect",
-      "description": "Adapted Evy's platform for larger US networks with scalable operations, flexible tariffs, and faster fault diagnosis.",
+      "description": "Adapted Evy's ChargeConnect for the scale and operating realities of US charging networks. The work brought multi-site operations, flexible tariffs, asset health, fault diagnosis, sessions, and revenue into one system so teams could understand and act on network performance.",
+      "caption": "Adapted Evy's platform for larger US networks with scalable operations, flexible tariffs, and faster fault diagnosis.",
       "units": [
         {
           "caption": "Gave CPOs one live view of the network, directing attention to the sites, chargers, and faults affecting service.",

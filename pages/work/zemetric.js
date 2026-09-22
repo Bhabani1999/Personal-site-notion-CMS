@@ -3,11 +3,23 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { Star } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
 import Layout from "../../components/Layout";
 import content from "../../content/zemetric.json";
 import styles from "../../styles/Evy.module.css";
+
+const galleries = {
+  ...content.galleries,
+  "energy-fleetconnect": {
+    title: "EnergyConnect and FleetConnect",
+    description: "Built EnergyConnect and FleetConnect from 0→1 for two linked operational problems: managing site power safely and keeping vehicles ready for departure. The products turn live demand, site constraints, telematics, schedules, and charging priorities into clear decisions for energy and fleet teams.",
+    caption: "Built from 0→1 to manage site power intelligently and keep fleet vehicles ready for departure.",
+    units: [
+      ...content.galleries.energyconnect.units,
+      ...content.galleries.fleetconnect.units,
+    ],
+  },
+};
 
 // A gallery stop sits inline in the narrative: a stacked thumbnail that
 // opens the full-screen gallery, matching the pattern on the other work page.
@@ -40,7 +52,6 @@ function GalleryStop({ gallery, galleryKey, onOpen }) {
           : <span className={styles.stopPending} />}
         {remaining > 0 && <span className={styles.morePill}>+{remaining}</span>}
       </span>
-      <Star className={styles.galleryStar} strokeWidth={1.5} />
     </span>
     <span className={styles.stopText}>
       <span className={styles.stopTitle}>{gallery.title}</span>
@@ -279,11 +290,11 @@ export default function Zemetric() {
   const [openKey, setOpenKey] = useState(null);
   const dialog = useRef(null);
   const trigger = useRef(null);
-  const openedFromPage = useRef(false);
+  const backToTop = useRef(null);
   const pageControls = useAnimation();
   const backToTopControls = useAnimation();
 
-  const gallery = openKey ? content.galleries[openKey] : null;
+  const gallery = openKey ? galleries[openKey] : null;
   const galleryUnits = gallery
     ? (gallery.units || (gallery.items || []).map(item => ({ caption: item.title, items: [item] })))
     : [];
@@ -294,26 +305,22 @@ export default function Zemetric() {
   useEffect(() => {
     if (!router.isReady) return;
     const key = typeof router.query.gallery === "string" ? router.query.gallery : null;
-    setOpenKey(key && content.galleries[key] ? key : null);
+    setOpenKey(key && galleries[key] ? key : null);
   }, [router.isReady, router.query.gallery]);
 
   const closeGallery = () => {
-    if (openedFromPage.current) {
-      openedFromPage.current = false;
-      router.back();
-      return;
-    }
-    router.replace(router.pathname, undefined, { shallow: true, scroll: false });
+    router.back();
   };
 
   useEffect(() => {
     const handleScroll = () => {
+      if (!backToTop.current) return;
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
       const threshold = Math.min(400, scrollable * 0.25);
       backToTopControls.start({ opacity: window.scrollY > threshold ? 1 : 0 });
     };
-    // Not called immediately: controls.start() throws before the motion
-    // element has mounted, and the initial opacity of 0 is already correct.
+    // The control unmounts while a gallery is open, so scroll events during
+    // browser navigation must not address its animation controls.
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleScroll);
     return () => {
@@ -371,7 +378,7 @@ export default function Zemetric() {
     bottomContent={
       // A gallery covers the page, so back to top does not belong there.
       openKey ? null : (
-        <motion.div initial={{ opacity: 0 }} animate={backToTopControls}>
+        <motion.div ref={backToTop} initial={{ opacity: 0 }} animate={backToTopControls}>
           <motion.div initial={{ opacity: 1 }} animate={pageControls}>
             <Link href="/work/zemetric#top" onClick={scrollToTop} className="accent-heading block type-opacity-50">back to top</Link>
           </motion.div>
@@ -430,13 +437,12 @@ export default function Zemetric() {
 
           {section.outro && section.outro.map((p, j) => <p key={j} className={`para ${styles.body}`}>{p}</p>)}
 
-          {section.gallery && content.galleries[section.gallery] && (
+          {section.gallery && galleries[section.gallery] && (
             <GalleryStop
-              gallery={content.galleries[section.gallery]}
+              gallery={galleries[section.gallery]}
               galleryKey={section.gallery}
               onOpen={(e) => {
                 trigger.current = e?.currentTarget;
-                openedFromPage.current = true;
               }}
             />
           )}
@@ -446,11 +452,10 @@ export default function Zemetric() {
               {section.galleries.map((galleryKey) => (
                 <GalleryStop
                   key={galleryKey}
-                  gallery={content.galleries[galleryKey]}
+                  gallery={galleries[galleryKey]}
                   galleryKey={galleryKey}
                   onOpen={(e) => {
                     trigger.current = e?.currentTarget;
-                    openedFromPage.current = true;
                   }}
                 />
               ))}
@@ -474,7 +479,7 @@ export default function Zemetric() {
       {gallery && <div className={styles.dialogInner} key={openKey}>
         <motion.header className={styles.toolbar} {...galleryFade(0)}>
           <button type="button" className={styles.backButton} onClick={closeGallery} autoFocus aria-label="Close gallery">
-            /back to Zemetric
+            /back
           </button>
           <div className={`${styles.galleryHeading} ${openKey === "chargeconnect" ? styles.chargeconnectHeading : ""}`}>
             <h2 id="zemetric-gallery-title" className={styles.galleryTitle}>{gallery.title}</h2>

@@ -3,7 +3,6 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { Star } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
 import Layout from "../../components/Layout";
 import content from "../../content/evy.json";
@@ -40,7 +39,6 @@ function GalleryStop({ gallery, galleryKey, onOpen }) {
           : <span className={styles.stopPending} />}
         {remaining > 0 && <span className={styles.morePill}>+{remaining}</span>}
       </span>
-      <Star className={styles.galleryStar} strokeWidth={1.5} />
     </span>
     <span className={styles.stopText}>
       <span className={styles.stopTitle}>{gallery.title}</span>
@@ -98,7 +96,7 @@ export default function EvyEnergy() {
   const [openKey, setOpenKey] = useState(null);
   const dialog = useRef(null);
   const trigger = useRef(null);
-  const openedFromPage = useRef(false);
+  const backToTop = useRef(null);
   const pageControls = useAnimation();
   const backToTopControls = useAnimation();
 
@@ -117,22 +115,18 @@ export default function EvyEnergy() {
   }, [router.isReady, router.query.gallery]);
 
   const closeGallery = () => {
-    if (openedFromPage.current) {
-      openedFromPage.current = false;
-      router.back();
-      return;
-    }
-    router.replace(router.pathname, undefined, { shallow: true, scroll: false });
+    router.back();
   };
 
   useEffect(() => {
     const handleScroll = () => {
+      if (!backToTop.current) return;
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
       const threshold = Math.min(400, scrollable * 0.25);
       backToTopControls.start({ opacity: window.scrollY > threshold ? 1 : 0 });
     };
-    // Not called immediately: controls.start() throws before the motion
-    // element has mounted, and the initial opacity of 0 is already correct.
+    // The control unmounts while a gallery is open, so scroll events during
+    // browser navigation must not address its animation controls.
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleScroll);
     return () => {
@@ -190,7 +184,7 @@ export default function EvyEnergy() {
     bottomContent={
       // A gallery covers the page, so back to top does not belong there.
       openKey ? null : (
-        <motion.div initial={{ opacity: 0 }} animate={backToTopControls}>
+        <motion.div ref={backToTop} initial={{ opacity: 0 }} animate={backToTopControls}>
           <motion.div initial={{ opacity: 1 }} animate={pageControls}>
             <Link href="/work/evy-energy#top" onClick={scrollToTop} className="accent-heading block type-opacity-50">back to top</Link>
           </motion.div>
@@ -255,7 +249,6 @@ export default function EvyEnergy() {
               galleryKey={section.gallery}
               onOpen={(e) => {
                 trigger.current = e?.currentTarget;
-                openedFromPage.current = true;
               }}
             />
           )}
@@ -264,7 +257,7 @@ export default function EvyEnergy() {
 
       <motion.footer className={`${styles.footer} page-nav`} {...fadeIn(0.14)}>
         <Link href="/" onClick={handleClick} className="accent-heading type-opacity-50">/back</Link>
-        <Link href="/work/undergraduate-explorations" onClick={handleClick} className="accent-heading type-opacity-50">/next</Link>
+        <Link href="/work/product-design" onClick={handleClick} className="accent-heading type-opacity-50">/next</Link>
       </motion.footer>
     </motion.article>
 
@@ -277,7 +270,7 @@ export default function EvyEnergy() {
       {gallery && <div className={styles.dialogInner} key={openKey}>
         <motion.header className={styles.toolbar} {...galleryFade(0)}>
           <button type="button" className={styles.backButton} onClick={closeGallery} autoFocus aria-label="Close gallery">
-            /back to Evy Energy
+            /back
           </button>
           <div className={styles.galleryHeading}>
             <h2 id="evy-gallery-title" className={styles.galleryTitle}>{gallery.title}</h2>

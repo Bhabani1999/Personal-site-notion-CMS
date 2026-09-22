@@ -100,6 +100,7 @@
   "galleries": {
     "discovery": {
       "title": "Charger discovery",
+      "description": "Designed the driver journey from finding a compatible, reliable charger to planning a longer EV trip with confidence. The experience combined availability, connector fit, route planning, station details, reliability feedback, and community contributions so discovery could work while charging coverage was still growing.",
       "caption": "Helped drivers find compatible chargers, judge reliability, and plan longer EV journeys.",
       "units": [
         {
@@ -284,7 +285,7 @@
     },
     "chargeconnect": {
       "title": "ChargeConnect",
-      "description": "Gave charging businesses one operating system for running reliable, profitable networks.",
+      "description": "Built one operating system for charging businesses to monitor and run their networks. ChargeConnect connected charger health, sessions, remote controls, pricing, revenue, drivers, and support so small teams could keep infrastructure reliable as their networks grew.",
       "caption": "One operating workspace for the full charging network.",
       "units": [
         {
@@ -411,6 +412,7 @@
     },
     "booking": {
       "title": "Booking and charging",
+      "description": "Designed the end-to-end charging journey from reservation and payment to live session control and receipts. The flow made public charging predictable for drivers while giving operators structured bookings, payment visibility, and support context.",
       "caption": "Made charging predictable from reservation through payment, live control, and receipts.",
       "units": [
         {
