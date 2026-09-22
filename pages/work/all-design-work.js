@@ -56,8 +56,13 @@ export default function AllDesignWork({ nextHref }) {
   // Each source keeps the units its own gallery groups it into; the board
   // only decides the order they appear in.
   const board = useMemo(() => {
+    // The board runs without captions, so the flow's description is dropped;
+    // the case studies are where the explanation lives.
     const undergraduateFlows = undergraduateProjects.flatMap(project =>
-      getProjectFlows(project).map(flow => ({ source: "undergraduate", flow }))
+      getProjectFlows(project).map(flow => ({
+        source: "undergraduate",
+        flow: { ...flow, description: null },
+      }))
     );
     return weave([zemetricUnits, evyUnits, undergraduateFlows]);
   }, []);
