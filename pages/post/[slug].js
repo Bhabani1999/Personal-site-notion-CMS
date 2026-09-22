@@ -9,8 +9,10 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { nextAfterPost } from "../../navigationOrder";
 import conversionCulture from "../../content/posts/conversion-culture";
+import vietnamChair from "../../content/posts/vietnam-chair";
 
 const localPosts = {
+  "the-street-begins-with-a-chair": vietnamChair,
   "conversion-culture": conversionCulture,
 };
 
@@ -340,13 +342,30 @@ function BlogPage({ pageContent, nextHref }) {
               )}
               
               {block.type === "image" && (
-                <Image
-                  className="image top-padding-26 bottom-padding-26"
-                  width={block.width || 20000000}
-                  height={block.height || 200}
-                  src={block.url}
-                  alt={block.alt || "Article illustration"}
-                />
+                <figure className="article-figure bottom-padding-26">
+                  <Image
+                    className="image top-padding-26"
+                    width={block.width || 20000000}
+                    height={block.height || 200}
+                    src={block.url}
+                    alt={block.alt || "Article illustration"}
+                  />
+                  {block.credit && (
+                    <figcaption className="article-image-caption">
+                      {block.creditUrl ? (
+                        <a
+                          href={block.creditUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          {block.credit}
+                        </a>
+                      ) : (
+                        block.credit
+                      )}
+                    </figcaption>
+                  )}
+                </figure>
               )}
               {block.type === "bookmark" && (
                 <div className="top-padding-26 bottom-padding-26">

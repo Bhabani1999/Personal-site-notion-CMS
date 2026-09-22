@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import { Star } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
 import Layout from "../../components/Layout";
 import content from "../../content/evy.json";
@@ -39,6 +40,7 @@ function GalleryStop({ gallery, galleryKey, onOpen }) {
           : <span className={styles.stopPending} />}
         {remaining > 0 && <span className={styles.morePill}>+{remaining}</span>}
       </span>
+      <Star className={styles.galleryStar} strokeWidth={1.5} />
     </span>
     <span className={styles.stopText}>
       <span className={styles.stopTitle}>{gallery.title}</span>

@@ -1,4 +1,4 @@
-.page, .dialog { --work-type: #f3f3f3; --work-body: #bfbfbf; --work-muted: #808080; --work-accent: #ff3c00; }
+.page, .dialog { --work-type: #f3f3f3; --work-body: #bfbfbf; --work-muted: #808080; --work-accent: #ff3c00; --gallery-interaction: #f3f3f3; }
 .page { min-width: 0; }
 .back { display: inline-block; margin-bottom: 39px; }
 .intro { margin-bottom: 96px; }
@@ -20,12 +20,14 @@
   max-width: 68ch; font-family: var(--font-ibmplexsans); font-size: 15px; }
 /* The global a:hover paints links full accent orange; these sections use the
    softer hover from the homepage's writing list instead. */
-.projectLink:hover, .projectLink:focus-visible { color: #C2AAA3; }
-.projectLink:hover .heading, .projectLink:focus-visible .heading { color: #C2AAA3; }
+.projectLink:hover { color: #C2AAA3; }
+.projectLink:focus-visible { color: var(--gallery-interaction); }
+.projectLink:hover .heading { color: #C2AAA3; }
+.projectLink:focus-visible .heading { color: var(--gallery-interaction); }
 .projectLink:hover .moreTile::before { transform: translate(15px, -5px) rotate(14deg) scale(.91); }
 .projectLink:hover .moreTile::after { transform: translate(8px, -3px) rotate(7deg) scale(.96); }
 .projectLink:hover .moreFront { box-shadow: inset 0 -1px 0 #0000003d, 0 2px 0 #090909, 0 7px 13px #00000029; }
-.projectLink:focus-visible { outline: 2px solid var(--work-accent); outline-offset: 8px; border-radius: 4px; }
+.projectLink:focus-visible { outline: 2px solid var(--gallery-interaction); outline-offset: 8px; border-radius: 4px; }
 .sectionStack { width: 93px; margin-top: 4px; }
 .description { margin-bottom: 26px; }
 .tile { position: relative; display: block; box-sizing: border-box; appearance: none; width: 100%; min-width: 0; aspect-ratio: 1; overflow: hidden; border: 0; border-radius: clamp(10px, 22.7cqw, 28px); background: linear-gradient(145deg, #2c2c2c, #1d1d1d); box-shadow: inset 0 -1px 0 #0000003d, 0 1px 0 #0a0a0a, 0 5px 10px #0000001c; padding: 0; cursor: pointer; transition: box-shadow 220ms ease; }
@@ -37,6 +39,7 @@
 .moreFront { position: absolute; z-index: 2; inset: 0; overflow: hidden; box-sizing: border-box; border: 0; border-radius: clamp(10px, 22.7cqw, 28px); background: linear-gradient(145deg, #2c2c2c, #1d1d1d); box-shadow: inset 0 -1px 0 #0000003d, 0 1px 0 #0a0a0a, 0 5px 10px #0000001c; }
 .moreFront::after { content: ""; position: absolute; z-index: 1; right: 0; bottom: 0; left: 0; height: 88%; background: linear-gradient(to bottom, transparent 0%, #1d1d1d08 22%, #1d1d1d1f 44%, #1d1d1d4d 64%, #1d1d1d99 84%, #1d1d1d 100%); pointer-events: none; }
 .morePill { position: absolute; z-index: 3; right: 8px; bottom: 8px; display: inline-flex; align-items: center; justify-content: center; width: max-content; box-sizing: border-box; padding: 5px 7px; border-radius: 999px; background: #101010d9; color: var(--work-type); font-family: var(--font-supply); font-size: 11px; line-height: 1; letter-spacing: 0; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.galleryStar { position: absolute; z-index: 4; top: 4px; left: 0; width: 16px; height: 16px; color: #f5f5f5; fill: #ffd43b; filter: drop-shadow(0 2px 3px #00000052); transform: rotate(-14deg); pointer-events: none; }
 .tile.moreTile:hover { box-shadow: none; }
 .moreTile:hover::before { transform: translate(15px, -5px) rotate(14deg) scale(.91); }
 .moreTile:hover::after { transform: translate(8px, -3px) rotate(7deg) scale(.96); }
@@ -48,7 +51,7 @@
 .tile img.mobilePreview.roundedPreview, .tile video.mobilePreview.roundedPreview { left: 50%; width: auto; height: 76%; translate: -50% 0; border-radius: 10% / 5%; }
 .tile:not(.moreTile):hover img, .tile:not(.moreTile):hover video { transform: scale(1.065); }
 .tile:hover { box-shadow: inset 0 -1px 0 #0000003d, 0 2px 0 #090909, 0 7px 13px #00000029; }
-.tile:focus-visible, .iconButton:focus-visible { outline: 2px solid var(--work-accent); outline-offset: 3px; }
+.tile:focus-visible, .iconButton:focus-visible { outline: 2px solid var(--gallery-interaction); outline-offset: 3px; }
 .play { position: absolute; z-index: 2; top: 8px; right: 8px; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; color: var(--work-type); background: #141414d9; }
 /* The footer spans the text column, not the full page width. ch resolves
    against this element's own font, so the body's font and size are restated

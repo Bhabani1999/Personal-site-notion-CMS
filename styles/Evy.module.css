@@ -1,4 +1,4 @@
-.page, .dialog { --work-type: #f3f3f3; --work-body: #bfbfbf; --work-muted: #808080; --work-accent: #ff3c00; }
+.page, .dialog { --work-type: #f3f3f3; --work-body: #bfbfbf; --work-muted: #808080; --work-accent: #ff3c00; --gallery-interaction: #f3f3f3; }
 .page { min-width: 0; }
 
 /* The footer spans the text column, not the full page width, so /next lands
@@ -47,8 +47,8 @@
      on under the sidenotes. ch resolves against this element's own font, so
      the body's font and size are restated to get the same measure. */
   max-width: 68ch; font-family: var(--font-ibmplexsans); font-size: 15px; }
-.stopWrap:focus-visible { outline: 2px solid var(--work-accent); outline-offset: 6px; border-radius: 6px; }
 .stopWrap:hover { color: inherit; }
+.stopWrap:focus-visible { outline: 2px solid var(--gallery-interaction); outline-offset: 6px; border-radius: 6px; }
 /* Padding rather than margin: the stack is often the last child, so a
    bottom margin would collapse through the section instead of showing. */
 .section:has(.stopWrap) { padding-bottom: 38px; }
@@ -56,7 +56,7 @@
 
 .tile { position: relative; display: block; box-sizing: border-box; appearance: none; width: 100%; min-width: 0; aspect-ratio: 1; overflow: visible; border: 0; padding: 0; background: transparent; box-shadow: none; cursor: pointer; }
 .tile:disabled { cursor: default; }
-.tile:focus-visible { outline: 2px solid var(--work-accent); outline-offset: 3px; }
+.tile:focus-visible { outline: 2px solid var(--gallery-interaction); outline-offset: 3px; }
 
 .moreTile::before, .moreTile::after { content: ""; position: absolute; inset: 3px; border-radius: clamp(9px, 20.5cqw, 26px); pointer-events: none; transform-origin: 18% 88%; transition: transform 320ms cubic-bezier(.2, .72, .2, 1), box-shadow 220ms ease; }
 .moreTile::before { z-index: 0; background: linear-gradient(145deg, #292929, #181818); box-shadow: 0 5px 10px #00000024; transform: translate(12px, -4px) rotate(10deg) scale(.91); }
@@ -72,6 +72,7 @@
 .mobilePreview { top: 12%; left: 10%; width: 80%; height: 76%; border-radius: 9px; object-position: center top; }
 
 .morePill { position: absolute; z-index: 3; right: 8px; bottom: 8px; display: inline-flex; align-items: center; justify-content: center; width: max-content; box-sizing: border-box; padding: 5px 7px; border-radius: 999px; background: #101010d9; color: var(--work-type); font-family: var(--font-supply); font-size: 11px; line-height: 1; letter-spacing: 0; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.galleryStar { position: absolute; z-index: 4; top: 5px; left: -1px; width: 17px; height: 17px; color: #f5f5f5; fill: #ffd43b; filter: drop-shadow(0 2px 3px #00000052); transform: rotate(-14deg); pointer-events: none; }
 
 /* Placeholder until the exported screens land. */
 .stopPending { position: absolute; inset: 0; background: repeating-linear-gradient(135deg, #232323, #232323 6px, #1c1c1c 6px, #1c1c1c 12px); }
@@ -79,12 +80,13 @@
 .stopText { display: block; min-width: 0; padding-top: 18px; }
 .stopTitle { display: block; margin-bottom: 4px; color: #f3f3f3; font-family: var(--font-ibmplexsans); font-size: 16px; line-height: 24px; transition: color 150ms ease; }
 .stopWrap:hover .stopTitle { color: #c2aaa3; }
+.stopWrap:focus-visible .stopTitle { color: var(--gallery-interaction); }
 .stopCaption { display: block; max-width: 52ch; color: #6a6a6a; font-family: var(--font-ibmplexsans); font-size: 13px; line-height: 20px; }
 
 /* Full-screen gallery, matching the pattern on the other work page. */
 .dialog { width: 100vw; max-width: 100vw; height: 100vh; max-height: 100vh; margin: 0; padding: 0; border: 0; background: #141414; color: var(--work-type); overflow-y: auto; }
 .dialog::backdrop { background: #141414; }
-.dialogInner { box-sizing: border-box; width: 100%; max-width: 1400px; margin: 0 auto; padding: 42px 48px 96px; }
+.dialogInner { box-sizing: border-box; width: 100%; max-width: 1400px; margin: 0 auto; padding: 78px 48px 96px; }
 
 .toolbar { position: relative; z-index: 2; padding: 0 0 6px; }
 .backButton { display: inline-flex; align-items: center; margin-bottom: 26px; padding: 0; border: 0; background: none; color: var(--work-muted); font-family: var(--font-supply); font-size: 13px; line-height: 22px; letter-spacing: 0.3px; text-transform: uppercase; cursor: pointer; transition: color 150ms ease; }
@@ -108,13 +110,14 @@
 
 .cardAsset { position: relative; display: flex; flex: 0 1 auto; align-items: center; justify-content: center; height: 100%; min-width: 0; }
 /* Each screen fades in as it decodes; until then a plain shimmering block
-   holds its place. The browser frame and the phone bezel are part of the
-   screen, not part of the wait, so they stay hidden until there is
-   something to frame. */
+   holds its place. The browser frame is part of the screen, not part of the
+   wait, so it stays hidden until there is something to frame. */
 .cardAsset.isPending { border-radius: 12px; background: linear-gradient(100deg, #151515 30%, #1f1f1f 50%, #151515 70%) #151515; background-size: 240% 100%; animation: shimmer 1.4s ease-in-out infinite; }
 .cardAsset.isPending img { opacity: 0; }
 /* Hidden rather than removed, so the block keeps the size it will settle at. */
-.cardAsset.isPending .chromeBar { visibility: hidden; }
+.cardAsset.isPending .chromeBar,
+.cardAsset.isPending::before,
+.cardAsset.isPending::after { visibility: hidden; }
 .phoneFrame.isPending img { border-color: transparent; box-shadow: none; }
 .cardAsset.isLoaded img { opacity: 1; transition: opacity 320ms ease; }
 @keyframes shimmer {
@@ -153,6 +156,7 @@
   --chrome-h: 11px; --chrome-r: calc(var(--chrome-h) * 0.3); }
 .assetCentered { align-self: center; }
 .assetCropBottom { overflow: hidden; }
+.chromeShell.assetCropBottom { justify-content: flex-start; }
 /* Both of the shell's dimensions are computed from the panel, so the capture
    fills what the bar leaves and keeps its own proportions. */
 .chromeShell > img { display: block; flex: 0 0 auto; width: 100%; height: auto;
@@ -192,6 +196,10 @@
    ChargeConnect gallery. Each browser-framed capture then grows to the
    largest complete size that fits inside that panel. */
 .chargeconnectHeading { margin-bottom: 18px; }
+/* The panel's height is set per unit from the capture it holds (see
+   useFittedPanel), so a shallow screen does not sit under a deep band of
+   empty space. Padding matches on the top and sides; the capture is flush
+   with the base. */
 .chargeconnectGrid .cardMedia {
   aspect-ratio: auto;
   align-items: flex-end;
@@ -203,7 +211,8 @@
 .zemetricGrid .cardAsset.chromeShell { height: auto; }
 /* Every Zemetric panel is sized to the capture it holds (see useFittedPanel),
    so the margins are the padding itself rather than whatever height is left
-   over. A unit can ask for a different top gutter through its own padTop. */
+   over. Padding matches on the top and sides; the capture sits flush with
+   the base. */
 .zemetricGrid .cardMedia {
   aspect-ratio: auto;
   padding: 36px 36px 0;

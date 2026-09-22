@@ -64,23 +64,25 @@ function Home({ pageProperties, databaseInfo }) {
     },
   ].sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
 
-  // A visual index of every screen from the work above. It is not dated
-  // work of its own, so it sits after the case studies rather than being
-  // sorted in among them.
-  workPageProperties.push({
-    id: "all-design-work",
-    slug: "all-design-work",
-    href: "/work/all-design-work",
-    pageTitle: "All design work",
-    pageDescription:
-      "Every screen from the work above, in one gallery.",
-    creationDate: null,
-    dateLabel: "Gallery",
-  });
+  const localNotes = [
+    {
+      id: "the-street-begins-with-a-chair",
+      slug: "the-street-begins-with-a-chair",
+      pageTitle: "The Street Begins With a Chair",
+      pageDescription:
+        "What Vietnam's plastic chairs reveal about streets, homes, and the portable infrastructure of social life.",
+      creationDate: "2025-09-22T00:00:00.000Z",
+      Tags: "notes",
+    },
+  ];
 
-  const notesPageProperties = Array.isArray(pageProperties)
+  const notionNotes = Array.isArray(pageProperties)
     ? pageProperties
-        .filter((property) => property.Tags === "notes")
+        .filter(
+          (property) =>
+            property.Tags === "notes" &&
+            !localNotes.some((localNote) => localNote.slug === property.slug)
+        )
         .map((property) => {
           if (property.slug === "conversion-culture") {
             return {
@@ -103,6 +105,9 @@ function Home({ pageProperties, databaseInfo }) {
           return property;
         })
     : [];
+  const notesPageProperties = [...localNotes, ...notionNotes].sort(
+    (a, b) => new Date(b.creationDate) - new Date(a.creationDate)
+  );
 
   function renderTopContent() {
     return null;

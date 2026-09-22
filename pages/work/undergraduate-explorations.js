@@ -3,12 +3,22 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { Play } from "lucide-react";
+import { Play, Star } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
 import Layout from "../../components/Layout";
 import projects from "../../content/undergraduate.json";
 import styles from "../../styles/Undergraduate.module.css";
 import { retrievePageProperties } from "../../notionModule";
+
+const featuredProjectOrder = ["toli", "blip", "sprinklr"];
+const orderedProjects = [...projects].sort((a, b) => {
+  const aIndex = featuredProjectOrder.indexOf(a.slug);
+  const bIndex = featuredProjectOrder.indexOf(b.slug);
+  if (aIndex === -1 && bIndex === -1) return 0;
+  if (aIndex === -1) return 1;
+  if (bIndex === -1) return -1;
+  return aIndex - bIndex;
+});
 
 function Preview({ item }) {
   const ref = useRef(null);
@@ -422,14 +432,14 @@ export default function UndergraduateExplorations({ nextHref }) {
       transition: { duration: 0.2, ease: "easeOut" },
     });
   };
-  const project = selection ? projects[selection.project] : null;
+  const project = selection ? orderedProjects[selection.project] : null;
   const projectFlows = project ? getProjectFlows(project) : [];
   const open = Boolean(selection);
 
   useEffect(() => {
     if (!router.isReady) return;
     const slug = typeof router.query.project === "string" ? router.query.project : null;
-    const projectIndex = projects.findIndex(item => item.slug === slug);
+    const projectIndex = orderedProjects.findIndex(item => item.slug === slug);
     setSelection(projectIndex >= 0 ? { project: projectIndex, index: 0 } : null);
   }, [router.isReady, router.query.project]);
 
@@ -495,7 +505,7 @@ export default function UndergraduateExplorations({ nextHref }) {
         <h1 className={styles.srOnly}>Selected Design Work</h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.5, delay: 0.08, ease: "easeInOut" } }} className="para blogtype">Selected design work across independent products, company teams, open-source initiatives, and public-service collaborations.</motion.p>
       </header>
-      {projects.map((p, pi) => {
+      {orderedProjects.map((p, pi) => {
         const items = p.items.filter(item => item.type === "image");
         const remainingUnits = Math.max(0, getProjectFlows(p).length - 1);
         return <motion.section
@@ -517,6 +527,7 @@ export default function UndergraduateExplorations({ nextHref }) {
           <Link href={{ pathname: router.pathname, query: { project: p.slug } }} shallow scroll={false} className={styles.projectLink} aria-label={`View ${getProjectFlows(p).length} gallery units from ${p.title}`} onMouseEnter={() => prefetchProject(p)} onFocus={() => prefetchProject(p)} onTouchStart={() => prefetchProject(p)} onClick={e => { trigger.current = e.currentTarget; openedFromOverview.current = true; }}>
             <div className={styles.sectionStackWrap}><span className={`${styles.tile} ${styles.moreTile} ${styles.sectionStack}`}>
               <span className={styles.moreFront} aria-hidden="true"><Preview item={items[0]} /><span className={styles.morePill}>+{remainingUnits}</span></span>
+              {pi < 3 && <Star className={styles.galleryStar} strokeWidth={1.5} aria-hidden="true" />}
             </span></div>
             <div className={styles.projectHeader}>
               <h2 className={`heading-md type ${styles.heading}`}>{p.title}</h2>
