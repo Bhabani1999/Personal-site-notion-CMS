@@ -253,15 +253,6 @@ export default function Zemetric() {
     animate: { opacity: 1, transition: { duration: 0.5, delay, ease: "easeInOut" } },
   });
 
-  // Sections below the fold reveal as the reader reaches them, rather than
-  // all fading in at once behind the first screen. `once` keeps a section
-  // settled after its first reveal, and the margin starts the fade a little
-  // before the section's top edge arrives.
-  const revealOnScroll = (delay = 0) => ({
-    initial: { opacity: 0 },
-    whileInView: { opacity: 1, transition: { duration: 0.5, delay, ease: "easeInOut" } },
-    viewport: { once: true, margin: "0px 0px -12% 0px" },
-  });
 
   // A gallery opens over the page the reader is already on, so it settles
   // faster than a page transition does.
@@ -308,7 +299,7 @@ export default function Zemetric() {
           key={section.id}
           id={section.id}
           className={`${styles.section} ${section.heading ? "" : styles.sectionContinued}`}
-          {...(i === 0 ? fadeIn(0.12) : revealOnScroll())}
+          {...fadeIn(Math.min(0.12 + i * 0.05, 0.4))}
         >
           {section.heading && <h2 className={`heading-md type ${styles.heading}`}>{section.heading}</h2>}
           {section.body.map((p, j) => {

@@ -503,14 +503,16 @@ export default function UndergraduateExplorations({ nextHref }) {
           id={p.slug}
           className={styles.section}
           initial={{ opacity: 0 }}
-          {...(pi === 0
-            ? { animate: { opacity: 1, transition: { duration: 0.5, delay: 0.12, ease: "easeInOut" } } }
-            : {
-                // Sections below the fold reveal as the reader reaches them,
-                // rather than all fading in behind the first screen.
-                whileInView: { opacity: 1, transition: { duration: 0.5, ease: "easeInOut" } },
-                viewport: { once: true, margin: "0px 0px -12% 0px" },
-              })}
+          animate={{
+            opacity: 1,
+            transition: {
+              duration: 0.5,
+              // Every section fades in on load, one after another, so the
+              // page arrives whole rather than filling in as it is scrolled.
+              delay: Math.min(0.12 + pi * 0.05, 0.4),
+              ease: "easeInOut",
+            },
+          }}
         >
           <Link href={{ pathname: router.pathname, query: { project: p.slug } }} shallow scroll={false} className={styles.projectLink} aria-label={`View ${getProjectFlows(p).length} gallery units from ${p.title}`} onMouseEnter={() => prefetchProject(p)} onFocus={() => prefetchProject(p)} onTouchStart={() => prefetchProject(p)} onClick={e => { trigger.current = e.currentTarget; openedFromOverview.current = true; }}>
             <div className={styles.sectionStackWrap}><span className={`${styles.tile} ${styles.moreTile} ${styles.sectionStack}`}>
