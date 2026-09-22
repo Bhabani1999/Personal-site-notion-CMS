@@ -122,6 +122,12 @@
               "title": "Step 3",
               "width": 375,
               "height": 812
+            },
+            {
+              "src": "/work/evy/discovery/u0-login.avif",
+              "title": "Sign in",
+              "width": 563,
+              "height": 1218
             }
           ]
         },
@@ -234,20 +240,20 @@
             {
               "src": "/work/evy/discovery/u5a2-set-route.avif",
               "title": "Set route",
-              "width": 563,
-              "height": 1218
+              "width": 375,
+              "height": 812
             },
             {
               "src": "/work/evy/discovery/u5c-plan-result.avif",
               "title": "The plan",
-              "width": 563,
-              "height": 1218
+              "width": 375,
+              "height": 812
             },
             {
               "src": "/work/evy/discovery/u6a-plan-stops.avif",
               "title": "Route and stops",
-              "width": 563,
-              "height": 1218
+              "width": 375,
+              "height": 812
             }
           ]
         },
