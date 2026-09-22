@@ -197,6 +197,11 @@
 /* GalleryImage sizes each shell from its own aspect ratio, preserving the
    complete screen and keeping the browser bar attached at every size. */
 .zemetricGrid .cardAsset.chromeShell { height: auto; }
+/* Captures here are bottom-aligned, so a panel taller than the screen needs
+   piles all the leftover height above it: the top gap ran to 63px against
+   44px sides. A shorter panel brings that down without touching the grid
+   spans or the bottom alignment. ChargeConnect keeps its own box. */
+.zemetricGrid:not(.chargeconnectGrid) .cardMedia { aspect-ratio: 634 / 335; }
 .chargeconnectGrid .chromeShell > img {
   flex: 0 0 auto;
   width: 100%;
