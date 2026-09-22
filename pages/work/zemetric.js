@@ -61,6 +61,67 @@ function prefetchGallery(key, gallery) {
   });
 }
 
+// The panel's height is derived from the capture it holds rather than fixed
+// for the whole gallery, so a shallow screen does not sit under a deep band
+// of empty space. It is measured from the card's width, which does not
+// depend on the panel's height, so setting the height cannot feed back into
+// the measurement.
+function useFittedPanel(ref, unit, enabled) {
+  useEffect(() => {
+    const figure = ref.current;
+    if (!figure || !enabled) return;
+    const panel = figure.querySelector(`.${styles.cardMedia}`);
+    if (!panel) return;
+
+    let lastWidth = 0;
+    let frame = 0;
+    const apply = () => {
+      const width = figure.getBoundingClientRect().width;
+      // Setting the panel's height resizes the figure, which this observer
+      // also sees. Only the width feeds the calculation, so a height-only
+      // change is ignored and the two cannot chase each other.
+      if (!width || width === lastWidth) return;
+      lastWidth = width;
+      const count = unit.items.length || 1;
+      // Padding comes from the stylesheet, which differs between the desktop
+      // and phone layouts, so it is read rather than assumed.
+      const panelStyle = getComputedStyle(panel);
+      const padX = parseFloat(panelStyle.paddingLeft) || 0;
+      const padBottom = parseFloat(panelStyle.paddingBottom) || 0;
+      // A unit can ask for more or less room above its capture than the
+      // default gutter, for screens that read better tighter or airier.
+      const padTop = typeof unit.padTop === "number"
+        ? unit.padTop
+        : parseFloat(panelStyle.paddingTop) || 0;
+      const gap = parseFloat(panelStyle.columnGap) || 0;
+      const slotW = (width - padX * 2 - gap * (count - 1)) / count;
+      // The deepest capture in the unit sets the height the others sit in.
+      const tallest = Math.max(
+        ...unit.items.map(item => slotW / (item.width / item.height))
+      );
+      const bar = Math.min(BAR_MAX, Math.max(BAR_MIN, slotW * BAR_RATIO));
+      const next = `${Math.round(padTop + padBottom + tallest + bar)}px`;
+      // Written on the next frame rather than inside the observer callback:
+      // the height change resizes the capture, and doing that during the
+      // same delivery is what the browser reports as an observer loop.
+      frame = requestAnimationFrame(() => {
+        panel.style.height = next;
+        if (typeof unit.padTop === "number") panel.style.paddingTop = `${unit.padTop}px`;
+      });
+    };
+
+    apply();
+    const observer = new ResizeObserver(apply);
+    observer.observe(figure);
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      panel.style.height = "";
+      panel.style.paddingTop = "";
+    };
+  }, [ref, unit, enabled]);
+}
+
 // Each screen fades in once decoded, over a placeholder that holds its
 // space, so a slow connection shows a shimmer rather than a jump.
 // The chrome bar's height as a share of the capture's own width, with a
@@ -119,11 +180,13 @@ function GalleryImage({ item, priority }) {
       // The browser bar belongs inside the same available height. Repeating
       // the calculation settles the small dependency between width and the
       // proportional bar height without cropping the screenshot.
-      for (let i = 0; i < 3; i += 1) {
-        const bar = barFor(w);
-        const maxCapH = Math.max(0, innerH - bar);
-        capH = Math.min(w / ratio, maxCapH);
-        w = Math.min(slotW, capH * ratio);
+      if (!item.fillWidth) {
+        for (let i = 0; i < 3; i += 1) {
+          const bar = barFor(w);
+          const maxCapH = Math.max(0, innerH - bar);
+          capH = Math.min(w / ratio, maxCapH);
+          w = Math.min(slotW, capH * ratio);
+        }
       }
       const displayScale = item.displayScale || 1;
       w *= displayScale;
@@ -132,17 +195,19 @@ function GalleryImage({ item, priority }) {
       const cropBottom = Math.min(Math.max(item.cropBottom || 0, 0), 0.4);
       shell.style.setProperty("--chrome-h", `${barH}px`);
       shell.style.width = `${w}px`;
-      shell.style.height = `${capH * (1 - cropBottom) + barH}px`;
+      shell.style.height = item.fillWidth
+        ? `${innerH}px`
+        : `${capH * (1 - cropBottom) + barH}px`;
     };
 
     apply();
     const observer = new ResizeObserver(apply);
     observer.observe(panel);
     return () => observer.disconnect();
-  }, [item.src, item.width, item.height, item.displayScale, item.cropBottom]);
+  }, [item.src, item.width, item.height, item.displayScale, item.cropBottom, item.fillWidth]);
 
   return <span
-    className={`${styles.cardAsset} ${styles.chromeShell} ${isPhone ? styles.phoneFrame : ""} ${item.fit === "contain" ? styles.assetContain : ""} ${item.centered ? styles.assetCentered : ""} ${item.cropBottom ? styles.assetCropBottom : ""} ${status === "loaded" ? styles.isLoaded : styles.isPending}`}
+    className={`${styles.cardAsset} ${styles.chromeShell} ${isPhone ? styles.phoneFrame : ""} ${item.fit === "contain" ? styles.assetContain : ""} ${item.centered ? styles.assetCentered : ""} ${item.cropBottom || item.fillWidth ? styles.assetCropBottom : ""} ${status === "loaded" ? styles.isLoaded : styles.isPending}`}
   >
     <span className={styles.chromeBar} aria-hidden="true">
       <span className={styles.chromeNav}>
@@ -167,6 +232,44 @@ function GalleryImage({ item, priority }) {
       onError={() => setStatus("error")}
     />
   </span>;
+}
+
+// One gallery unit: the panel plus its caption. A component rather than an
+// inline block so the panel can size itself to the capture it holds.
+function UnitCard({ unit, index, fitPanel }) {
+  const ref = useRef(null);
+  useFittedPanel(ref, unit, fitPanel);
+
+  // A unit of three needs the full row; anything smaller takes half.
+  const span = unit.full || unit.items.length >= 3 ? 12 : 6;
+  const dense = unit.items.length >= 4;
+  // A landscape capture needs a short wide panel, not the tall one that
+  // suits phone screens.
+  const wide = unit.items.every(x => x.width > x.height);
+  // Only a genuinely long capture pans. A normal 375x812 phone screen is
+  // already taller than 2:1, so the threshold sits well above that.
+  const tall = unit.items.length === 1 && (
+    unit.items[0].pan || unit.items[0].height > unit.items[0].width * 3
+  );
+  const desktopPan = tall && Boolean(unit.items[0].panAspect);
+
+  return <figure
+    ref={ref}
+    className={`${styles.card} ${tall ? styles.cardTall : ""} ${desktopPan ? styles.cardDesktopPan : ""} ${dense ? styles.cardDense : ""} ${wide ? styles.cardWide : ""} ${unit.items.length >= 3 ? styles.cardPan : ""}`}
+    style={{
+      "--unit-span": span,
+      "--pan-ratio": unit.items[0].panAspect || "375 / 812",
+    }}
+  >
+    <div className={styles.cardMedia}>
+      <div className={styles.panTrack}>
+        {unit.items.map(item => (
+          <GalleryImage key={item.src} item={item} priority={index < 2} />
+        ))}
+      </div>
+    </div>
+    {unit.caption && <figcaption className={styles.cardCaption}>{unit.caption}</figcaption>}
+  </figure>;
 }
 
 export default function Zemetric() {
@@ -377,37 +480,9 @@ export default function Zemetric() {
           </div>
         </motion.header>
         <motion.div className={`${styles.grid} ${styles.zemetricGrid} ${openKey === "chargeconnect" ? styles.chargeconnectGrid : ""}`} {...galleryFade(0.06)}>
-          {galleryUnits.map((unit, i) => {
-            // A unit of three needs the full row; anything smaller takes half.
-            const span = unit.full || unit.items.length >= 3 ? 12 : 6;
-            const dense = unit.items.length >= 4;
-            // A landscape capture needs a short wide panel, not the tall
-            // one that suits phone screens.
-            const wide = unit.items.every(x => x.width > x.height);
-            // Only a genuinely long capture pans. A normal 375x812 phone screen
-            // is already taller than 2:1, so the threshold sits well above that.
-            const tall = unit.items.length === 1 && (
-              unit.items[0].pan || unit.items[0].height > unit.items[0].width * 3
-            );
-            const desktopPan = tall && Boolean(unit.items[0].panAspect);
-            return <figure
-              key={i}
-              className={`${styles.card} ${tall ? styles.cardTall : ""} ${desktopPan ? styles.cardDesktopPan : ""} ${dense ? styles.cardDense : ""} ${wide ? styles.cardWide : ""} ${unit.items.length >= 3 ? styles.cardPan : ""}`}
-              style={{
-                "--unit-span": span,
-                "--pan-ratio": unit.items[0].panAspect || "375 / 812"
-              }}
-            >
-              <div className={styles.cardMedia}>
-                <div className={styles.panTrack}>
-                  {unit.items.map((item) => (
-                    <GalleryImage key={item.src} item={item} priority={i < 2} />
-                  ))}
-                </div>
-              </div>
-              {unit.caption && <figcaption className={styles.cardCaption}>{unit.caption}</figcaption>}
-            </figure>;
-          })}
+          {galleryUnits.map((unit, i) => (
+            <UnitCard key={i} unit={unit} index={i} fitPanel />
+          ))}
         </motion.div>
       </div>}
     </dialog>

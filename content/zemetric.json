@@ -135,8 +135,7 @@
             {
               "src": "/work/zemetric/chargeconnect/cc07-fault-detail.avif",
               "title": "Fault details",
-              "displayScale": 0.86,
-              "cropBottom": 0.08,
+              "fillWidth": true,
               "width": 2000,
               "height": 1227
             }
@@ -152,7 +151,8 @@
               "width": 2000,
               "height": 817
             }
-          ]
+          ],
+          "padTop": 20
         },
         {
           "caption": "Made reliability measurable by separating true downtime from exclusions and exposing the assets lowering network uptime.",
@@ -160,6 +160,7 @@
             {
               "src": "/work/zemetric/chargeconnect/cc09-uptime.avif",
               "title": "Uptime",
+              "fillWidth": true,
               "width": 1459,
               "height": 1063
             }
@@ -315,7 +316,6 @@
             {
               "src": "/work/zemetric/fleetconnect/fc01-vehicles.avif",
               "title": "Fleet status",
-              "displayScale": 0.86,
               "centered": true,
               "width": 2000,
               "height": 1249
@@ -328,7 +328,6 @@
             {
               "src": "/work/zemetric/fleetconnect/fc02-vehicle-detail.avif",
               "title": "Vehicle activity",
-              "displayScale": 0.86,
               "centered": true,
               "width": 2000,
               "height": 1252

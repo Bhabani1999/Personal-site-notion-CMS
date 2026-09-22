@@ -188,24 +188,20 @@
    largest complete size that fits inside that panel. */
 .chargeconnectHeading { margin-bottom: 18px; }
 .chargeconnectGrid .cardMedia {
-  height: auto;
-  aspect-ratio: 634 / 363;
+  aspect-ratio: auto;
   align-items: flex-end;
-  padding: 22px 44px 0;
+  padding: 36px 36px 0;
   overflow: hidden;
 }
 /* GalleryImage sizes each shell from its own aspect ratio, preserving the
    complete screen and keeping the browser bar attached at every size. */
 .zemetricGrid .cardAsset.chromeShell { height: auto; }
-/* Captures are bottom-aligned and sized to the slot width, so the leftover
-   height collects above them and varies with each capture's proportions:
-   a fixed panel cannot give a constant top gap. The panel is shortened so
-   that gap averages ~35px, and the sides are brought in to match, which
-   leaves the three margins even. The panel keeps a definite height because
-   GalleryImage sizes each capture from it. */
-.zemetricGrid:not(.chargeconnectGrid) .cardMedia {
-  aspect-ratio: 634 / 335;
-  padding: 22px 36px 0;
+/* Every Zemetric panel is sized to the capture it holds (see useFittedPanel),
+   so the margins are the padding itself rather than whatever height is left
+   over. A unit can ask for a different top gutter through its own padTop. */
+.zemetricGrid .cardMedia {
+  aspect-ratio: auto;
+  padding: 36px 36px 0;
 }
 .chargeconnectGrid .chromeShell > img {
   flex: 0 0 auto;
