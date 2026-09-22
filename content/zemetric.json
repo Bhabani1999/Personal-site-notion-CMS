@@ -151,8 +151,7 @@
               "width": 2000,
               "height": 817
             }
-          ],
-          "padTop": 20
+          ]
         },
         {
           "caption": "Made reliability measurable by separating true downtime from exclusions and exposing the assets lowering network uptime.",
@@ -162,7 +161,7 @@
               "title": "Uptime",
               "fillWidth": true,
               "width": 1459,
-              "height": 1063
+              "height": 946
             }
           ]
         },

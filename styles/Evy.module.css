@@ -107,10 +107,15 @@
 .panTrack { display: contents; }
 
 .cardAsset { position: relative; display: flex; flex: 0 1 auto; align-items: center; justify-content: center; height: 100%; min-width: 0; }
-/* Each screen fades in as it decodes; until then a shimmer holds its place,
-   matching the loading treatment on the other work page. */
-.cardAsset.isPending { border-radius: 8%; background: linear-gradient(100deg, #151515 30%, #1f1f1f 50%, #151515 70%) #151515; background-size: 240% 100%; animation: shimmer 1.4s ease-in-out infinite; }
+/* Each screen fades in as it decodes; until then a plain shimmering block
+   holds its place. The browser frame and the phone bezel are part of the
+   screen, not part of the wait, so they stay hidden until there is
+   something to frame. */
+.cardAsset.isPending { border-radius: 12px; background: linear-gradient(100deg, #151515 30%, #1f1f1f 50%, #151515 70%) #151515; background-size: 240% 100%; animation: shimmer 1.4s ease-in-out infinite; }
 .cardAsset.isPending img { opacity: 0; }
+/* Hidden rather than removed, so the block keeps the size it will settle at. */
+.cardAsset.isPending .chromeBar { visibility: hidden; }
+.phoneFrame.isPending img { border-color: transparent; box-shadow: none; }
 .cardAsset.isLoaded img { opacity: 1; transition: opacity 320ms ease; }
 @keyframes shimmer {
   0% { background-position: 140% 0; }
@@ -202,7 +207,13 @@
 .zemetricGrid .cardMedia {
   aspect-ratio: auto;
   padding: 36px 36px 0;
+  height: 100%;
 }
+/* Cards in a row stretch to the tallest of them, so the row reads as a row.
+   The panel takes that height and the capture stays flush with its base, so
+   a shallower screen simply carries more space above it. */
+.zemetricGrid { align-items: stretch; }
+.zemetricGrid .card { grid-template-rows: 1fr auto; align-content: stretch; }
 .chargeconnectGrid .chromeShell > img {
   flex: 0 0 auto;
   width: 100%;
