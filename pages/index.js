@@ -64,6 +64,20 @@ function Home({ pageProperties, databaseInfo }) {
     },
   ].sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
 
+  // A visual index of every screen from the work above. It is not dated
+  // work of its own, so it sits after the case studies rather than being
+  // sorted in among them.
+  workPageProperties.push({
+    id: "all-design-work",
+    slug: "all-design-work",
+    href: "/work/all-design-work",
+    pageTitle: "All design work",
+    pageDescription:
+      "Every screen from the work above, in one gallery.",
+    creationDate: null,
+    dateLabel: "Gallery",
+  });
+
   const notesPageProperties = Array.isArray(pageProperties)
     ? pageProperties
         .filter((property) => property.Tags === "notes")

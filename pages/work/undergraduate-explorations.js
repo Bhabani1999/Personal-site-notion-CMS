@@ -139,7 +139,7 @@ const scrollToTop = (event) => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-function getProjectFlows(project) {
+export function getProjectFlows(project) {
   const skippedFiles = {
     saksham: ["020.avif", "023.avif", "028.avif", "031.avif", "034.avif", "motion-04.mp4"],
     sprinklr: ["add-adjustment.avif"],
@@ -177,7 +177,7 @@ function getProjectFlows(project) {
 // two take 6, three or more take 12. Rows are then filled so no gaps remain.
 // Two square posters share a panel sized to their own proportions rather than
 // the generic fixed-height one, which would fit them by height and waste width.
-function isSquarePair(flow) {
+export function isSquarePair(flow) {
   if (flow.items.length !== 2) return false;
   return flow.items.every(item => {
     if (!item?.width || !item?.height) return false;
@@ -186,7 +186,7 @@ function isSquarePair(flow) {
   });
 }
 
-function flowSpan(flow) {
+export function flowSpan(flow) {
   if (flow.full || flow.items.length >= 3) return 12;
   // Desktop captures sit two to a row: wide enough to read, small enough that
   // one screen does not fill the viewport.
@@ -198,7 +198,7 @@ function flowSpan(flow) {
   return 4;
 }
 
-function packFlows(flows) {
+export function packFlows(flows) {
   const sized = flows.map(flow => ({ ...flow, span: flowSpan(flow) }));
   const packed = [];
   let row = [];
@@ -331,7 +331,7 @@ function FlowAsset({ item, priority }) {
   </div>;
 }
 
-function FlowCard({ flow, index }) {
+export function FlowCard({ flow, index }) {
   // A motion clip carries its own backdrop colour, so the panel adopts it and
   // the two read as one continuous surface.
   const motionBackdrop = flow.motion ? flow.items[0]?.backdrop : null;
