@@ -36,6 +36,14 @@ export default function AllDesignWork({ nextHref }) {
     await pageControls.start({ opacity: 0, transition: { duration: 0.2, ease: "easeOut" } });
   };
 
+  // This page is the gallery modal's layout standing on its own, so it drops
+  // the writing column and spans the viewport the way the modal does.
+  useEffect(() => {
+    const container = document.getElementById("postContainer");
+    container?.classList.add("gallery-page");
+    return () => container?.classList.remove("gallery-page");
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
