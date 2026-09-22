@@ -105,7 +105,7 @@ function useFittedPanel(ref, unit, enabled) {
       // the height change resizes the capture, and doing that during the
       // same delivery is what the browser reports as an observer loop.
       frame = requestAnimationFrame(() => {
-        panel.style.height = next;
+        panel.style.minHeight = next;
         if (typeof unit.padTop === "number") panel.style.paddingTop = `${unit.padTop}px`;
       });
     };
@@ -116,7 +116,7 @@ function useFittedPanel(ref, unit, enabled) {
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
-      panel.style.height = "";
+      panel.style.minHeight = "";
       panel.style.paddingTop = "";
     };
   }, [ref, unit, enabled]);
