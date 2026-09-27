@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
+import useRestoreOnBack from "../../components/useRestoreOnBack";
 import Layout from "../../components/Layout";
 import content from "../../content/zemetric.json";
 import styles from "../../styles/Evy.module.css";
@@ -293,6 +294,8 @@ export default function Zemetric() {
   const backToTop = useRef(null);
   const pageControls = useAnimation();
   const backToTopControls = useAnimation();
+
+  useRestoreOnBack(pageControls, backToTopControls);
 
   const gallery = openKey ? galleries[openKey] : null;
   const galleryUnits = gallery

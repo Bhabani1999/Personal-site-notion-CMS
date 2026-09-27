@@ -5,6 +5,7 @@ import retrievePageData from "../../notioncontentModule";
 import { retrievePageProperties } from "../../notionModule";
 import Head from "next/head";
 import { motion, useAnimation } from "framer-motion";
+import useRestoreOnBack from "../../components/useRestoreOnBack";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { nextAfterPost } from "../../navigationOrder";
@@ -26,6 +27,8 @@ const postMetadataOverrides = {
 
 function BlogPage({ pageContent, nextHref }) {
   const pageControls = useAnimation();
+  useRestoreOnBack(pageControls);
+
   const SCROLL_THRESHOLD = 400; // Adjust this value to set the scroll threshold
   const router = useRouter();
 

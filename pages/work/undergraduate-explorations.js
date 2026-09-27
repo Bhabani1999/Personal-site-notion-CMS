@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { Play } from "lucide-react";
 import { motion, useAnimation } from "framer-motion";
+import useRestoreOnBack from "../../components/useRestoreOnBack";
 import Layout from "../../components/Layout";
 import projects from "../../content/undergraduate.json";
 import evyContent from "../../content/evy.json";
@@ -448,6 +449,9 @@ export default function UndergraduateExplorations({ nextHref }) {
   const pageControls = useAnimation();
 
   const backToTopControls = useAnimation();
+
+
+  useRestoreOnBack(pageControls, backToTopControls);
 
   useEffect(() => {
     // This page is shorter than a long-form post, so the writing pages' fixed

@@ -4,12 +4,15 @@ import { getDatabaseInfo } from "../databasemodule";
 import Layout from "../components/Layout";
 import Head from "next/head";
 import { motion, useAnimation } from "framer-motion";
+import useRestoreOnBack from "../components/useRestoreOnBack";
 import { useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 
 function Home({ pageProperties, databaseInfo }) {
   const controls = useAnimation();
+  useRestoreOnBack(controls);
+
   const [copied, setCopied] = useState(false);
   const email = "bhabani10121999@gmail.com"; // Your email address
 
