@@ -451,7 +451,7 @@ export default function UndergraduateExplorations({ nextHref }) {
   const backToTopControls = useAnimation();
 
 
-  useRestoreOnBack(pageControls, backToTopControls);
+  useRestoreOnBack(pageControls);
 
   useEffect(() => {
     // This page is shorter than a long-form post, so the writing pages' fixed
@@ -473,13 +473,6 @@ export default function UndergraduateExplorations({ nextHref }) {
     };
   }, [backToTopControls]);
 
-  const handleClick = async () => {
-    // Trigger a fade-out animation for other elements
-    await pageControls.start({
-      opacity: 0,
-      transition: { duration: 0.2, ease: "easeOut" },
-    });
-  };
   const project = selection ? orderedProjects[selection.project] : null;
   const projectFlows = project ? getProjectFlows(project) : [];
   const open = Boolean(selection);
@@ -541,7 +534,7 @@ export default function UndergraduateExplorations({ nextHref }) {
     <motion.article initial={{ opacity: 1 }} animate={pageControls} className={styles.page}>
       <div id="top"></div>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.5, ease: "easeInOut" } }}>
-        <Link href="/" onClick={handleClick} className={`accent-heading type-opacity-50 ${styles.back}`}>/back</Link>
+        <Link href="/" className={`accent-heading type-opacity-50 ${styles.back}`}>/back</Link>
       </motion.div>
       <header className={styles.intro}>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.5, delay: 0, ease: "easeInOut" } }} className={`accent-heading type-opacity-50 ${styles.eyebrow}`}>2020–2025</motion.p>
@@ -582,9 +575,7 @@ export default function UndergraduateExplorations({ nextHref }) {
             onMouseEnter={warm}
             onFocus={warm}
             onTouchStart={warm}
-            onClick={linkedGallery
-              ? handleClick
-              : e => { trigger.current = e.currentTarget; }}
+            onClick={e => { trigger.current = e.currentTarget; }}
           >
             <div className={styles.sectionStackWrap}><span className={`${styles.tile} ${styles.moreTile} ${styles.sectionStack}`}>
               <span className={styles.moreFront} aria-hidden="true"><Preview item={items[0]} /><span className={styles.morePill}>+{remainingUnits}</span></span>
@@ -596,8 +587,8 @@ export default function UndergraduateExplorations({ nextHref }) {
           </Link>
         </motion.section>})}
       <footer className={`${styles.footer} page-nav`}>
-        <Link href="/" onClick={handleClick} className="accent-heading type-opacity-50">/back</Link>
-        {nextHref && <Link href={nextHref} onClick={handleClick} className="accent-heading type-opacity-50">/next</Link>}
+        <Link href="/" className="accent-heading type-opacity-50">/back</Link>
+        {nextHref && <Link href={nextHref} className="accent-heading type-opacity-50">/next</Link>}
       </footer>
     </motion.article>
     <dialog ref={dialog} className={styles.dialog} aria-labelledby="gallery-title" onCancel={e => { e.preventDefault(); closeGallery(); }}>

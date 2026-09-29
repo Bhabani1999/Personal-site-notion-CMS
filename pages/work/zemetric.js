@@ -295,7 +295,7 @@ export default function Zemetric() {
   const pageControls = useAnimation();
   const backToTopControls = useAnimation();
 
-  useRestoreOnBack(pageControls, backToTopControls);
+  useRestoreOnBack(pageControls);
 
   const gallery = openKey ? galleries[openKey] : null;
   const galleryUnits = gallery
@@ -354,9 +354,6 @@ export default function Zemetric() {
     };
   }, [openKey]);
 
-  const handleClick = async () => {
-    await pageControls.start({ opacity: 0, transition: { duration: 0.2, ease: "easeOut" } });
-  };
 
   const scrollToTop = (event) => {
     event.preventDefault();
@@ -400,7 +397,7 @@ export default function Zemetric() {
       <div id="top"></div>
 
       <motion.div {...fadeIn()}>
-        <Link href="/" onClick={handleClick} className={`accent-heading type-opacity-50 ${styles.back}`}>/back</Link>
+        <Link href="/" className={`accent-heading type-opacity-50 ${styles.back}`}>/back</Link>
       </motion.div>
 
       <header className={styles.intro}>
@@ -468,8 +465,8 @@ export default function Zemetric() {
       ))}
 
       <motion.footer className={`${styles.footer} page-nav`} {...fadeIn(0.14)}>
-        <Link href="/" onClick={handleClick} className="accent-heading type-opacity-50">/back</Link>
-        <Link href="/work/evy-energy" onClick={handleClick} className="accent-heading type-opacity-50">/next</Link>
+        <Link href="/" className="accent-heading type-opacity-50">/back</Link>
+        <Link href="/work/evy-energy" className="accent-heading type-opacity-50">/next</Link>
       </motion.footer>
     </motion.article>
 

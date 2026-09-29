@@ -3,6 +3,7 @@ import { retrievePageProperties } from "../notionModule";
 import { getDatabaseInfo } from "../databasemodule";
 import Layout from "../components/Layout";
 import Head from "next/head";
+import Link from "next/link";
 import { motion, useAnimation } from "framer-motion";
 import useRestoreOnBack from "../components/useRestoreOnBack";
 import { useState } from "react";
@@ -23,13 +24,6 @@ function Home({ pageProperties, databaseInfo }) {
     setTimeout(() => {
       setCopied(false);
     }, 3000);
-  };
-  const handleClick = async () => {
-    // Trigger a fade-out animation for other elements
-    await controls.start({
-      opacity: 0,
-      transition: { duration: 0.2, ease: "easeOut" },
-    });
   };
 
   // Filter pageProperties for work and notes separately
@@ -305,13 +299,12 @@ function Home({ pageProperties, databaseInfo }) {
                 <div className="row">
                   <div className="left-content">
                     <div>
-                      <a
-                        onClick={handleClick}
+                      <Link
                         className="para   type pageTitleLink"
                         href={property.href || `/post/${property.slug}`}
                       >
                       {property.pageTitle} 
-                      </a>
+                      </Link>
                     </div>
                     {property.pageDescription && <p className="para  type-opacity-50 pageDescription">
                       {property.pageDescription}
@@ -391,13 +384,12 @@ function Home({ pageProperties, databaseInfo }) {
                 <div className="row">
                   <div className="left-content">
                     <div>
-                      <a
-                        onClick={handleClick}
+                      <Link
                         className="para  type pageTitleLink"
                         href={`/post/${property.slug}`}
                       >
                         {property.pageTitle} 
-                      </a>
+                      </Link>
                     </div>
                     <p className="para  type-opacity-50 pageDescription">
                       {property.pageDescription}

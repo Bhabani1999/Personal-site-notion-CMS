@@ -32,13 +32,6 @@ function BlogPage({ pageContent, nextHref }) {
   const SCROLL_THRESHOLD = 400; // Adjust this value to set the scroll threshold
   const router = useRouter();
 
-  const handleClick = async () => {
-    // Trigger a fade-out animation for other elements
-    await pageControls.start({
-      opacity: 0,
-      transition: { duration: 0.2, ease: "easeOut" },
-    });
-  };
 
   const renderH2Headings = () => {
     if (!pageContent || !pageContent.content) {
@@ -150,7 +143,6 @@ function BlogPage({ pageContent, nextHref }) {
         <div className="mobile-show">
           <div className="nav-container-mobile nav-container">
             <Link
-              onClick={handleClick}
               className="accent-heading type-opacity-50 "
               href="../"
             >
@@ -171,7 +163,6 @@ function BlogPage({ pageContent, nextHref }) {
             >
               <Link
                 className="accent-heading type-opacity-50"
-                onClick={handleClick}
                 href="../"
               >
                 /back
@@ -402,7 +393,6 @@ function BlogPage({ pageContent, nextHref }) {
           >
             <Link
               className="accent-heading type-opacity-50"
-              onClick={handleClick}
               href="/"
             >
               /back
@@ -410,7 +400,6 @@ function BlogPage({ pageContent, nextHref }) {
             {nextHref && (
               <Link
                 className="accent-heading type-opacity-50"
-                onClick={handleClick}
                 href={nextHref}
               >
                 /next
